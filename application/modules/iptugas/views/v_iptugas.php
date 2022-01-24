@@ -33,15 +33,15 @@
               <div class="col-6">
               <div style="overflow-x:scroll">
                 <?php 
-                $this->db->where('id_pegawai', $this->session->userdata('id_member'));
-            $nip_ses = $this->db->get('dp_pegawai')->first_row();
+                      $this->db->where('id_pegawai', $this->session->userdata('id_member'));
+                      $nip_ses = $this->db->get('dp_pegawai')->first_row();
 
-            $this->db->where('nip_pegawai', $nip_ses->nip);
-            $penilai = $this->db->get('dp_pejabat_penilai')->first_row();
-            $nippenilai=isset ($penilai->nip_penilai) ? $penilai->nip_penilai:'';
-            if($nippenilai=="") { $nippen=0; } else { $nippen=$penilai->nip_penilai; }
-            echo "NIP : $nip_ses->nip <br> NIP PENILAI : $nippen";
-             ?>
+                      $this->db->where('nip_pegawai', $nip_ses->nip);
+                      $penilai = $this->db->get('dp_pejabat_penilai')->first_row();
+                      $nippenilai=isset ($penilai->nip_penilai) ? $penilai->nip_penilai:'';
+                      if($nippenilai=="") { $nippen=0; } else { $nippen=$penilai->nip_penilai; }
+                      echo "NIP : $nip_ses->nip <br> NIP PENILAI : $nippen";
+                ?>
                 <table id="rev_penelitian" class="table table-bordered table-striped" style="width: 100%;">
 
                 <thead>
@@ -66,7 +66,7 @@
                                   <a href="<?= base_url()?>assets/bukti/<?php echo $rows->file_bukti; ?>" target="_blank" class="btn btn-default btn-sm"><i class="nav-icon fas fa-file"></i></a>
                               </td>
                               <td>
-                                <button type="button" class="btn btn-block btn-outline-primary btn-xs" st><?php echo $rows->status_periksa; ?></button>
+                                <label type="button" class="btn btn-block btn-outline-primary btn-xs" st><?php echo $rows->status_periksa; ?></label>
                               </td>
                               <td>
                                 <a href="<?= base_url()?>iptugas/<?= $rows->id_uraian_kegiatan ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>

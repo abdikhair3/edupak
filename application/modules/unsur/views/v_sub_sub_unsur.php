@@ -31,12 +31,12 @@
               <div class="card-body">
               <div class="row">
               <div class="col-6">
-                <button type="button" class="btn btn-block btn-info btn-sm"><b><?php echo $unsurroot[0]->unsur; ?></b> <br>
+                <label type="button" class="btn btn-block btn-info btn-sm"><b><?php echo $unsurroot[0]->unsur; ?></b> <br>
                 <i class="fa fa-arrow-down"></i> 
-                </button>
-                <button type="button" class="btn btn-block btn-success btn-sm"><?php echo $unsurroot[0]->sub_unsur; ?> <br>
+                </label>
+                <label type="button" class="btn btn-block btn-success btn-sm"><?php echo $unsurroot[0]->sub_unsur; ?> <br>
                 <i class="fa fa-arrow-down"></i>
-                </button>
+                </label>
                 <br>
                 <table id="rev_penelitian" class="table table-bordered table-striped">
 

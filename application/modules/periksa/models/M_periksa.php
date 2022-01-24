@@ -99,13 +99,13 @@ class M_periksa extends CI_Model {
 
     }  
 
-    public function get_kegiatan_selesai($id_tugas)
+    public function get_kegiatan_selesai($id_tugas, $status_periksa)
 
     {
 
         $data = array(
 
-                'status_periksa'   => 'Diverifikasi'
+                'status_periksa'   => $status_periksa
 
         );
         

@@ -31,7 +31,7 @@
               <div class="card-body">
               <div class="row">
               <div class="col-6">
-              <div style="overflow:scroll">
+              <div style="overflow-x:scroll">
 
                 <table id="rev_penelitian" class="table table-bordered table-striped" style="width: 100%;">
 

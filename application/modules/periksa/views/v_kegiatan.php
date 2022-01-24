@@ -65,8 +65,18 @@
                                   <a href="<?= base_url()?>assets/bukti/<?php echo $rows->file_bukti; ?>" target="_blank" class="btn btn-default btn-sm"><i class="nav-icon fas fa-file"></i></a>
                               </td>
                               <td>
-                                <a href="<?= base_url()?>periksa/kegiatan_selesai/<?= $rows->id_tugas ?>" title="Setuju" type="button" class="btn btn-primary btn-sm"><i class="fa fa-check"></i></a>
-                                <a href="<?= base_url()?>periksa/kegiatan_selesai/<?= $rows->id_tugas ?>" title="Tolak" type="button" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>
+                                <form>
+                                  <input type="hidden" name="id" value="<?= $rows->id_tugas ?>">
+                                  <input type="hidden" name="nip" value="<?= $rows->nip ?>">
+                                  <input type="hidden" name="status" value="Diverifikasi Atasan">
+                                  <button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-check"></i></button>
+                                </form>
+                                <form>
+                                  <input type="hidden" name="id" value="<?= $rows->id_tugas ?>">
+                                  <input type="hidden" name="nip" value="<?= $rows->nip ?>">
+                                  <input type="hidden" name="status" value="Diverifikasi Atasan">
+                                  <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
+                                </form>
                               </td>
                             </tr>
                   <?php $no++;  } ?>

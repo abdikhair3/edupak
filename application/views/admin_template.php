@@ -60,11 +60,6 @@
   padding-top: 25%;
   opacity: .80;
 }
-button {
-  margin: 40px;
-  padding: 5px 20px;
-  cursor: pointer;
-}
 .spinner {
     margin: 0 auto;
     height: 30px;

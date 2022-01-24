@@ -58,12 +58,13 @@ class Periksa extends CI_Controller
     {
         $id_tugas        = $this->uri->segment(3);
         $nip        = $this->uri->segment(4);
+        $status_periksa        = $this->uri->segment(5);
 
-		$this->M_periksa->get_kegiatan_selesai($id_tugas);
+		$this->M_periksa->get_kegiatan_selesai($id_tugas, $status_periksa);
 
         $this->session->set_flashdata('notifinput', "sukses_input");
 
-        redirect('periksa/tp/'.$nip,'refresh');
+        redirect('periksa/kegiatan/'.$nip,'refresh');
 
     }
 	

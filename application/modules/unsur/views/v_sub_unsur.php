@@ -31,9 +31,12 @@
               <div class="card-body">
               <div class="row">
               <div class="col-6">
-                <button type="button" class="btn btn-block btn-info btn-sm"><?php echo $unsurroot[0]->unsur; ?> <br>
-                <i class="fa fa-arrow-down"></i>
-                </button>
+                <div class="card-header"> 
+                    <label type="button" class="btn btn-block btn-primary btn-sm"><?php echo $unsurroot[0]->unsur; ?> <br>
+                    <i class="fa fa-arrow-down"></i>
+                    </label>
+                </div>
+                <div class="card-body">
                 <br>
                 <table id="rev_penelitian" class="table table-bordered table-striped">
 
@@ -66,6 +69,7 @@
                 <i class="fa fa-arrow-left"></i>
                 </a>
               <?php } ?>
+              </div>
               </div>
               <div class="col-6">
                 <form class="form-horizontal" action="<?php if($this->uri->segment(5)!=null) { echo base_url()."unsur/subunsur/edit_unsur"; } else { echo base_url()."unsur/subunsur/tambah_unsur"; } ?>" method="post">
