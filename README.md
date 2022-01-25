@@ -1,1 +1,1 @@
-Mari Mulai menggunakan git
+Mari Mulai menggunakan git dan github
