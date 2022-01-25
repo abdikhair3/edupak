@@ -7,7 +7,7 @@ class History_kegiatan extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('M_output_kerja');
+		$this->load->model('M_history_kegiatan');
 		is_logged_in();
 	}
 
@@ -26,8 +26,7 @@ class History_kegiatan extends CI_Controller
     	$data['extra_js']		= "";
     	$data['menu_active']	= "historytugas";
     	$data['sub_menu']		= "historytugasharian";
-    	// $id=$this->uri->segment(3);
-    	// $data['output_kerja']     		= $this->M_output_kerja->get_output_kerja();
+    	$data['history_harian']   = $this->M_history_kegiatan->get_history_harian();
     	$data['container']		= $this->load->view('history_kegiatan/v_harian', $data, true);
     	$this->load->view('admin_template', $data);
 

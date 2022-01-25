@@ -34,7 +34,7 @@
                 <div >
                 <table border="1" width="100%">
 
-                    <tr>
+                   <!--  <tr>
                         <td width=1></td>
                         <td>Nama</td>
                         <td align="center" width=1>:</td>
@@ -63,7 +63,7 @@
                         <td>Bulan Kegiatan</td>
                         <td align="center" width=1>:</td>
                         <td colspan="31"></td>
-                    </tr>
+                    </tr> -->
                     <tr align="center">
                         <td width=1 rowspan="2">No.</td>
                         <td rowspan="2">Uraian Kegiatan</td>
@@ -79,9 +79,23 @@
                       <?php } ?> 
                       <td>Jumlah</td>
                     </tr>
-                <tr>
-                  <td colspan="34"></td>
-                </tr>
+                      <?php $no=1; foreach ($history_harian as $rows) {
+                          $psh_tgl=explode("-", $rows->tgl_input)
+                       ?>
+                    <tr>
+                        <td align="center"><?php echo $no;  ?></td>
+                        <td><?php echo $rows->uraian_kegiatan; ?></td>
+                        <?php $jml_hari = cal_days_in_month(CAL_GREGORIAN, $bln, $thn);
+                              for ($x = 1; $x <= $jml_hari; $x++) { ?>
+                        <td align="center"><?php  if($psh_tgl[2]==$x) { echo "&check;"; } ?></td>
+                      <?php } 
+                        $this->db->where('tgl_input', $rows->tgl_input);
+                        $this->db->where('nip', $rows->nip);
+                        $jml_kegiatan_harian = $this->db->get('dp_tugas')->num_rows();
+                        ?>
+                        <td><?php echo $jml_kegiatan_harian ?></td>
+                    </tr>
+                      <?php $no++; } ?>
                 <tr>
                     <td colspan="2" align="center">Paraf Atasan Langsung</td>
                 </tr>
