@@ -1,3 +1,1 @@
-Mari Mulai menggunakan git
-
-dan sekarang saya sudah mencoba
+Mari Mulai menggunakan git dan github
