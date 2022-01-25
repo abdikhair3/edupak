@@ -65,13 +65,13 @@
                                   <a href="<?= base_url()?>assets/bukti/<?php echo $rows->file_bukti; ?>" target="_blank" class="btn btn-default btn-sm"><i class="nav-icon fas fa-file"></i></a>
                               </td>
                               <td>
-                                <form style="float:left">
+                                <form style="float:left" action="<?php echo base_url()."periksa/kegiatan_selesai"; ?>" method="post">
                                   <input type="hidden" name="id" value="<?= $rows->id_tugas ?>">
                                   <input type="hidden" name="nip" value="<?= $rows->nip ?>">
                                   <input type="hidden" name="status" value="Diverifikasi Atasan">
                                   <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check"></i></button>
                                 </form>
-                                <form style="float:right;">
+                                <form style="float:right;" action="<?php echo base_url()."periksa/kegiatan_selesai"; ?>" method="post">
                                   <input type="hidden" name="id" value="<?= $rows->id_tugas ?>">
                                   <input type="hidden" name="nip" value="<?= $rows->nip ?>">
                                   <input type="hidden" name="status" value="Diverifikasi Atasan">

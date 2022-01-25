@@ -56,11 +56,11 @@ class Periksa extends CI_Controller
 
     public function kegiatan_selesai()
     {
-        $id_tugas        = $this->uri->segment(3);
-        $nip        = $this->uri->segment(4);
-        $status_periksa        = $this->uri->segment(5);
+            $id            = $this->input->post('id');
+            $nip            = $this->input->post('nip');
+            $status            = $this->input->post('status');
 
-		$this->M_periksa->get_kegiatan_selesai($id_tugas, $status_periksa);
+		$this->M_periksa->get_kegiatan_selesai($id, $nip, $status);
 
         $this->session->set_flashdata('notifinput', "sukses_input");
 

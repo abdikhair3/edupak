@@ -473,7 +473,7 @@
     //   "autoWidth": true,
     //   "responsive": true,
     // });
-    $('#masuk_baru_dt').dataTable({
+    $('#penilai').dataTable({
         "lengthChange": false,
         "ordering": true,               // Allows ordering
         "searching": true,              // Searchbox
