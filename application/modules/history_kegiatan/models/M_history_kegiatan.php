@@ -18,7 +18,7 @@ class M_history_kegiatan extends CI_Model {
             // $this->db->group_by('dp_tugas.id_uraian_kegiatan');
             $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_tugas.id_uraian_kegiatan');
             $this->db->where('nip', $nip_ses->nip);
-            $this->db->where('status_periksa', "Diverifikasi Atasann");
+            $this->db->where('status_periksa', "Diverifikasi Atasan");
             $q = $this->db->get('dp_tugas')->result();
             return $q;
         }      
