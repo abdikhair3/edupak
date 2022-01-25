@@ -16,6 +16,7 @@ class M_periksa extends CI_Model {
             $nip_ses = $this->db->get('dp_pegawai')->first_row();
 
             $this->db->where('nip_pemeriksa', $nip_ses->nip);
+            $this->db->group_by("dp_pegawai.nip");
             $this->db->join('dp_pegawai', 'dp_pegawai.nip = dp_tugas.nip');
             $q = $this->db->get('dp_tugas')->result();
             return $q;

@@ -54,6 +54,7 @@
                               <td>
                                 <?php
                                 $this->db->where('nip', $rows->nip);
+                                $this->db->where('status_periksa', 'Diperiksa Atasan');
                                 $jmltgs = $this->db->get('dp_tugas')->num_rows();
                                  echo $jmltgs; ?>
                               </td>
