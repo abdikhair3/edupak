@@ -16,7 +16,7 @@ class M_iptugas extends CI_Model {
             $nip_ses = $this->db->get('dp_pegawai')->first_row();
 
             $this->db->where('nip', $nip_ses->nip);
-            $this->db->where('status_periksa', "Diperiksa Atasan");
+            $this->db->order_by('id_tugas', 'DESC');
             $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_tugas.id_uraian_kegiatan');
             $q = $this->db->get('dp_tugas')->result();
             return $q;

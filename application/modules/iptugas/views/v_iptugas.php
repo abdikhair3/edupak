@@ -56,10 +56,12 @@
                                   <a href="<?= base_url()?>assets/bukti/<?php echo $rows->file_bukti; ?>" target="_blank" class="btn btn-default btn-sm"><i class="nav-icon fas fa-file"></i></a>
                               </td>
                               <td>
-                                <label type="button" class="btn btn-block btn-outline-primary btn-xs" st><?php echo $rows->status_periksa; ?></label>
+                                <label type="button" class="btn btn-block btn-outline-<?php if($rows->status_periksa=="Ditolak") { echo "danger"; } else if($rows->status_periksa=="Diverifikasi Atasan") { echo "success"; } else { echo "primary"; } ?> btn-xs" st><?php echo $rows->status_periksa; ?></label>
                               </td>
                               <td>
+                              <?php if($rows->status_periksa=="Diperiksa Atasan") { ?>
                                 <a href="<?= base_url()?>iptugas/<?= $rows->id_uraian_kegiatan ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                            <?php } else { echo "-"; } ?>
                               </td>
                             </tr>
                   <?php $no++;  } ?>
