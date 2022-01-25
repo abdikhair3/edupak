@@ -32,16 +32,6 @@
               <div class="row">
               <div class="col-6">
               <div style="overflow-x:scroll">
-                <?php 
-                      $this->db->where('id_pegawai', $this->session->userdata('id_member'));
-                      $nip_ses = $this->db->get('dp_pegawai')->first_row();
-
-                      $this->db->where('nip_pegawai', $nip_ses->nip);
-                      $penilai = $this->db->get('dp_pejabat_penilai')->first_row();
-                      $nippenilai=isset ($penilai->nip_penilai) ? $penilai->nip_penilai:'';
-                      if($nippenilai=="") { $nippen=0; } else { $nippen=$penilai->nip_penilai; }
-                      echo "NIP : $nip_ses->nip <br> NIP PENILAI : $nippen";
-                ?>
                 <table id="rev_penelitian" class="table table-bordered table-striped" style="width: 100%;">
 
                 <thead>
