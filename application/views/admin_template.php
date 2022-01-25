@@ -100,7 +100,11 @@
 </head>
 <?php 
               $this->db->where('id_pegawai', $this->session->userdata('id_member'));
-              $nip_ses = $this->db->get('dp_pegawai')->first_row(); ?>
+              $nip_ses = $this->db->get('dp_pegawai')->first_row();
+
+
+              $this->db->where('id_unit', $this->session->userdata('id_member'));
+              $unit_ses = $this->db->get('dp_unit')->first_row(); ?>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
  
 <div class="preloader">
@@ -162,8 +166,8 @@
         <div class="info">
           <a href="#" class="d-block">
             <?php 
-          if($this->session->userdata('level')=='Admin_opd') { echo "Administrator"; } 
-          else { echo $nip_ses->nip; echo "<br>"; echo $nip_ses->nama; } ?></a>
+          if($this->session->userdata('level')=='Admin_opd') { echo $unit_ses->nm_unit; } 
+          else if($this->session->userdata('level')=='Pegawai') { echo $nip_ses->nip; echo "<br>"; echo $nip_ses->nama; } else { echo "Administrator"; } ?></a>
           <a href="<?= base_url()?>login/logout"><i class="fas fa-sign-out-alt fa-fw"></i> Keluar</a>
         </div>
       </div>

@@ -74,7 +74,7 @@
                                 <form style="float:right;" action="<?php echo base_url()."periksa/kegiatan_selesai"; ?>" method="post">
                                   <input type="hidden" name="id" value="<?= $rows->id_tugas ?>">
                                   <input type="hidden" name="nip" value="<?= $rows->nip ?>">
-                                  <input type="hidden" name="status" value="Diverifikasi Atasan">
+                                  <input type="hidden" name="status" value="Ditolak">
                                   <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                 </form>
                               </td>
