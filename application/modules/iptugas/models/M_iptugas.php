@@ -38,6 +38,7 @@ class M_iptugas extends CI_Model {
     public function get_cb_uraian_tugas()
     {
         $id_unsur = $this->input->get('id_unsur');
+        $this->db->join('dp_pelaksana_tgs_jabatan', 'dp_pelaksana_tgs_jabatan.id_pelaksana_tgs_jabatan = dp_uraian_kegiatan.id_pelaksana_tgs_jabatan');
         $this->db->where('id_unsur', $id_unsur);
         $this->db->order_by('uraian_kegiatan','ASC');
         return $this->db->get('dp_uraian_kegiatan');

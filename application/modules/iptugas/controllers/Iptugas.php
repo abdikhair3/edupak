@@ -41,7 +41,7 @@ class Iptugas extends CI_Controller
         $data = $this->M_iptugas->get_cb_uraian_tugas();
         echo "<option value=''>Pilih Uraian Kegiatan</option>";
         foreach ($data->result() as $d) {
-            echo "<option value=$d->id_uraian_kegiatan>$d->uraian_kegiatan</option>";
+            echo "<option value=$d->id_uraian_kegiatan>$d->uraian_kegiatan ($d->pelaksana_tgs_jabatan)</option>";
         }
     }
 

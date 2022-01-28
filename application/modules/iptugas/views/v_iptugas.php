@@ -33,15 +33,6 @@
               <div class="col-6">
               <div style="overflow-x:scroll">
                 <table id="rev_penelitian" class="table table-bordered table-striped" style="width: 100%;">
-                  <?php 
-                  $tgl_input="2020-01-25";
-                   $bln_now=date('m');
-                  $bln_now_con=(int)$bln_now;
-                  $bln_input=explode("-", $tgl_input);
-                  $bln_input_con=(int)$bln_input[1];
-                  if($bln_input_con<=6) { $batas_ml=1; $batas_sl=6; } else { $batas_ml=7; $batas_sl=12; }
-                  echo $batas_sl;
-                 ?>
 
                 <thead>
                     <tr>
