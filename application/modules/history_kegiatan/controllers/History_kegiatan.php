@@ -47,8 +47,8 @@ class History_kegiatan extends CI_Controller
     	$data['extra_js']		= "";
     	$data['menu_active']	= "historytugas";
     	$data['sub_menu']		= "historytugasbulanan";
-    	// $id=$this->uri->segment(3);
-    	// $data['output_kerja']     		= $this->M_output_kerja->get_output_kerja();
+    	$bln_cari=$this->uri->segment(3);
+    	$data['history_bulanan']   = $this->M_history_kegiatan->get_history_bulanan($bln_cari);
     	$data['container']		= $this->load->view('history_kegiatan/v_bulanan', $data, true);
     	$this->load->view('admin_template', $data);
 

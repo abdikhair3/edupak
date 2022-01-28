@@ -93,7 +93,7 @@
                         $this->db->where('nip', $rows->nip);
                         $jml_kegiatan_harian = $this->db->get('dp_tugas')->num_rows();
                         ?>
-                        <td><?php echo $jml_kegiatan_harian ?></td>
+                        <td align="center"><?php echo $jml_kegiatan_harian ?></td>
                     </tr>
                       <?php $no++; } ?>
                 <tr>

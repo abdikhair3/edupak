@@ -13,10 +13,10 @@ class M_uraian_kegiatan extends CI_Model {
     public function get_uraian_kegiatan()
         {
             $this->db->join('dp_unsur', 'dp_unsur.id_unsur = dp_uraian_kegiatan.id_unsur');
-            $this->db->join('dp_sub_unsur', 'dp_sub_unsur.id_unsur = dp_unsur.id_unsur');
-            $this->db->join('dp_sub_sub_unsur', 'dp_sub_sub_unsur.id_sub_unsur = dp_sub_unsur.id_sub_unsur');
+            $this->db->join('dp_sub_unsur', 'dp_sub_unsur.id_unsur = dp_uraian_kegiatan.id_unsur');
+            $this->db->join('dp_sub_sub_unsur', 'dp_sub_sub_unsur.id_sub_sub_unsur = dp_uraian_kegiatan.id_sub_sub_unsur');
             $this->db->join('dp_pelaksana_tgs_jabatan', 'dp_pelaksana_tgs_jabatan.id_pelaksana_tgs_jabatan = dp_uraian_kegiatan.id_pelaksana_tgs_jabatan');
-            $this->db->group_by("dp_uraian_kegiatan.id_output_kerja");
+            // $this->db->group_by("dp_uraian_kegiatan.id_output_kerja");
             $this->db->join('dp_output_kerja', 'dp_output_kerja.id_output_kerja = dp_uraian_kegiatan.id_output_kerja');
             $q = $this->db->get('dp_uraian_kegiatan')->result();
             return $q;

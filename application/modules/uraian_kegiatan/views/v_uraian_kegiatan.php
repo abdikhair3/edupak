@@ -131,7 +131,7 @@
                   </div>
                   <div class="form-group">
                       <label for="sel1">Angka Kredit</label>
-                      <input type="text" class="form-control" name="angka_kredit" value="<?php echo isset ($uraian_kegiatan_edit[0]->angka_kredit) ? $uraian_kegiatan_edit[0]->angka_kredit:''; ?>">
+                      <input type="text" class="form-control allow_decimal" name="angka_kredit" value="<?php echo isset ($uraian_kegiatan_edit[0]->angka_kredit) ? $uraian_kegiatan_edit[0]->angka_kredit:''; ?>">
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -192,3 +192,20 @@
         });
     });
     </script>
+
+    <script>
+$(document).ready(function(){
+
+
+ $(".allow_decimal").on("input", function(evt) {
+   var self = $(this);
+   self.val(self.val().replace(/[^0-9\.]/g, ''));
+   if ((evt.which != 46 || self.val().indexOf('.') != -1) && (evt.which < 48 || evt.which > 57)) 
+   {
+     evt.preventDefault();
+   }
+ });
+
+});
+
+</script>
