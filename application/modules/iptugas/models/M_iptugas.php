@@ -12,10 +12,15 @@ class M_iptugas extends CI_Model {
 
     public function get_ip_tugas()
         {
+            $bln_now=date('m');
+            $bln_now_con=(int)$bln_now;
+            if($bln_now_con<=6) { $semester=1; } else { $semester=2; }
+
             $this->db->where('id_pegawai', $this->session->userdata('id_member'));
             $nip_ses = $this->db->get('dp_pegawai')->first_row();
 
             $this->db->where('nip', $nip_ses->nip);
+            $this->db->where('semester', $semester);
             $this->db->order_by('id_tugas', 'DESC');
             $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_tugas.id_uraian_kegiatan');
             $q = $this->db->get('dp_tugas')->result();
@@ -33,6 +38,7 @@ class M_iptugas extends CI_Model {
     public function get_cb_uraian_tugas()
     {
         $id_unsur = $this->input->get('id_unsur');
+        $this->db->join('dp_pelaksana_tgs_jabatan', 'dp_pelaksana_tgs_jabatan.id_pelaksana_tgs_jabatan = dp_uraian_kegiatan.id_pelaksana_tgs_jabatan');
         $this->db->where('id_unsur', $id_unsur);
         $this->db->order_by('uraian_kegiatan','ASC');
         return $this->db->get('dp_uraian_kegiatan');
@@ -52,7 +58,7 @@ class M_iptugas extends CI_Model {
             return $q;
         }  
 
-    public function simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_pemeriksa, $tgl_input, $bukti)
+    public function simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_pemeriksa, $tgl_input, $semester, $bukti)
 
     {
             $this->db->where('id_pegawai', $this->session->userdata('id_member'));
@@ -68,6 +74,7 @@ class M_iptugas extends CI_Model {
             'nip_pemeriksa'                   => $nippen,
             'file_bukti'                      => $bukti,
             'tgl_input'                       => $tgl_input,
+            'semester'                        => $semester,
             'status_periksa'                  => "Diperiksa Atasan",
             'status_tugas'                    => "Baru"
         );
@@ -80,20 +87,5 @@ class M_iptugas extends CI_Model {
 
     }  
 
-    public function edit_pelaksana_tgs_jabatan($id, $pelaksana_tgs_jabatan)
-
-    {
-
-        $data = array(
-            'pelaksana_tgs_jabatan'                             => $pelaksana_tgs_jabatan
-        );
-
-        $this->db->where('id_pelaksana_tgs_jabatan', $id);
-
-        $this->db->update('dp_uraian_kegiatan', $data);
-
-        return;
-
-    }  
 
 }

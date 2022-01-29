@@ -684,6 +684,10 @@
           Command: toastr["error"]("Maaf ada data yg masih kosong, silahkan lengkapi!")
 <?php } ?>
 
+<?php if($this->session->flashdata('notifinput')=="tanggal_salah") { ?>
+          Command: toastr["error"]("Maaf sesuaikan tanggal dengan semester penginputan data!")
+<?php } ?>
+
       toastr.options = {
         "closeButton": true,
         "debug": false,

@@ -41,7 +41,7 @@ class Iptugas extends CI_Controller
         $data = $this->M_iptugas->get_cb_uraian_tugas();
         echo "<option value=''>Pilih Uraian Kegiatan</option>";
         foreach ($data->result() as $d) {
-            echo "<option value=$d->id_uraian_kegiatan>$d->uraian_kegiatan</option>";
+            echo "<option value=$d->id_uraian_kegiatan>$d->uraian_kegiatan ($d->pelaksana_tgs_jabatan)</option>";
         }
     }
 
@@ -67,44 +67,55 @@ class Iptugas extends CI_Controller
             $nip_pemeriksa            = $this->input->post('nip_pemeriksa');
             $tgl_input            = $this->input->post('tgl_input');
 
+            $bln_now=date('m');
+            $bln_now_con=(int)$bln_now;
+            $bln_input=explode("-", $tgl_input);
+            $bln_input_con=(int)$bln_input[1];
+              if($bln_input_con<=6) { $batas_ml=1; $batas_sl=6; $semester=1; } else { $batas_ml=7; $batas_sl=12; $semester=2;}
+                    if($bln_now_con >= $batas_ml && $bln_now_con <= $batas_sl) {
+                        $random        = time().'_'.rand();
 
-                    $random        = time().'_'.rand();
+                        $config['upload_path'] = './assets/bukti/'; //path folder
 
-                    $config['upload_path'] = './assets/bukti/'; //path folder
+                        $config['allowed_types'] = 'jpg|png|jpeg'; //type yang dapat diakses bisa anda sesuaikan
 
-                    $config['allowed_types'] = 'jpg|png|jpeg'; //type yang dapat diakses bisa anda sesuaikan
+                        $config['encrypt_name'] = FALSE; //nama yang terupload nantinya
 
-                    $config['encrypt_name'] = FALSE; //nama yang terupload nantinya
+                        $config['file_size'] = TRUE; 
 
-                    $config['file_size'] = TRUE; 
+                        $config['file_name'] = $random;
 
-                    $config['file_name'] = $random;
-
-                    $this->load->library('upload',$config);
-                    
-                    if(!empty($_FILES['bukti']['name'])){
-
-                            if (!$this->upload->do_upload('bukti')) {
-                                
-                                $this->session->set_flashdata('notiformas', "gagal_upload");
-
-                                redirect('penelitian/penelitian','refresh');
-
-                            }else{
-
-                                $this->M_iptugas->simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_pemeriksa, $tgl_input, $this->upload->data('file_name'));
-
-                                $this->session->set_flashdata('notifinput', "sukses_input");
-
-                                redirect('iptugas/tp','refresh');
-                            }   
+                        $this->load->library('upload',$config);
                         
+                            if(!empty($_FILES['bukti']['name'])){
+
+                                    if (!$this->upload->do_upload('bukti')) {
+                                        
+                                        $this->session->set_flashdata('notiformas', "gagal_upload");
+
+                                        redirect('penelitian/penelitian','refresh');
+
+                                    }else{
+
+                                        $this->M_iptugas->simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_pemeriksa, $tgl_input,$semester, $this->upload->data('file_name'));
+
+                                        $this->session->set_flashdata('notifinput', "sukses_input");
+
+                                        redirect('iptugas/tp','refresh');
+                                    }   
+                            
+                        } else {
+
+                              $this->session->set_flashdata('notifinput', "gagal_upload");
+
+                                      redirect('iptugas/tp','refresh');
+                        }
                     } else {
+                         $this->session->set_flashdata('notifinput', "tanggal_salah");
 
-                          $this->session->set_flashdata('notifinput', "gagal_upload");
-
-                                  redirect('iptugas/tp','refresh');
+                                      redirect('iptugas/tp','refresh');
                     }
+
         }
         
         else
