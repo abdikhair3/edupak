@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_history_kegiatan extends CI_Model {
 
-    public function get_history_harian()
+    public function get_history_harian($bln_cari)
         {
             $bln_now=date('m');
             $bln_now_con=(int)$bln_now;
@@ -24,7 +24,8 @@ class M_history_kegiatan extends CI_Model {
 
             // $this->db->group_by('dp_tugas.id_uraian_kegiatan');
             $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_tugas.id_uraian_kegiatan');
-            $this->db->where('semester', $semester);            
+            $this->db->where('semester', $semester);         
+            $this->db->where('MONTH(tgl_input)',$bln_cari);       
             $this->db->where('YEAR(tgl_input)',$thn_now);
             $this->db->where('nip', $nip_ses->nip);
             $this->db->where('status_periksa', "Diverifikasi Atasan");
