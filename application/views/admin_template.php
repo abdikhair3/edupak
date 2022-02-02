@@ -25,12 +25,8 @@
   <link rel="stylesheet" href="<?= base_url()?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url()?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url()?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <!-- Select2 -->
-  <link rel="stylesheet" href="<?= base_url()?>assets/plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="<?= base_url()?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
 <script src="<?php echo base_url()?>assets/dist/js/jquery-3.5.1.min.js"></script>
-<link rel="stylesheet" href="<?= base_url()?>assets/dist/css/adminlte.min.css">
 <style type="text/css">
   body{
     font-size: 13px;
@@ -190,118 +186,7 @@
             </a>
            
           </li>
-      <?php if($this->session->userdata('level')=='Superadmin'){ ?>
-        
-        <li class="nav-item <?php if($menu_active=='account'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
-          <a href="#" class="nav-link <?php if($menu_active=='account'){echo 'active';} ?>">
-            <i class="nav-icon fas fa-user"></i>
-            <p> Account
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
-            <li class="nav-item">
-              <a href="<?= base_url()?>account/superadmin" class="nav-link <?php if($sub_menu=='superadmin'){echo 'active';} ?>" style='color: #333;'>
-                <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                <p> Superadmin
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url()?>account/admin" class="nav-link <?php if($sub_menu=='admin'){echo 'active';} ?>" style='color: #333;'>
-                <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                <p> Admin OPD
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url()?>account/akun_pegawai" class="nav-link <?php if($sub_menu=='user_pegawai'){echo 'active';} ?>" style='color: #333;'>
-                <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                <p> Pegawai
-                </p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item <?php if($menu_active=='master'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
-          <a href="#" class="nav-link <?php if($menu_active=='master'){echo 'active';} ?>">
-            <i class="nav-icon fas fa-database"></i>
-            <p> Master
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
-
-            <li class="nav-item">
-              <a href="<?= base_url()?>master/satuan" class="nav-link <?php if($sub_menu=='satuan'){echo 'active';} ?>" style='color: #333;'>
-                <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                <p>
-                    Satuan Kerja
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url()?>master/unit" class="nav-link <?php if($sub_menu=='unit'){echo 'active';} ?>" style='color: #333;'>
-                <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                <p>
-                    Unit Kerja
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url()?>master/jenis" class="nav-link <?php if($sub_menu=='jenis'){echo 'active';} ?>" style='color: #333;'>
-                <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                <p>
-                    Jenis Jabatan
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url()?>master/jabatan" class="nav-link <?php if($sub_menu=='jabatan'){echo 'active';} ?>" style='color: #333;'>
-                <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                <p>
-                    Jabatan
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url()?>master/pangkat" class="nav-link <?php if($sub_menu=='pangkat'){echo 'active';} ?>" style='color: #333;'>
-                <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                <p>
-                    Pangkat
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url()?>master/pegawai" class="nav-link <?php if($sub_menu=='pegawai'){echo 'active';} ?>" style='color: #333;'>
-                <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                <p>
-                    Pegawai
-                </p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item <?php if($menu_active=='api'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
-          <a href="#" class="nav-link <?php if($menu_active=='api'){echo 'active';} ?>">
-            <i class="nav-icon fas fa-file-alt"></i>
-            <p> API
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
-              <li class="nav-item">
-              <a href="<?= base_url()?>Api/api_in" class="nav-link <?php if($sub_menu=='api_in'){echo 'active';} ?>" style='color: #333;'>
-                <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                <p> API-IN
-                </p>
-              </a>
-            </li>
-          </ul>
-        </li>
-      <?php }else if($this->session->userdata('level') == 'Pegawai') { ?>
+<?php if($this->session->userdata('level') == 'Pegawai') { ?>
          <li class="nav-item" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
             <a href="<?= base_url()?>iptugas/tp" class="nav-link <?php if($sub_menu=='iptugas'){echo 'active';} ?>">
               <i class="nav-icon fas fa-edit"></i>
@@ -563,8 +448,6 @@
 
 <!-- bs-custom-file-input -->
 <script src="<?= base_url()?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<!-- Select2 -->
-<script src="<?= base_url()?>assets/plugins/select2/js/select2.full.min.js"></script>
 <!-- Datatable -->
 <script src="<?= base_url()?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url()?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
