@@ -12,6 +12,16 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Dumping structure for table e_dupak.dp_api
+CREATE TABLE IF NOT EXISTS `dp_api` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_api` varchar(50) DEFAULT NULL,
+  `request` varchar(50) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `last_sync` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+
 -- Data exporting was unselected.
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
