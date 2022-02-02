@@ -22,7 +22,16 @@ CREATE TABLE IF NOT EXISTS `dp_api` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
--- Data exporting was unselected.
+-- Dumping data for table e_dupak.dp_api: ~6 rows (approximately)
+/*!40000 ALTER TABLE `dp_api` DISABLE KEYS */;
+INSERT INTO `dp_api` (`id`, `nama_api`, `request`, `url`, `last_sync`) VALUES
+	(1, 'Satuan Kerja', 'GET', 'http://localhost/API-SIMPEG/api_edupak/satuan', '2022-01-29 11:26:47'),
+	(2, 'Unit Kerja', 'GET', 'http://localhost/API-SIMPEG/api_edupak/unit', '2022-01-29 11:26:49'),
+	(3, 'Jenis Jabatan', 'GET', 'http://localhost/API-SIMPEG/api_edupak/jenis_jabatan', '2022-01-29 11:26:57'),
+	(4, 'Jabatan', 'GET', 'http://localhost/API-SIMPEG/api_edupak/jabatan', '2022-01-29 11:26:59'),
+	(5, 'Pangkat', 'GET', 'http://localhost/API-SIMPEG/api_edupak/pangkat', '2022-01-29 11:27:04'),
+	(6, 'Pegawai', 'GET', 'http://localhost/API-SIMPEG/api_edupak/pegawai', '2022-01-29 11:27:06');
+/*!40000 ALTER TABLE `dp_api` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
