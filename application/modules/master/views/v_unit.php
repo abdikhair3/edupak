@@ -30,7 +30,6 @@
                                     <th>Key Unit</th>
                                     <th>Nama Unit</th>
                                     <th>Key Satuan</th>
-                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,9 +40,6 @@
                                     <td><?= $rows->key_unit ?></td>
                                     <td><?= $rows->nm_unit ?></td>
                                     <td><?= $rows->satuan ?></td>
-                                    <td>
-                                        <a href="<?= base_url()?>api/form_edit/<?= $rows->id_unit ?>" title="Edit Data" type="button" class="btn btn-warning btn-sm"><i class="fa fa-pen"></i></a>
-                                    </td>
                                 </tr>
                                 <?php $no++; }?>
                             </tbody>

@@ -28,14 +28,16 @@
                         <h4 class="card-title">Form Edit Account</h4>
                         </div>
                         <div class="card-body">
-                        <div class="form-group">
-                            <label for="sel1">Nip</label>
-                            <input type="text" class="form-control" value="<?= $user->nip ?>" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="sel1">Nama</label>
-                            <input type="text" class="form-control" value="<?= $user->nama ?>" disabled>
-                        </div>
+                        <?php if($user->level != 'Admin_opd' AND $user->level != 'Superadmin'){?>
+                          <div class="form-group">
+                              <label for="sel1">Nip</label>
+                              <input type="text" class="form-control" value="<?= $user->nip ?>" disabled>
+                          </div>
+                          <div class="form-group">
+                              <label for="sel1">Nama</label>
+                              <input type="text" class="form-control" value="<?= $user->nama ?>" disabled>
+                          </div>
+                        <?php }?>
                         <div class="form-group">
                             <label for="sel1">Username</label>
                             <input type="text" class="form-control" name="username" value="<?= $user->username ?>">

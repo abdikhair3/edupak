@@ -107,8 +107,8 @@
               $nip_ses = $this->db->get('dp_pegawai')->first_row();
 
 
-              $this->db->where('id_unit', $this->session->userdata('id_member'));
-              $unit_ses = $this->db->get('dp_unit')->first_row(); ?>
+              $this->db->where('id_satuan', $this->session->userdata('id_member'));
+              $unit_ses = $this->db->get('dp_satuan')->first_row(); ?>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
  
 <div class="preloader">
@@ -170,9 +170,11 @@
         <div class="info">
           <a href="#" class="d-block">
             <?php 
-          if($this->session->userdata('level')=='Admin_opd') { echo $unit_ses->nm_unit; } 
-          else if($this->session->userdata('level')=='Pegawai') { echo $nip_ses->nip; echo "<br>"; echo $nip_ses->nama; } else { echo "Administrator"; } ?></a>
-          <a href="<?= base_url()?>login/logout"><i class="fas fa-sign-out-alt fa-fw"></i> Keluar</a>
+          if($this->session->userdata('level')=='Admin_opd') { echo $unit_ses->nm_satuan; } 
+          else if($this->session->userdata('level')=='Pegawai') { echo $nip_ses->nip; echo "<br>"; echo $nip_ses->nama; }
+          else { echo "Administrator"; } ?></a>
+          <a href="<?= base_url()?>login/logout"><i class="fas fa-sign-out-alt fa-fw"></i> Keluar</a> &nbsp
+          <a href="<?= base_url()?>login/logout"><i class="fas fa-cogs"></i> Setting</a>
         </div>
       </div>
 
@@ -412,7 +414,7 @@
                   <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
 
                      <li class="nav-item">
-                      <a href="#" class="nav-link <?php if($sub_menu=='pegawai'){echo 'active';} ?>" style='color: #333;'>
+                      <a href="<?= base_url()?>master/pegawai" class="nav-link <?php if($sub_menu=='pegawai'){echo 'active';} ?>" style='color: #333;'>
                         <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
                         <p>
                            Data Pegawai 
@@ -481,7 +483,7 @@
 
             <li class="nav-item <?php if($menu_active=='masteruser'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
                   <a href="#" class="nav-link <?php if($menu_active=='masteruser'){echo 'active';} ?>">
-                    <i class="nav-icon fas fa-user-lock"></i>
+                    <i class="nav-icon fas fa-lock"></i>
                     <p> Master User
                       <i class="right fas fa-angle-left"></i>
                     </p>

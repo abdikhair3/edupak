@@ -38,7 +38,7 @@
                                     <td><?= $rows->username ?></td>
                                     <td><?= $rows->level ?></td>
                                     <td>
-                                        <a href="<?= base_url()?>api/form_edit/<?= $rows->id_users ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-pen"></i></a>
+                                        <a href="<?= base_url()?>account/form_edit/<?= $rows->id_users ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-pen"></i></a>
                                     </td>
                                 </tr>
                                 <?php $no++; }?>
