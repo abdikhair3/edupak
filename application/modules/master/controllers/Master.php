@@ -134,6 +134,7 @@ class Master extends CI_Controller
 			$this->db->join('dp_satuan','dp_satuan.id_satuan=dp_pegawai.id_satuan','left');
 			$this->db->join('dp_unit','dp_unit.key_unit=dp_pegawai.id_unit','left');
 			$this->db->join('dp_pangkat','dp_pangkat.id_pangkat=dp_pegawai.id_pangkat','left');
+			$this->db->join('dp_jabatan','dp_jabatan.id_jabatan=dp_pegawai.id_jabatan','left');
 			$data['pegawai']       = $this->db->get('dp_pegawai')->result();
 		}else{
 			$this->db->join('dp_satuan','dp_satuan.id_satuan=dp_pegawai.id_satuan','left');

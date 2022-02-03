@@ -404,8 +404,8 @@
          
          
 <?php } else if($this->session->userdata('level') == 'Admin_opd'){?>
-            <li class="nav-item <?php if($menu_active=='masterpegawai'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
-                  <a href="#" class="nav-link <?php if($menu_active=='masterpegawai'){echo 'active';} ?>">
+            <li class="nav-item <?php if($menu_active=='master'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
+                  <a href="#" class="nav-link <?php if($menu_active=='master'){echo 'active';} ?>">
                     <i class="nav-icon fas fa-user-tie"></i>
                     <p> Master Pegawai
                       <i class="right fas fa-angle-left"></i>

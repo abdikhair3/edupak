@@ -24,7 +24,7 @@ class Pejabat_penilai extends CI_Controller
     	$data['breadcrumbs']	= $breadcrumbs->render();
     	$data['extra_css']		= "";
     	$data['extra_js']		= "";
-    	$data['menu_active']	= "masterpegawai";
+    	$data['menu_active']	= "master";
     	$data['sub_menu']		= "pejabatpenilai";
     	$id=$this->uri->segment(3);
     	$data['pejabat_penilai']     		= $this->M_pejabat_penilai->get_pejabat_penilai();
