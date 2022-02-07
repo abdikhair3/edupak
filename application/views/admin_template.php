@@ -98,6 +98,61 @@
       transform: translate(-50%,-50%);
       font: 14px arial;
     }
+
+.tree li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 5px 0 5px;
+    position:relative;
+}
+.tree li::before, 
+.tree li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto
+}
+.tree li::before {
+    border-left:2px dotted #000;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px
+}
+.tree li::after {
+    border-top:2px dotted #000;
+    height:20px;
+    top:25px;
+    width:25px
+}
+.tree li span {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:2px solid #000;
+    border-radius:3px;
+    display:inline-block;
+    padding:3px 8px;
+    text-decoration:none;
+    cursor:pointer;
+}
+.tree>ul>li::before,
+.tree>ul>li::after {
+    border:0
+}
+.tree li:last-child::before {
+    height:27px
+}
+.tree li span:hover {
+    background: #fff;
+    border:2px solid #94a0b4;
+    }
+
+[aria-expanded="false"] > .expanded,
+[aria-expanded="true"] > .collapsed {
+  display: none;
+}
+    
+    
 </style>
   <?= $extra_css ?>
 
@@ -439,23 +494,32 @@
                   </a>
                   <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
 
-                     <li class="nav-item">
+                     <!-- <li class="nav-item">
                       <a href="<?= base_url()?>unsur/tp" class="nav-link <?php if($sub_menu=='unsurtugas'){echo 'active';} ?>" style='color: #333;'>
                         <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
                         <p>
                            Unsur Tugas 
                         </p>
                       </a>
+                    </li> -->
+                    
+                    <li class="nav-item">
+                      <a href="<?= base_url()?>kegiatan/tp" class="nav-link <?php if($sub_menu=='kategorikegiatan'){echo 'active';} ?>" style='color: #333;'>
+                        <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
+                        <p>
+                           Kegiatan / Tugas 
+                        </p>
+                      </a>
                     </li>
 
-                     <li class="nav-item">
+                     <!-- <li class="nav-item">
                       <a href="<?= base_url()?>pelaksana_tgs_jabatan/tp" class="nav-link <?php if($sub_menu=='pelaksana_tgs_jabatan'){echo 'active';} ?>" style='color: #333;'>
                         <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
                         <p>
                            Jenjang Pel. Tgs Jabatan
                         </p>
                       </a>
-                    </li>
+                    </li> -->
 
                      <li class="nav-item">
                       <a href="<?= base_url()?>output_kerja/tp" class="nav-link <?php if($sub_menu=='output_kerja'){echo 'active';} ?>" style='color: #333;'>
