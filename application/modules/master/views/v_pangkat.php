@@ -29,7 +29,6 @@
                                     <th>ID Pangkat</th>
                                     <th>Pangkat</th>
                                     <th>Keterangan</th>
-                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,9 +38,6 @@
                                     <td><?= $rows->id_pangkat ?></td>
                                     <td><?= $rows->pangkat ?></td>
                                     <td><?= $rows->keterangan ?></td>
-                                    <td>
-                                        <a href="<?= base_url()?>api/form_edit/<?= $rows->id_pangkat ?>" title="Edit Data" type="button" class="btn btn-warning btn-sm"><i class="fa fa-pen"></i></a>
-                                    </td>
                                 </tr>
                                 <?php $no++; }?>
                             </tbody>

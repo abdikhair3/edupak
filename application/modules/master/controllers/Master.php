@@ -130,7 +130,19 @@ class Master extends CI_Controller
     	$data['extra_js']		= "";
     	$data['menu_active']	= "master";
     	$data['sub_menu']		= "pegawai";
-        $data['pegawai']       = $this->db->get('dp_pegawai')->result();
+		if($this->session->userdata('level')=='Superadmin'){
+			$this->db->join('dp_satuan','dp_satuan.id_satuan=dp_pegawai.id_satuan','left');
+			$this->db->join('dp_unit','dp_unit.key_unit=dp_pegawai.id_unit','left');
+			$this->db->join('dp_pangkat','dp_pangkat.id_pangkat=dp_pegawai.id_pangkat','left');
+			$this->db->join('dp_jabatan','dp_jabatan.id_jabatan=dp_pegawai.id_jabatan','left');
+			$data['pegawai']       = $this->db->get('dp_pegawai')->result();
+		}else{
+			$this->db->join('dp_satuan','dp_satuan.id_satuan=dp_pegawai.id_satuan','left');
+			$this->db->join('dp_unit','dp_unit.key_unit=dp_pegawai.id_unit','left');
+			$this->db->join('dp_pangkat','dp_pangkat.id_pangkat=dp_pegawai.id_pangkat','left');
+			$this->db->join('dp_jabatan','dp_jabatan.id_jabatan=dp_pegawai.id_jabatan','left');
+			$data['pegawai']       = $this->db->get_where('dp_pegawai', ['dp_pegawai.id_satuan' => $this->session->userdata('id_member')])->result();
+		} 
     	$data['container']		= $this->load->view('master/v_pegawai', $data, true);
     	$this->load->view('admin_template', $data);
 

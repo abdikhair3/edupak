@@ -28,7 +28,6 @@
                                     <th width=1>NO.</th>
                                     <th>ID Jenis Jabatan</th>
                                     <th>Jenis</th>
-                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,9 +36,6 @@
                                     <td><?= $no ?></td>
                                     <td><?= $rows->id_jenis_jabatan ?></td>
                                     <td><?= $rows->jenis ?></td>
-                                    <td>
-                                        <a href="<?= base_url()?>api/form_edit/<?= $rows->id_jenis_jabatan ?>" title="Edit Data" type="button" class="btn btn-warning btn-sm"><i class="fa fa-pen"></i></a>
-                                    </td>
                                 </tr>
                                 <?php $no++; }?>
                             </tbody>

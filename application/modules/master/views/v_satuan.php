@@ -29,7 +29,6 @@
                                     <th>ID Satuan</th>
                                     <th>Key Satuan</th>
                                     <th>Nama Satuan</th>
-                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,9 +38,6 @@
                                     <td><?= $rows->id_satuan ?></td>
                                     <td><?= $rows->key ?></td>
                                     <td><?= $rows->nm_satuan ?></td>
-                                    <td>
-                                        <a href="<?= base_url()?>api/form_edit/<?= $rows->id_satuan ?>" title="Edit Data" type="button" class="btn btn-warning btn-sm"><i class="fa fa-pen"></i></a>
-                                    </td>
                                 </tr>
                                 <?php $no++; }?>
                             </tbody>
