@@ -18,15 +18,17 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
+              
               <div class="card-body">
+                
                 <div class="row">
+                
                     <div class="col-12">
-                        <form method="get" action="<?= base_url()?>account/akun_pegawai" >
+                    <?= $this->session->flashdata('notifinput'); ?>
                             <div class="card-footer">
-                                <button type="submit" name="subject" class="btn btn-sm btn-primary" value="generate" onClick="return confirm('Generate akan membuat akun secara otomatis, pada pegawai yang belum memiliki akun, yakin mau melanjutkan ?')"><i class="fas fa-sync"></i> Auto Generate</button>
-                                <button type="submit" name="subject" class="btn btn-sm bg-gradient-secondary btn-sm" value="print_akun"><i class="fas fa-print"></i> Cetak Account</button>
+                                <a href="<?= base_url()?>account_satuan/user_pegawai/generate" class="btn btn-sm btn-primary" onClick="return confirm('Generate akan membuat akun secara otomatis, pada pegawai yang belum memiliki akun, yakin mau melanjutkan ?')"><i class="fas fa-sync"></i> Auto Generate</a>
+                                <a href="<?= base_url()?>account_satuan/user_pegawai/print_akun" class="btn btn-sm bg-gradient-secondary btn-sm"><i class="fas fa-print"></i> Cetak Account</a>
                             </div>
-                        </form>
                         <div class="mt-2" style="overflow-x:scroll">
                             <table id="rev_penelitian" class="table table-bordered table-striped" style="width: 100%;">
                             <thead>
@@ -46,7 +48,7 @@
                                     <td><?= $rows->nama ?></td>
                                     <td><?= $rows->level ?></td>
                                     <td>
-                                        <a href="<?= base_url()?>account/form_edit/<?= $rows->id_users ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-pen"></i></a>
+                                        <a href="<?= base_url()?>account_satuan/user_pegawai/form_edit/<?= $rows->id_users ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-pen"></i></a>
                                     </td>
                                 </tr>
                                 <?php $no++; }?>

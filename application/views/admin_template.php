@@ -487,6 +487,7 @@
                     </li>
                   </ul>
                 </li>
+                
                 <li class="nav-item <?php if($menu_active=='masterkegiatan'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
                   <a href="#" class="nav-link <?php if($menu_active=='masterkegiatan'){echo 'active';} ?>">
                     <i class="nav-icon fas fa-passport"></i>
@@ -555,7 +556,7 @@
                   <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
 
                      <li class="nav-item">
-                      <a href="<?= base_url()?>user_pegawai/tp" class="nav-link <?php if($sub_menu=='userpegawai'){echo 'active';} ?>" style='color: #333;'>
+                      <a href="<?= base_url()?>account_satuan/user_pegawai" class="nav-link <?php if($sub_menu=='userpegawai'){echo 'active';} ?>" style='color: #333;'>
                         <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
                         <p>
                            User Pegawai

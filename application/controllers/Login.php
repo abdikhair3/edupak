@@ -24,7 +24,7 @@ class Login extends CI_Controller
 		    			'id'		=> $rows->id_users,
 		    			'username'	=> $rows->username,
 		    			'level'		=> $rows->level,
-		    			'id_member'		=> $rows->id_member,
+		    			'id_member'	=> $rows->id_member,
 						'logged_in' => TRUE
 						);
 		 
