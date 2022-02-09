@@ -147,7 +147,6 @@
             </div>
           </div>
         </div>
-        </form>
       </div>
       <div class="modal-footer">
           <?php if($this->uri->segment(3)!=null) { ?>
@@ -158,6 +157,7 @@
             <a href="<?php base_url()?>" class="btn btn-secondary">Batal</a>
           <?php } ?>
       </div>
+        </form>
     </div>
   </div>
 </div>
