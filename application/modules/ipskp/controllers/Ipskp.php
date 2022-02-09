@@ -82,12 +82,11 @@ class Ipskp extends CI_Controller
             
             $id_uraian_kegiatan            = $this->input->post('id_uraian_kegiatan');
             $nip                           = $this->input->post('nip');
-            $nip_pemeriksa            = $this->input->post('nip_pemeriksa');
             $tgl_input            = $this->input->post('tgl_input');
             $totalangkakredit            = $this->input->post('totalangkakredit');
             $kuantitas            = $this->input->post('kuantitas');
 
-                        $this->M_ipskp->simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_pemeriksa, $tgl_input, $totalangkakredit, $kuantitas);
+                        $this->M_ipskp->simpan_ip_tugas($id_uraian_kegiatan, $nip, $tgl_input, $totalangkakredit, $kuantitas);
 
                         $this->session->set_flashdata('notifinput', "sukses_input");
 
