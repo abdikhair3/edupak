@@ -15,7 +15,6 @@ class Dashboard extends CI_Controller
 	{
 		$breadcrumbs 		= $this->breadcrumbs;
 
-		$breadcrumbs->add('Home', base_url().'home');
 		$breadcrumbs->add('Dashboard', base_url().'home');
 		$breadcrumbs->render();
 
@@ -24,8 +23,8 @@ class Dashboard extends CI_Controller
     	$data['breadcrumbs']	= $breadcrumbs->render();
     	$data['extra_css']		= "";
     	$data['extra_js']		= "";
-    	$data['menu_active']	= "master";
-    	$data['sub_menu']		= "uraiankeg";
+    	$data['menu_active']	= "";
+    	$data['sub_menu']		= "";
     	$data['container']		= $this->load->view('dashboard/v_dashboard', $data, true);
     	$this->load->view('admin_template', $data);
 
