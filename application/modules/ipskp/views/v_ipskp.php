@@ -29,7 +29,7 @@
               <!-- /.card-header -->
               <div class="card-body">
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#skpmodal">
                   INPUT SKP
                 </button>
               <div class="row">
@@ -88,11 +88,11 @@
   
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="skpmodal" tabindex="-1" role="dialog" aria-labelledby="skpmodalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">FORM INPUT SKP</h5>
+        <h5 class="modal-title" id="skpmodalLabel">FORM INPUT SKP</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -142,7 +142,7 @@
           </div>
           <div class="col-sm-3">
             <div class="form-group">
-            <label>Total</label>
+            <label>Target Angka Kredit</label>
             <input type="text" class="form-control" name="totalangkakredit" placeholder="0" readonly id="ttlangkakredit">
             </div>
           </div>
@@ -155,7 +155,7 @@
             <a href="../<?php base_url()?>tp" class="btn btn-secondary">Batal</a>
           <?php } else { ?>
             <button type="submit" class="btn btn-info">Simpan Data</button>
-            <a href="<?php base_url()?>" class="btn btn-secondary">Reset</a>
+            <a href="<?php base_url()?>" class="btn btn-secondary">Batal</a>
           <?php } ?>
       </div>
     </div>
