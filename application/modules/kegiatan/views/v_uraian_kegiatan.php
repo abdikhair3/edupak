@@ -77,6 +77,7 @@
                         <th>JENJANG</th>
                         <th>URAIAN KEGIATAN</th>
                         <th>OUTPUT</th>
+                        <th>SATUAN</th>
                         <th>ANGKA KREDIT</th>
                         <th width=100></th>
 
@@ -93,6 +94,7 @@
                               <td><?php echo $rows->jabatan; ?></td>
                               <td><?php echo $rows->uraian_kegiatan; ?></td>
                               <td><?php echo $rows->output_kerja; ?></td>
+                              <td><?php echo $rows->satuan_kuantitas; ?></td>
                               <td><?php echo $rows->angka_kredit; ?></td>
                               <td>
                                 <a href="<?= base_url()?>kegiatan/uraian_kegiatan/tp/<?php echo $this->uri->segment(4); ?>/<?= $rows->id_uraian_kegiatan ?>" title="Edit Data" type="button" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
@@ -141,6 +143,15 @@
                               echo "<option value='$value->id_output_kerja'>$value->output_kerja</option>";
                           }
                           ?>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="sel1">Pilih Satuan Kuantitas</label>
+                      <select name="satuan_kuantitas" class="form-control">
+                        <option value=""></option>
+                        <option value="Orang">Orang</option>
+                        <option value="Lembar">Lembar</option>
+                        <option value="Unit">Unit</option>
                       </select>
                   </div>
                   <div class="form-group">

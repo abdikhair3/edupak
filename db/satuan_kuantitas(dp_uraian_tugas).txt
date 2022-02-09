@@ -1,0 +1,1 @@
+ALTER TABLE `dp_uraian_kegiatan` ADD `satuan_kuantitas` VARCHAR(100) NOT NULL AFTER `uraian_kegiatan`;
