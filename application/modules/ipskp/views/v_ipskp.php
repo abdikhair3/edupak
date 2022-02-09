@@ -27,10 +27,13 @@
 
             <div class="card">
               <!-- /.card-header -->
-
               <div class="card-body">
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  INPUT SKP
+                </button>
               <div class="row">
-              <div class="col-6">
+              <div class="col-12">
               <div style="overflow-x:scroll">
                 <table id="rev_penelitian" class="table table-bordered table-striped" style="width: 100%;">
 
@@ -69,76 +72,6 @@
                 </table>
               </div>
               </div>
-              <div class="col-6">
-                <form class="form-horizontal" id="formUraian" action="<?php if($this->uri->segment(3)!=null) { echo base_url()."ipskp/edit_ipskp"; } else { echo base_url()."ipskp/tambah_ipskp"; } ?>" method="post" enctype="multipart/form-data">
-                  <input type="hidden" class="form-control" name="id" value="<?php echo $this->uri->segment(3); ?>">
-                <div class="card card-info">
-                <div class="card-header">
-                  <h3 class="card-title">FORM TUGAS / KEGIATAN</h3>
-                </div>
-                <div class="card-body">
-                  <div class="form-group">
-                      <label for="sel1">Pilih Kategori :</label>
-                      <select class="form-control" name="id_kategori_kegiatan" id="kategori_kegiatan" required="required">
-                        <option value="0"></option>
-                          <?php
-                          foreach ($cb_unsur as $value) {
-                              echo "<option value='$value->id_kategori_kegiatan'>$value->kategori_kegiatan</option>";
-                          }
-                          ?>
-                      </select>
-                  </div>
-                  <div class="form-group">
-                      <label for="sel1">Pilih Uraian Kegiatan</label>
-                      <!-- <select class="form-control" name="id_uraian_kegiatan" id="uraiankegiatan">
-                          <option value="0"></option>
-                      </select> -->
-                      <select id="uraiankegiatan" class="form-control" name="id_uraian_kegiatan" required="required"></select>
-                  </div>
-                  <div class="row" id="tpform">
-                    <div class="col-sm-2">
-                      <div class="form-group">
-                      <label>Kuantitas</label>
-                      <input type="text" class="form-control hanyaangka" placeholder="0" name="kuantitas" id="kuantitasid">
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="form-group">
-                      <label>Satuan</label>
-                      <div id="satuankuantitas"></div>
-                      <!-- <input type="text" class="form-control" placeholder="Satuan" readonly id="satuankuantitas"> -->
-                      <!-- <select id="satuankuantitas" class="form-control" name="id_uraian_kegiatan" required="required" readonly></select> -->
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="form-group">
-                      <label>Angka Kredit</label>
-                      <div id="angkakredit"></div>
-                      <!-- <select id="angkakredit" class="form-control" name="angka_kredit" required="required" readonly></select> -->
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="form-group">
-                      <label>Total</label>
-                      <input type="text" class="form-control" name="totalangkakredit" placeholder="0" readonly id="ttlangkakredit">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <?php if($this->uri->segment(3)!=null) { ?>
-                  <button type="submit" class="btn btn-warning">Perbarui Data</button>
-                  <a href="../<?php base_url()?>tp" class="btn btn-secondary">Batal</a>
-                <?php } else { ?>
-                  <button type="submit" class="btn btn-info">Simpan Data</button>
-                  <a href="<?php base_url()?>" class="btn btn-secondary">Reset</a>
-                <?php } ?>
-                </div>
-                <!-- /.card-footer -->
-                </div>
-                </form>
-              </div>
               </div>
               </div>
             </div>
@@ -152,6 +85,83 @@
     </section>
     <!-- /.content -->
   </div>
+  
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">FORM INPUT SKP</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" id="formUraian" action="<?php if($this->uri->segment(3)!=null) { echo base_url()."ipskp/edit_ipskp"; } else { echo base_url()."ipskp/tambah_ipskp"; } ?>" method="post" enctype="multipart/form-data">
+        <input type="hidden" class="form-control" name="id" value="<?php echo $this->uri->segment(3); ?>">
+        <div class="form-group">
+            <label for="sel1">Pilih Kategori :</label>
+            <select class="form-control" name="id_kategori_kegiatan" id="kategori_kegiatan" required="required">
+              <option value="0"></option>
+                <?php
+                foreach ($cb_unsur as $value) {
+                    echo "<option value='$value->id_kategori_kegiatan'>$value->kategori_kegiatan</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sel1">Pilih Uraian Kegiatan</label>
+            <!-- <select class="form-control" name="id_uraian_kegiatan" id="uraiankegiatan">
+                <option value="0"></option>
+            </select> -->
+            <select id="uraiankegiatan" class="form-control" name="id_uraian_kegiatan" required="required"></select>
+        </div>
+        <div class="row" id="tpform">
+          <div class="col-sm-2">
+            <div class="form-group">
+            <label>Kuantitas</label>
+            <input type="text" class="form-control hanyaangka" placeholder="0" name="kuantitas" id="kuantitasid" autocomplete="off">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+            <label>Satuan</label>
+            <div id="satuankuantitas"></div>
+            <!-- <input type="text" class="form-control" placeholder="Satuan" readonly id="satuankuantitas"> -->
+            <!-- <select id="satuankuantitas" class="form-control" name="id_uraian_kegiatan" required="required" readonly></select> -->
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+            <label>Angka Kredit</label>
+            <div id="angkakredit"></div>
+            <!-- <select id="angkakredit" class="form-control" name="angka_kredit" required="required" readonly></select> -->
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+            <label>Total</label>
+            <input type="text" class="form-control" name="totalangkakredit" placeholder="0" readonly id="ttlangkakredit">
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <?php if($this->uri->segment(3)!=null) { ?>
+            <button type="submit" class="btn btn-warning">Perbarui Data</button>
+            <a href="../<?php base_url()?>tp" class="btn btn-secondary">Batal</a>
+          <?php } else { ?>
+            <button type="submit" class="btn btn-info">Simpan Data</button>
+            <a href="<?php base_url()?>" class="btn btn-secondary">Reset</a>
+          <?php } ?>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
     $(document).ready(function(){
       document.getElementById('formUraian').reset();
@@ -229,7 +239,7 @@
     </script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $("#kuantitasid").keyup(function() {
+      $("#kuantitasid").on("keyup change", function(e) {
             var kuantitasid  = $("#kuantitasid").val();
             var angkakredittp = $("#angkakredittp").val();
 
