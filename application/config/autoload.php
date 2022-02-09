@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','roles','tanggal','harikerja','harikerjasatubulan','api_simpeg');
+$autoload['helper'] = array('url','roles','tanggal');
 
 /*
 | -------------------------------------------------------------------
