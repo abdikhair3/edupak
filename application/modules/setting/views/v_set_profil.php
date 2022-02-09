@@ -39,6 +39,7 @@
                             <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
                             </div>
                         </div>
+                        <?php if($this->session->userdata('level')=="Pegawai"){?>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Atasan Langsung</label>
                             <div class="col-sm-10">
@@ -50,6 +51,7 @@
                             </select>
                             </div>
                         </div>
+                        <?php }?>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-info">Simpan Data</button>
                         </div>
