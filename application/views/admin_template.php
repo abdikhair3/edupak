@@ -229,7 +229,7 @@
           else if($this->session->userdata('level')=='Pegawai') { echo $nip_ses->nip; echo "<br>"; echo $nip_ses->nama; }
           else { echo "Administrator"; } ?></a>
           <a href="<?= base_url()?>login/logout"><i class="fas fa-sign-out-alt fa-fw"></i> Keluar</a> &nbsp
-          <a href="<?= base_url()?>login/logout"><i class="fas fa-cogs"></i> Setting</a>
+          <a href="<?= base_url()?>setting/set_profil"><i class="fas fa-cogs"></i> Setting</a>
         </div>
       </div>
 
