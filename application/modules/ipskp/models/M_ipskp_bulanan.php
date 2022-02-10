@@ -8,7 +8,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_ipskp extends CI_Model {
+class M_ipskp_bulanan extends CI_Model {
 
     public function get_ip_tugas()
         {
@@ -25,36 +25,23 @@ class M_ipskp extends CI_Model {
             $q = $this->db->get('dp_skp_tahunan')->result();
             return $q;
         }    
-        
-    public function get_cb_unsur()
-    {
-        $this->db->order_by('kategori_kegiatan', 'ASC');
-        $q = $this->db->get('dp_kategori_kegiatan')->result();
-        return $q;
-    }
 
     public function get_cb_uraian_tugas()
     {
-        $id_kategori_kegiatan = $this->input->get('id_kategori_kegiatan');
-        // $this->db->join('dp_kategori_kegiatan', 'dp_kategori_kegiatan.id_kategori_kegiatan = dp_uraian_kegiatan.id_kategori_kegiatan');
-        $this->db->where('id_kategori_kegiatan', $id_kategori_kegiatan);
+        $this->db->where('id_pegawai', detail_pegawai()->id_pegawai);
         $this->db->order_by('uraian_kegiatan','ASC');
-        return $this->db->get('dp_uraian_kegiatan');
+        $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_skp_tahunan.id_uraian_kegiatan');
+        $q = $this->db->get('dp_skp_tahunan')->result();
+        return $q;
     }
 
-    public function get_tp_detail()
+    public function get_ft_uraian_tugas($id_ft)
     {
-        $id_uraian_kegiatan = $this->input->get('id_uraian_kegiatan');
-        $this->db->where('id_uraian_kegiatan', $id_uraian_kegiatan);
-        $this->db->order_by('uraian_kegiatan','ASC');
-        return $this->db->get('dp_uraian_kegiatan');
+        $this->db->where('id_uraian_kegiatan', $id_ft);
+        $q = $this->db->get('dp_uraian_kegiatan')->first_row();
+        return $q;
     }
-    // public function get_cb_sub_sub_unsur($id_sub_unsur)
-    // {
-    //     $this->db->order_by('sub_sub_unsur', 'ASC');
-    //     $q = $this->db->get('dp_sub_sub_unsur')->result();
-    //     return $q;
-    // }
+
 
     public function get_pelaksana_tgs_jabatan_edit($id)
         {

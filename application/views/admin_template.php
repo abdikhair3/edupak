@@ -360,14 +360,6 @@
         </li>
       <?php }else if($this->session->userdata('level') == 'Pegawai') { ?>
          <li class="nav-item" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
-            <a href="<?= base_url()?>ipskp/tp" class="nav-link <?php if($sub_menu=='ipskp'){echo 'active';} ?>">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Input SKP
-              </p>
-            </a>
-          </li>
-         <li class="nav-item" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
             <a href="<?= base_url()?>iptugas/tp" class="nav-link <?php if($sub_menu=='iptugas'){echo 'active';} ?>">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -390,15 +382,34 @@
             </a>
           </li>
         <?php } ?>
+        <li class="nav-item <?php if($menu_active=='ipskp'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
+          <a href="#" class="nav-link <?php if($menu_active=='ipskp'){echo 'active';} ?>">
+            <i class="nav-icon fas fa-book"></i>
+            <p> Target Kinerja
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
 
-         <!-- <li class="nav-item" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-file-alt"></i>
-              <p>
-                History Kegiatan / Tugas
-              </p>
-            </a>
-          </li> -->
+              <li class="nav-item">
+                <a href="<?= base_url()?>ipskp/tp" class="nav-link <?php if($sub_menu=='ipskp_tahunan'){echo 'active';} ?>" style='color: #333;'>
+                  <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
+                  <p>
+                    Input Target Tahunan
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="<?= base_url()?>ipskp/ipskp_bulanan/tp" class="nav-link <?php if($sub_menu=='ipskp_bulanan'){echo 'active';} ?>" style='color: #333;'>
+                    <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
+                    <p>
+                      Input Target Bulanan
+                    </p>
+                  </a>
+                </li>
+          </ul>
+          </li>
             <li class="nav-item <?php if($menu_active=='historytugas'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
                   <a href="#" class="nav-link <?php if($menu_active=='historytugas'){echo 'active';} ?>">
                     <i class="nav-icon fas fa-file-alt"></i>

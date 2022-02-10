@@ -1,6 +1,6 @@
 
 <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -24,14 +24,31 @@
        
         <div class="row">
           <div class="col-12">
-
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#skpmodal">
-                  INPUT SKP
-                </button>
+              <!-- <div class="input-group mb-3 col-6">
+                  <input type="text" class="form-control rounded-0" disabled value="Silahkan Pilih Kegiatan &#8594; &#8594; &#8594;">
+                  <span class="input-group-append">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                          Pilih Kegiatan 
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <?php
+                          foreach ($cb_uraian_kegiatan as $value) {
+                          ?>
+                          <a class="dropdown-item" href="<?= base_url()?>ipskp/ipskp_bulanan/tp/<?php echo $value->id_uraian_kegiatan; ?>"><?php echo $value->uraian_kegiatan; ?></a>
+                          <?php } ?>
+                        </div>
+                    </div>
+                  </span>
+                </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#skpmodal" style="text-transform:uppercase">
+                <i class="fas fa-file"></i> <b> INPUT SKP BULANAN 
+                          ( <?php echo isset ($ft_uraian_tugas->uraian_kegiatan) ? $ft_uraian_tugas->uraian_kegiatan:''; ?> ) </b>
+                </button> -->
               <div class="row">
               <div class="col-12">
               <div style="overflow-x:scroll">
@@ -42,11 +59,9 @@
 
                         <th width=1>NO.</th>
                         <th>KEGIATAN / TUGAS</th>
-                        <th>TANGGAL</th>
                         <th>TARGET KUANTITAS</th>
                         <th>TARGET ANGKA KREDIT</th>
-                        <th>STATUS</th>
-                        <th width=100></th>
+                        <th>TARGET BULANAN</th>
 
                     </tr>
                 </thead>
@@ -55,16 +70,10 @@
                             <tr align="center">
                               <td><?php echo $no;  ?></td>
                               <td><?php echo $rows->uraian_kegiatan; ?></td>
-                              <td><?php echo $rows->tgl_input; ?></td>
                               <td><?php echo "$rows->kuantitas $rows->satuan_kuantitas"; ?></td>
                               <td><?php echo $rows->ttl_angkakredit; ?></td>
                               <td>
-                                <label type="button" class="btn btn-block btn-outline-<?php if($rows->status_periksa=="Ditolak") { echo "danger"; } else if($rows->status_periksa=="Diverifikasi Atasan") { echo "success"; } else { echo "primary"; } ?> btn-xs" st><?php echo $rows->status_periksa; ?></label>
-                              </td>
-                              <td>
-                              <?php if($rows->status_periksa=="Diperiksa Atasan") { ?>
-                                <a href="<?= base_url()?>ipskp/<?= $rows->id_uraian_kegiatan ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                            <?php } else { echo "-"; } ?>
+                              <a href="<?= base_url()?>ipskp/<?= $rows->id_uraian_kegiatan ?>" title="Target Bulanan" type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
                               </td>
                             </tr>
                   <?php $no++;  } ?>
