@@ -1,2 +1,6 @@
 # commit 09/02/2022, tambahkan field id_atasan type integer di tabel dp_pegawai 
 # commit 09/02/2022, tambah tabel SKP_tahunan
+
+# script notif
+$this->session->set_flashdata('notifikasi', notif("success", "Ada Kesalahan pada penginputan"));
+$this->session->set_flashdata('notifikasi_line', notif_line("success", "Ada Kesalahan pada penginputan"));

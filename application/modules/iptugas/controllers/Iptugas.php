@@ -11,7 +11,7 @@ class Iptugas extends CI_Controller
 		is_logged_in();
 	}
 
-	public function tp()
+	public function index()
 	{
 		$breadcrumbs 		= $this->breadcrumbs;
 
@@ -36,6 +36,24 @@ class Iptugas extends CI_Controller
 
 	}
 
+    public function simpan_laporan()
+    {
+        $tanggal = $this->input->post('tanggal');
+
+        $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+        $this->form_validation->set_rules('id_unsur', 'Unsur', 'required');
+        $this->form_validation->set_rules('id_uraian_kegiatan', 'Uraian', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->session->set_flashdata('notifikasi', notif("error", "Ada Kesalahan pada penginputan"));
+            $this->index();
+        }
+        else
+        {
+            
+        }
+    }
     
     public function tp_cb_uraian_tugas() {
         $data = $this->M_iptugas->get_cb_uraian_tugas();
@@ -45,11 +63,6 @@ class Iptugas extends CI_Controller
         }
     }
 
-	// public function tp_cb_sub_sub_unsur(){
- //        $id_sub_unsur=$this->input->post('id_sub_unsur');
- //        $data=$this->M_iptugas->get_cb_sub_sub_unsur($id_sub_unsur);
- //        echo json_encode($data);
- //    }
 
 	public function tambah_iptugas()
 	{
