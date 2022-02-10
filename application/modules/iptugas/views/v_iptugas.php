@@ -1,53 +1,98 @@
-
-<!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+<div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h4 class="m-0"><?= $description ?></h4>
-          </div><!-- /.col -->
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <?= $breadcrumbs ?>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
+  <section class="content">
       <div class="container-fluid">
-       
         <div class="row">
           <div class="col-12">
-
+            
             <div class="card">
-              <!-- /.card-header -->
-
+            <?= $this->session->userdata('notifikasi_line'); ?>
               <div class="card-body">
+              
               <div class="row">
-              <div class="col-6">
-              <div style="overflow-x:scroll">
-                <table id="rev_penelitian" class="table table-bordered table-striped" style="width: 100%;">
+              
+                <div class="col-md-12">
+                
+                  <form class="form-horizontal" action="<?= base_url()?>iptugas/simpan_laporan" method="post" enctype="multipart/form-data">
+                  <div class="card">
+                    <div class="card-header bg-secondary ">
+                      <h5 class="card-title">Form Laporan Harian</h5>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+  
+  
+                          <label class="col-form-label" for="inputError">Tanggal Kegiatan / Tugas</label>
+  
+                          <input type="date" class="form-control is-invalid" id="inputError" name="tanggal">
+                      
+                          <label for="sel1">Pilih Unsur Kegiatan / Tugas:</label>
+                          <select class="form-control" name="id_unsur" id="unsur">
+                            <option value="0"></option>
+                              <?php
+                              foreach ($cb_unsur as $value) {
+                                  echo "<option value='$value->id_unsur'>$value->unsur</option>";
+                              }
+                              ?>
+                          </select>
+                          <label for="sel1">Pilih Uraian Kegiatan</label>
+                          <!-- <select class="form-control" name="id_uraian_kegiatan" id="uraiankegiatan">
+                              <option value="0"></option>
+                          </select> -->
+                          <select id="uraiankegiatan" class="form-control" name="id_uraian_kegiatan"></select>
+    
+                          <label for="sel1">Bukti Tugas / Kegiatan</label>
+                          <input type="file" class="form-control" name="bukti" value="" style="font-size: 12px;">
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <div class="row">
+                        <div class="col-sm-3 col-6">
+                          <button type="submit" class="btn btn-info">Simpan Data</button>
+                          <a href="<?php base_url()?>" class="btn btn-secondary">Reset</a>
+                        </div>
+                      </div>
+                    </div>
+                        
+                  </div>
+                </div>
+              </div>
+              </form>
 
-                <thead>
-                    <tr>
-
-                        <th width=1>NO.</th>
-                        <th>KEGIATAN / TUGAS</th>
-                        <th>TANGGAL</th>
-                        <th>BUKTI</th>
-                        <th>STATUS</th>
-                        <th width=100></th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                 <?php $no=1; foreach ($tp_ip_tugas as $rows) { ?>
+                <div class="row">
+                  <div class="col-12">
+                    <div style="overflow-x:scroll">
+                      <table id="rev_penelitian" class="table table-bordered table-striped" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th width=1>NO.</th>
+                                <th>KEGIATAN / TUGAS</th>
+                                <th>TANGGAL</th>
+                                <th>BUKTI</th>
+                                <th>STATUS</th>
+                                <th width=100></th>
+                            </tr>
+                        </thead>
+                          <tbody>
+                          <?php $no=1; foreach ($tp_ip_tugas as $rows) { ?>
                             <tr align="center">
                               <td><?php echo $no;  ?></td>
                               <td><?php echo $rows->uraian_kegiatan; ?></td>
@@ -61,63 +106,15 @@
                               <td>
                               <?php if($rows->status_periksa=="Diperiksa Atasan") { ?>
                                 <a href="<?= base_url()?>iptugas/<?= $rows->id_uraian_kegiatan ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                            <?php } else { echo "-"; } ?>
+                              <?php } else { echo "-"; } ?>
                               </td>
                             </tr>
-                  <?php $no++;  } ?>
-                </tbody>
-                </table>
-              </div>
-              </div>
-              <div class="col-6">
-                <form class="form-horizontal" action="<?php if($this->uri->segment(3)!=null) { echo base_url()."iptugas/edit_iptugas"; } else { echo base_url()."iptugas/tambah_iptugas"; } ?>" method="post" enctype="multipart/form-data">
-                  <input type="hidden" class="form-control" name="id" value="<?php echo $this->uri->segment(3); ?>">
-                <div class="card card-info">
-                <div class="card-header">
-                  <h3 class="card-title">FORM TUGAS / KEGIATAN</h3>
-                </div>
-                <div class="card-body">
-                  <div class="form-group">
-                      <label for="sel1">Tanggal Kegiatan / Tugas</label>
-                      <input type="date" class="form-control" name="tgl_input" value="" required="required">
-                  </div>
-                  <div class="form-group">
-                      <label for="sel1">Pilih Unsur Kegiatan / Tugas:</label>
-                      <select class="form-control" name="id_unsur" id="unsur" required="required">
-                        <option value="0"></option>
-                          <?php
-                          foreach ($cb_unsur as $value) {
-                              echo "<option value='$value->id_unsur'>$value->unsur</option>";
-                          }
-                          ?>
-                      </select>
-                  </div>
-                  <div class="form-group">
-                      <label for="sel1">Pilih Uraian Kegiatan</label>
-                      <!-- <select class="form-control" name="id_uraian_kegiatan" id="uraiankegiatan">
-                          <option value="0"></option>
-                      </select> -->
-                      <select id="uraiankegiatan" class="form-control" name="id_uraian_kegiatan" required="required"></select>
-                  </div>
-                  <div class="form-group">
-                      <label for="sel1">Bukti Tugas / Kegiatan</label>
-                      <input type="file" class="form-control" name="bukti" value="" style="font-size: 12px;" required="required">
-                  </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <?php if($this->uri->segment(3)!=null) { ?>
-                  <button type="submit" class="btn btn-warning">Perbarui Data</button>
-                  <a href="../<?php base_url()?>tp" class="btn btn-secondary">Batal</a>
-                <?php } else { ?>
-                  <button type="submit" class="btn btn-info">Simpan Data</button>
-                  <a href="<?php base_url()?>" class="btn btn-secondary">Reset</a>
-                <?php } ?>
-                </div>
-                <!-- /.card-footer -->
-                </div>
-                </form>
-              </div>
+                            <?php $no++;  } ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+              
               </div>
               </div>
             </div>

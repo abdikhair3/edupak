@@ -360,13 +360,38 @@
         </li>
       <?php }else if($this->session->userdata('level') == 'Pegawai') { ?>
          <li class="nav-item" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
+<<<<<<< HEAD
             <a href="<?= base_url()?>iptugas/tp" class="nav-link <?php if($sub_menu=='iptugas'){echo 'active';} ?>">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Input Kegiatan / Tugas
+=======
+            <a href="<?= base_url()?>ipskp/tp" class="nav-link <?php if($sub_menu=='ipskp'){echo 'active';} ?>">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Input SKP
               </p>
             </a>
           </li>
+          <li class="nav-item <?php if($menu_active=='historytugas'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
+            <a href="#" class="nav-link <?php if($menu_active=='historytugas'){echo 'active';} ?>">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p> Laporan Harian
+                <i class="right fas fa-angle-left"></i>
+>>>>>>> 6e4ca3e427916411466ab81d1da13ca365dcca12
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
+                <li class="nav-item">
+                <a href="<?= base_url()?>iptugas" class="nav-link <?php if($sub_menu=='historytugasharian'){echo 'active';} ?>" style='color: #333;'>
+                  <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
+                  <p> Laporan Harian Pegawai
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <?php 
 
               $this->db->where('nip_penilai', $nip_ses->nip);
@@ -380,6 +405,7 @@
                 Periksa Kegiatan / Tugas
               </p>
             </a>
+            
           </li>
         <?php } ?>
         <li class="nav-item <?php if($menu_active=='ipskp'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
@@ -600,8 +626,9 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-
+  
     <?= $container ?>
+   
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -752,50 +779,8 @@
 
 
  <?= $extra_js ?>
+ <?= $this->session->userdata('notifikasi'); ?>
 
-
-<?php if(!empty($this->session->flashdata('notifinput'))) { ?>
-  <script>
-         $(document).ready(function() {
-
-<?php if($this->session->flashdata('notifinput')=="sukses_input") { ?>
-          Command: toastr["success"]("Data berhasil ditambahkan!")
-<?php } ?>
-
-<?php if($this->session->flashdata('notifinput')=="sukses_edit") { ?>
-          Command: toastr["success"]("Data berhasil diperbarui!")
-<?php } ?>
-
-<?php if($this->session->flashdata('notifinput')=="gagal") { ?>
-          Command: toastr["error"]("Maaf ada data yg masih kosong, silahkan lengkapi!")
-<?php } ?>
-
-<?php if($this->session->flashdata('notifinput')=="tanggal_salah") { ?>
-          Command: toastr["error"]("Maaf sesuaikan tanggal dengan semester penginputan data!")
-<?php } ?>
-
-      toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": true,
-        "positionClass": "toast-top-center",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-      }
-
-      });
-
-    </script>
-<?php } ?>
 
  
 <script>
