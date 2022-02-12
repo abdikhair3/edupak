@@ -81,7 +81,7 @@ class Ipskp extends CI_Controller
         $this->db->where('YEAR(tgl_input)', $thn_cek);
         $cek_kegiatan = $this->db->get('dp_skp_tahunan')->num_rows();
         if($cek_kegiatan>=1) {
-            $this->session->set_flashdata('notifinput', "gagal");
+            $this->session->set_flashdata('notifikasi', notif("Error", "Gagal Menambah Target Tahunan"));
 
                     redirect('ipskp/tp','refresh');
         } else {
@@ -98,7 +98,7 @@ class Ipskp extends CI_Controller
 
                                 $this->M_ipskp_tahunan->simpan_ip_tugas($id_uraian_kegiatan, $nip, $tgl_input, $totalangkakredit, $kuantitas);
 
-                                $this->session->set_flashdata('notifinput', "sukses_input");
+                                $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Menambah Target Tahunan"));
 
                                 redirect('ipskp/tp','refresh');
 
@@ -108,7 +108,7 @@ class Ipskp extends CI_Controller
 
                 {
 
-                    $this->session->set_flashdata('notifinput', "gagal");
+                    $this->session->set_flashdata('notifikasi', notif("danger", "Gagal Menambah Target Tahunan"));
 
                     redirect('ipskp/tp','refresh');
                 }

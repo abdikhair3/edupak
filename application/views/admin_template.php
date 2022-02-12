@@ -360,25 +360,10 @@
         </li>
       <?php }else if($this->session->userdata('level') == 'Pegawai') { ?>
          <li class="nav-item" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
-<<<<<<< HEAD
             <a href="<?= base_url()?>iptugas/tp" class="nav-link <?php if($sub_menu=='iptugas'){echo 'active';} ?>">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Input Kegiatan / Tugas
-=======
-            <a href="<?= base_url()?>ipskp/tp" class="nav-link <?php if($sub_menu=='ipskp'){echo 'active';} ?>">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Input SKP
-              </p>
-            </a>
-          </li>
-          <li class="nav-item <?php if($menu_active=='historytugas'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
-            <a href="#" class="nav-link <?php if($menu_active=='historytugas'){echo 'active';} ?>">
-              <i class="nav-icon fas fa-file-alt"></i>
-              <p> Laporan Harian
-                <i class="right fas fa-angle-left"></i>
->>>>>>> 6e4ca3e427916411466ab81d1da13ca365dcca12
               </p>
             </a>
             <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
