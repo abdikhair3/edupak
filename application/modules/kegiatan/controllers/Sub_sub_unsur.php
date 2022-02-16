@@ -53,7 +53,7 @@ class Sub_sub_unsur extends CI_Controller
 
             $this->M_sub_sub_unsur->simpan_unsur($id, $sub_sub_unsur, $detail_butir);
 
-            $this->session->set_flashdata('notifinput', "sukses_input");
+            $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Menambah Data"));
 
             redirect('kegiatan/sub_sub_unsur/tp/'.$id,'refresh');
         }
@@ -62,7 +62,7 @@ class Sub_sub_unsur extends CI_Controller
 
         {
 
-            $this->session->set_flashdata('notifinput', "gagal");
+            $this->session->set_flashdata('notifikasi', notif("error", "Gagal Menambah Data"));
 
             redirect('kegiatan/sub_sub_unsur/tp/'.$id,'refresh');
         }
@@ -88,7 +88,7 @@ class Sub_sub_unsur extends CI_Controller
 
             $this->M_sub_sub_unsur->edit_unsur($id_sub_sub, $sub_sub_unsur, $detail_butir);
 
-            $this->session->set_flashdata('notifinput', "sukses_edit");
+            $this->session->set_flashdata('notifikasi', notif("success", "Berhasil perbarui Data"));
 
     		redirect('kegiatan/sub_sub_unsur/tp/'.$id,'refresh');
         }
@@ -97,7 +97,7 @@ class Sub_sub_unsur extends CI_Controller
 
         {
 
-            $this->session->set_flashdata('notifinput', "gagal");
+            $this->session->set_flashdata('notifikasi', notif("error", "Gagal Perbarui Data"));
 
             redirect('kegiatan/sub_sub_unsur/tp/'.$id,'refresh');
         }

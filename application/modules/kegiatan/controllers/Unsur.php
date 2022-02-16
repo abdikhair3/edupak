@@ -52,7 +52,7 @@ class Unsur extends CI_Controller
 
             $this->M_unsur->simpan_unsur($id, $unsur);
 
-            $this->session->set_flashdata('notifinput', "sukses_input");
+            $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Menambah Data"));
 
             redirect('kegiatan/unsur/tp/'.$id,'refresh');
         }
@@ -61,7 +61,7 @@ class Unsur extends CI_Controller
 
         {
 
-            $this->session->set_flashdata('notifinput', "gagal");
+            $this->session->set_flashdata('notifikasi', notif("error", "Gagal Menambah Data"));
 
             redirect('kegiatan/unsur/tp/'.$id,'refresh');
         }
@@ -72,18 +72,18 @@ class Unsur extends CI_Controller
 		$this->form_validation->set_rules('id', 'id', 'required');
 		$this->form_validation->set_rules('unsur', 'unsur', 'required');
   
+		$id            = $this->input->post('id');
 
         // periksa data kosong yang belum diisi pada form tambah
        if ($this->form_validation->run() == TRUE)
 
         {
             
-            $id            = $this->input->post('id');
             $unsur            = $this->input->post('unsur');
 
             $this->M_unsur->edit_unsur($id, $unsur);
 
-            $this->session->set_flashdata('notifinput', "sukses_input");
+            $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Perbarui Data"));
 
     		redirect('kegiatan/unsur/tp/'.$id,'refresh');
         }
@@ -92,7 +92,7 @@ class Unsur extends CI_Controller
 
         {
 
-            $this->session->set_flashdata('notifinput', "gagal");
+            $this->session->set_flashdata('notifikasi', notif("error", "Gagal Perbarui Data"));
 
             redirect('kegiatan/unsur/tp/'.$id,'refresh');
         }

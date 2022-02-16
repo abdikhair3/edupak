@@ -108,7 +108,7 @@ class Ipskp extends CI_Controller
 
                 {
 
-                    $this->session->set_flashdata('notifikasi', notif("danger", "Gagal Menambah Target Tahunan"));
+                    $this->session->set_flashdata('notifikasi', notif("error", "Gagal Menambah Target Tahunan"));
 
                     redirect('ipskp/tp','refresh');
                 }
