@@ -23,7 +23,7 @@ class Iptugas extends CI_Controller
     	$data['description']	= "Halaman Input Kegiatan / Tugas";
     	$data['breadcrumbs']	= $breadcrumbs->render();
     	$data['extra_css']		= "";
-    	$data['extra_js']		= "";
+    	$data['extra_js']		= $this->load->view('iptugas/extra_js');
     	$data['menu_active']	= "iptugas";
     	$data['sub_menu']		= "iptugas";
     	$id=$this->uri->segment(3);
@@ -53,6 +53,13 @@ class Iptugas extends CI_Controller
         {
             
         }
+    }
+
+    public function tes()
+    {
+        $this->session->set_flashdata('notifikasi', notif("danger", "Ada Kesalahan pada penginputan"));
+        $this->session->set_flashdata('notifikasi_line', notif_line("success", "Ada Kesalahan pada penginputan"));
+        redirect('iptugas','refresh');
     }
     
     public function tp_cb_uraian_tugas() {
@@ -172,7 +179,20 @@ class Iptugas extends CI_Controller
         }
 	}
 
-	
+	public function get_skp_bulanan()
+    {
+        $tggl = $_POST['tggl'];
+        $pecah = explode('-', $tggl);
+        $t = $pecah[0].'-'.$pecah[1];
+        $this->db->join('dp_uraian_kegiatan','dp_uraian_kegiatan.id_uraian_kegiatan=dp_skp_tahunan.id_uraian_kegiatan','right');
+        $this->db->group_by('dp_uraian_kegiatan.id_uraian_kegiatan');
+        $this->db->where("DATE_FORMAT(tgl_input,'%Y-%m')", $t);
+        $get_keg = $this->db->get('dp_skp_tahunan')->result();
+        foreach($get_keg as $rows){
+            echo "<option value=".$rows->id_uraian_kegiatan.">".$rows->uraian_kegiatan."</option>";
+        }
+        
+    }
 
 
 }
