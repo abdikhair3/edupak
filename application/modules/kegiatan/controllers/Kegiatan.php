@@ -49,7 +49,7 @@ class Kegiatan extends CI_Controller
 
             $this->M_kategori->simpan_kategori($kategori);
 
-            $this->session->set_flashdata('notifinput', "sukses_input");
+            $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Menambah Data"));
 
             redirect('kegiatan/tp','refresh');
         }
@@ -57,8 +57,7 @@ class Kegiatan extends CI_Controller
         else
 
         {
-
-            $this->session->set_flashdata('notifinput', "gagal");
+            $this->session->set_flashdata('notifikasi', notif("error", "Gagal Menambah Data"));
 
             redirect('kegiatan/tp','refresh');
         }
@@ -80,7 +79,7 @@ class Kegiatan extends CI_Controller
 
             $this->M_kategori->edit_kategori($id, $kategori);
 
-            $this->session->set_flashdata('notifinput', "sukses_input");
+            $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Perbarui Data"));
 
     		redirect('kegiatan/tp','refresh');
         }
@@ -89,7 +88,7 @@ class Kegiatan extends CI_Controller
 
         {
 
-            $this->session->set_flashdata('notifinput', "gagal");
+            $this->session->set_flashdata('notifikasi', notif("error", "Gagal Perbarui Data"));
 
             redirect('kegiatan/tp','refresh');
         }
