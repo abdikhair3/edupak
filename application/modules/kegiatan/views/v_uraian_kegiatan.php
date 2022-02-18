@@ -70,10 +70,13 @@
                     <tr>
 
                         <th width=1>NO.</th>
+<<<<<<< HEAD
                         <th>KATEGORI</th>
                         <th>UNSUR</th>
                         <th>SUB UNSUR</th>
                         <th>BUTIR</th>
+=======
+>>>>>>> bfa13c6c50892f560f5e222c8324281f7b6d1162
                         <th>JENJANG</th>
                         <th>URAIAN KEGIATAN</th>
                         <th>OUTPUT</th>
@@ -87,12 +90,17 @@
                  <?php $no=1; foreach ($uraian_kegiatan as $rows) { ?>
                             <tr align="center">
                               <td><?php echo $no;  ?></td>
+<<<<<<< HEAD
                               <td><?php echo $rows->kategori_kegiatan; ?></td>
                               <td><?php echo $rows->unsur; ?></td>
                               <td><?php echo $rows->sub_unsur; ?></td>
                               <td><?php echo $rows->sub_sub_unsur; ?></td>
                               <td><?php echo $rows->jabatan; ?></td>
                               <td><?php echo $rows->uraian_kegiatan; ?></td>
+=======
+                              <td><?php echo $rows->jabatan; ?></td>
+                              <td><?php echo "$rows->uraian_kegiatan"; if($rows->detail_uraian!="") { echo "($rows->detail_uraian)"; } ?></td>
+>>>>>>> bfa13c6c50892f560f5e222c8324281f7b6d1162
                               <td><?php echo $rows->output_kerja; ?></td>
                               <td><?php echo $rows->satuan_kuantitas; ?></td>
                               <td><?php echo $rows->angka_kredit; ?></td>
@@ -124,6 +132,13 @@
                       <input type="hidden" class="form-control" name="id_sub_sub_unsur" value="<?php echo $unsurroot[0]->id_sub_sub_unsur; ?>">
                 </div>
                   <div class="form-group">
+<<<<<<< HEAD
+=======
+                    <label for="ipText">Detail / Keterangan</label>
+                    <input type="text" class="form-control" name="detail_uraian" placeholder="Detail/Keterangan" value="<?php echo isset ($unsuredit[0]->detail_butir) ? $unsuredit[0]->detail_butir:''; ?>">
+                  </div>
+                  <div class="form-group">
+>>>>>>> bfa13c6c50892f560f5e222c8324281f7b6d1162
                       <label for="sel1">Pilih Jenjang Jabatan</label>
                       <select class="form-control" name="id_pelaksana_tgs_jabatan">
                           <option value="<?php echo isset ($uraian_kegiatan_edit[0]->id_jabatan) ? $uraian_kegiatan_edit[0]->id_jabatan:''; ?>"><?php echo isset ($uraian_kegiatan_edit[0]->id_jabatan  ) ? $uraian_kegiatan_edit[0]->jabatan:''; ?></option>

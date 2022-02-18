@@ -81,7 +81,7 @@ class Ipskp extends CI_Controller
         $this->db->where('YEAR(tgl_input)', $thn_cek);
         $cek_kegiatan = $this->db->get('dp_skp_tahunan')->num_rows();
         if($cek_kegiatan>=1) {
-            $this->session->set_flashdata('notifikasi', notif("Error", "Gagal Menambah Target Tahunan"));
+            $this->session->set_flashdata('notifikasi', notif("error", "Kegiatan ini sudah pernah diinputkan"));
 
                     redirect('ipskp/tp','refresh');
         } else {

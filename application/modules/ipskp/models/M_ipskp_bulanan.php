@@ -26,6 +26,25 @@ class M_ipskp_bulanan extends CI_Model {
             return $q;
         }    
 
+<<<<<<< HEAD
+=======
+        public function get_detail_tp()
+            {
+                $bln_now=date('m');
+                $bln_now_con=(int)$bln_now;
+                if($bln_now_con<=6) { $semester=1; } else { $semester=2; }
+    
+                $this->db->where('id_pegawai', $this->session->userdata('id_member'));
+                $nip_ses = $this->db->get('dp_pegawai')->first_row();
+    
+                $this->db->where('nip', $nip_ses->nip);
+                $this->db->order_by('id_skp', 'DESC');
+                $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_skp_tahunan.id_uraian_kegiatan');
+                $q = $this->db->get('dp_skp_tahunan')->result();
+                return $q;
+            }    
+
+>>>>>>> bfa13c6c50892f560f5e222c8324281f7b6d1162
     public function get_cb_uraian_tugas()
     {
         $this->db->where('id_pegawai', detail_pegawai()->id_pegawai);
