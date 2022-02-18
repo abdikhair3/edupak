@@ -55,7 +55,6 @@
 
                         <th width=1>NO.</th>
                         <th>BUTIR KEGIATAN / TUGAS</th>
-                        <th>Detail / Keterangan</th>
                         <th width=100></th>
 
                     </tr>
@@ -65,7 +64,6 @@
                             <tr align="center">
                               <td><?php echo $no;  ?></td>
                               <td><?php echo $rows->sub_sub_unsur; ?></td>
-                              <td><?php echo $rows->detail_butir; ?></td>
                               <td>
                                 <a href="<?= base_url()?>kegiatan/uraian_kegiatan/tp/<?= $rows->id_sub_sub_unsur ?>" title="Tambah Unsur Kegiatan / Tugas" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                 <a href="<?= base_url()?>kegiatan/sub_sub_unsur/tp/<?php echo $this->uri->segment(4); ?>/<?= $rows->id_sub_sub_unsur ?>" title="Edit Data" type="button" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
@@ -94,10 +92,6 @@
                     <input type="text" class="form-control" name="sub_sub_unsur" placeholder="Butir Kegiatan / Tugas" value="<?php echo isset ($unsuredit[0]->sub_sub_unsur) ? $unsuredit[0]->sub_sub_unsur:''; ?>">
                     <input type="hidden" class="form-control" name="id" value="<?php echo $this->uri->segment(4); ?>">
                     <input type="hidden" class="form-control" name="id_sub_sub" value="<?php echo $this->uri->segment(5); ?>">
-                  </div>
-                  <div class="form-group">
-                    <label for="ipText">Detail / Keterangan</label>
-                    <input type="text" class="form-control" name="detail_butir" placeholder="Detail/Keterangan" value="<?php echo isset ($unsuredit[0]->detail_butir) ? $unsuredit[0]->detail_butir:''; ?>">
                   </div>
                 </div>
                 <!-- /.card-body -->

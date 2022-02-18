@@ -34,6 +34,30 @@ class Ipskp_bulanan extends CI_Controller
     	$this->load->view('admin_template', $data);
 
 	}
+
+	public function detail_tp()
+	{
+		$breadcrumbs 		= $this->breadcrumbs;
+
+		$breadcrumbs->add('Home', base_url().'home');
+		$breadcrumbs->add('Dashboard', base_url().'home');
+		$breadcrumbs->render();
+
+    	$data['title']			= 'Halaman Input SKP Bulanan';
+    	$data['description']	= "Halaman Input SKP Bulanan";
+    	$data['breadcrumbs']	= $breadcrumbs->render();
+    	$data['extra_css']		= "";
+    	$data['extra_js']		= "";
+    	$data['menu_active']	= "ipskp";
+    	$data['sub_menu']		= "ipskp_bulanan";
+    	$id_ft=$this->uri->segment(4);
+    	$data['tp_ip_tugas']     		= $this->M_ipskp_bulanan->get_detail_tp();
+    	$data['cb_uraian_kegiatan']     		= $this->M_ipskp_bulanan->get_cb_uraian_tugas();
+    	$data['ft_uraian_tugas']     		= $this->M_ipskp_bulanan->get_ft_uraian_tugas($id_ft);
+    	$data['container']		= $this->load->view('ipskp/v_ipskp_bulanan', $data, true);
+    	$this->load->view('admin_template', $data);
+
+	}
     
     public function tp_detail() {
         $data = $this->M_ipskp_bulanan->get_tp_detail();

@@ -63,7 +63,7 @@ class M_uraian_kegiatan extends CI_Model {
             return $q;
         } 
 
-    public function simpan_uraian_kegiatan($id_unsur, $id_kategori_kegiatan, $id_sub_unsur, $id_sub_sub_unsur, $id_pelaksana_tgs_jabatan, $uraian_kegiatan, $id_output_kerja, $satuan_kuantitas, $angka_kredit)
+    public function simpan_uraian_kegiatan($id_unsur, $id_kategori_kegiatan, $id_sub_unsur, $id_sub_sub_unsur, $id_pelaksana_tgs_jabatan, $uraian_kegiatan, $id_output_kerja, $satuan_kuantitas, $angka_kredit, $detail_uraian)
 
     {
 
@@ -77,6 +77,7 @@ class M_uraian_kegiatan extends CI_Model {
             'id_output_kerja'                      => $id_output_kerja,
             'satuan_kuantitas'                     => $satuan_kuantitas,
             'angka_kredit'                         => $angka_kredit,
+            'detail_uraian'                         => $detail_uraian,
         );
 
 
