@@ -37,6 +37,13 @@ class M_uraian_kegiatan extends CI_Model {
         $q = $this->db->get('dp_jabatan ')->result();
         return $q;
     }
+   
+    public function cb_kuantitas()
+     {
+         $this->db->order_by('satuan_kuantitas', 'ASC');
+         $q = $this->db->get('dp_kuantitas ')->result();
+         return $q;
+     }
 
     public function get_uraian_kegiatan_edit($id, $id_kategori_kegiatan)
         {
