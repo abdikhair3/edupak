@@ -73,7 +73,7 @@ class Sub_sub_unsur extends CI_Controller
 	{
 		$this->form_validation->set_rules('id_sub_sub', 'id_sub_sub', 'required');
 		$this->form_validation->set_rules('sub_sub_unsur', 'sub_sub_unsur', 'required');
-		$this->form_validation->set_rules('detail_butir', 'detail_butir', 'required');
+		// $this->form_validation->set_rules('detail_butir', 'detail_butir', 'required');
   
 		$id            	= $this->input->post('id');
 
@@ -84,9 +84,9 @@ class Sub_sub_unsur extends CI_Controller
             
             $id_sub_sub         = $this->input->post('id_sub_sub');
             $sub_sub_unsur          = $this->input->post('sub_sub_unsur');
-            $detail_butir          = $this->input->post('detail_butir');
+            // $detail_butir          = $this->input->post('detail_butir');
 
-            $this->M_sub_sub_unsur->edit_unsur($id_sub_sub, $sub_sub_unsur, $detail_butir);
+            $this->M_sub_sub_unsur->edit_unsur($id_sub_sub, $sub_sub_unsur);
 
             $this->session->set_flashdata('notifikasi', notif("success", "Berhasil perbarui Data"));
 

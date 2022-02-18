@@ -35,14 +35,13 @@ class M_sub_sub_unsur extends CI_Model {
             return $q;
         }  
 
-    public function simpan_unsur($id, $sub_sub_unsur, $detail_butir)
+    public function simpan_unsur($id, $sub_sub_unsur)
 
     {
 
         $data = array(
             'id_sub_unsur'                             => $id,
-            'sub_sub_unsur'                             => $sub_sub_unsur,
-            'detail_butir'                             => $detail_butir
+            'sub_sub_unsur'                             => $sub_sub_unsur
         );
 
 
@@ -53,13 +52,12 @@ class M_sub_sub_unsur extends CI_Model {
 
     }  
 
-    public function edit_unsur($id_sub_sub, $sub_sub_unsur, $detail_butir)
+    public function edit_unsur($id_sub_sub, $sub_sub_unsur)
 
     {
 
         $data = array(
-            'sub_sub_unsur'                             => $sub_sub_unsur,
-            'detail_butir'                             => $detail_butir
+            'sub_sub_unsur'                             => $sub_sub_unsur
         );
 
         $this->db->where('id_sub_sub_unsur', $id_sub_sub);
