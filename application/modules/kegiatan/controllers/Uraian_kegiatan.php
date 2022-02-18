@@ -31,6 +31,7 @@ class Uraian_kegiatan extends CI_Controller
     	$data['uraian_kegiatan']     		= $this->M_uraian_kegiatan->get_uraian_kegiatan();
     	$data['cb_output_kerja']     		= $this->M_uraian_kegiatan->get_cb_output_kerja();
         $data['cb_pel_tgs_jabatan']            = $this->M_uraian_kegiatan->cb_pel_tgs_jabatan();
+        $data['cb_kuantitas']            = $this->M_uraian_kegiatan->cb_kuantitas();
     	$data['unsurroot']     	= $this->M_uraian_kegiatan->get_unsur_root($id, $id_kategori_kegiatan);
     	if($this->uri->segment(5)!=null) {
     	$data['uraian_kegiatan_edit']     	= $this->M_uraian_kegiatan->get_uraian_kegiatan_edit($id, $id_kategori_kegiatan); }
@@ -70,7 +71,8 @@ class Uraian_kegiatan extends CI_Controller
 
             $this->M_uraian_kegiatan->simpan_uraian_kegiatan($id_kategori_kegiatan, $id_unsur, $id_sub_unsur, $id_sub_sub_unsur, $id_pelaksana_tgs_jabatan, $uraian_kegiatan, $id_output_kerja, $satuan_kuantitas, $angka_kredit, $detail_uraian);
 
-            $this->session->set_flashdata('notifinput', "sukses_input");
+            
+            $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Menambah Data"));
 
             redirect('kegiatan/uraian_kegiatan/tp/'.$id,'refresh');
         }
@@ -79,7 +81,8 @@ class Uraian_kegiatan extends CI_Controller
 
         {
 
-            $this->session->set_flashdata('notifinput', "gagal");
+            
+            $this->session->set_flashdata('notifikasi', notif("error", "Gagal Menambah Data"));
 
             redirect('kegiatan/uraian_kegiatan/tp/'.$id,'refresh');
         }
@@ -117,7 +120,8 @@ class Uraian_kegiatan extends CI_Controller
 
             $this->M_uraian_kegiatan->edit_uraian_kegiatan($id, $id_kategori_kegiatan, $id_unsur, $id_sub_unsur, $id_sub_sub_unsur, $id_pelaksana_tgs_jabatan, $uraian_kegiatan, $id_output_kerja, $satuan_kuantitas, $angka_kredit);
 
-            $this->session->set_flashdata('notifinput', "sukses_input");
+            
+            $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Perbarui Data"));
 
     		redirect('kegiatan/uraian_kegiatan/tp/'.$id,'refresh');
         }
@@ -126,7 +130,8 @@ class Uraian_kegiatan extends CI_Controller
 
         {
 
-            $this->session->set_flashdata('notifinput', "gagal");
+            
+            $this->session->set_flashdata('notifikasi', notif("error", "Gagal Perbarui Data"));
 
             redirect('kegiatan/uraian_kegiatan/tp/'.$id,'refresh');
         }

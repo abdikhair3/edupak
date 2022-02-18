@@ -143,11 +143,13 @@
                   </div>
                   <div class="form-group">
                       <label for="sel1">Pilih Satuan Kuantitas</label>
-                      <select name="satuan_kuantitas" class="form-control">
-                        <option value=""></option>
-                        <option value="Orang">Orang</option>
-                        <option value="Lembar">Lembar</option>
-                        <option value="Unit">Unit</option>
+                      <select class="form-control" name="satuan_kuantitas">
+                          <option value="<?php echo isset ($uraian_kegiatan_edit[0]->id_dp_kuantitas) ? $uraian_kegiatan_edit[0]->id_dp_kuantitas:''; ?>"><?php echo isset ($uraian_kegiatan_edit[0]->output_kerja) ? $uraian_kegiatan_edit[0]->output_kerja:''; ?></option>
+                          <?php
+                          foreach ($cb_kuantitas as $value) {
+                              echo "<option value='$value->id_dp_kuantitas'>$value->satuan_kuantitas</option>";
+                          }
+                          ?>
                       </select>
                   </div>
                   <div class="form-group">
