@@ -117,7 +117,7 @@
                 </div>
                   <div class="form-group">
                     <label for="ipText">Detail / Keterangan</label>
-                    <input type="text" class="form-control" name="detail_uraian" placeholder="Detail/Keterangan" value="<?php echo isset ($unsuredit[0]->detail_butir) ? $unsuredit[0]->detail_butir:''; ?>">
+                    <input type="text" class="form-control" name="detail_uraian" placeholder="Detail/Keterangan" value="<?php echo isset ($uraian_kegiatan_edit[0]->detail_uraian) ? $uraian_kegiatan_edit[0]->detail_uraian:''; ?>">
                   </div>
                   <div class="form-group">
                       <label for="sel1">Pilih Jenjang Jabatan</label>
