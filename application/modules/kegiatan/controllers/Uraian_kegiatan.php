@@ -49,10 +49,7 @@ class Uraian_kegiatan extends CI_Controller
         $this->form_validation->set_rules('id_output_kerja', 'id_output_kerja', 'required');
         $this->form_validation->set_rules('satuan_kuantitas', 'satuan_kuantitas', 'required');
         $this->form_validation->set_rules('angka_kredit', 'angka_kredit', 'required');
-<<<<<<< HEAD
-=======
         $this->form_validation->set_rules('detail_uraian', 'detail_uraian', 'required');
->>>>>>> bfa13c6c50892f560f5e222c8324281f7b6d1162
   
         $id            = $this->input->post('id');
 
@@ -70,14 +67,9 @@ class Uraian_kegiatan extends CI_Controller
             $id_output_kerja            = $this->input->post('id_output_kerja');
             $satuan_kuantitas            = $this->input->post('satuan_kuantitas');
             $angka_kredit            = $this->input->post('angka_kredit');
-<<<<<<< HEAD
-
-            $this->M_uraian_kegiatan->simpan_uraian_kegiatan($id_kategori_kegiatan, $id_unsur, $id_sub_unsur, $id_sub_sub_unsur, $id_pelaksana_tgs_jabatan, $uraian_kegiatan, $id_output_kerja, $satuan_kuantitas, $angka_kredit);
-=======
             $detail_uraian            = $this->input->post('detail_uraian');
 
             $this->M_uraian_kegiatan->simpan_uraian_kegiatan($id_kategori_kegiatan, $id_unsur, $id_sub_unsur, $id_sub_sub_unsur, $id_pelaksana_tgs_jabatan, $uraian_kegiatan, $id_output_kerja, $satuan_kuantitas, $angka_kredit, $detail_uraian);
->>>>>>> bfa13c6c50892f560f5e222c8324281f7b6d1162
 
             $this->session->set_flashdata('notifinput', "sukses_input");
 
