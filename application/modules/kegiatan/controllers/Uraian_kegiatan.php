@@ -49,7 +49,6 @@ class Uraian_kegiatan extends CI_Controller
         $this->form_validation->set_rules('id_output_kerja', 'id_output_kerja', 'required');
         $this->form_validation->set_rules('satuan_kuantitas', 'satuan_kuantitas', 'required');
         $this->form_validation->set_rules('angka_kredit', 'angka_kredit', 'required');
-        $this->form_validation->set_rules('detail_uraian', 'detail_uraian', 'required');
   
         $id            = $this->input->post('id');
 
