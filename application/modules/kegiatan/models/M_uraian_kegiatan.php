@@ -19,6 +19,7 @@ class M_uraian_kegiatan extends CI_Model {
             $this->db->join('dp_jabatan', 'dp_jabatan.id_jabatan = dp_uraian_kegiatan.id_pelaksana_tgs_jabatan');
             // $this->db->group_by("dp_uraian_kegiatan.id_output_kerja");
             $this->db->join('dp_output_kerja', 'dp_output_kerja.id_output_kerja = dp_uraian_kegiatan.id_output_kerja');
+            $this->db->join('dp_kuantitas', 'dp_kuantitas.id_dp_kuantitas = dp_uraian_kegiatan.id_dp_kuantitas');
             $q = $this->db->get('dp_uraian_kegiatan')->result();
             return $q;
         }    
@@ -82,7 +83,7 @@ class M_uraian_kegiatan extends CI_Model {
             'id_pelaksana_tgs_jabatan'             => $id_pelaksana_tgs_jabatan,
             'uraian_kegiatan'                      => $uraian_kegiatan,
             'id_output_kerja'                      => $id_output_kerja,
-            'satuan_kuantitas'                     => $satuan_kuantitas,
+            'id_dp_kuantitas'                     => $satuan_kuantitas,
             'angka_kredit'                         => $angka_kredit,
             'detail_uraian'                         => $detail_uraian,
         );
@@ -107,7 +108,7 @@ class M_uraian_kegiatan extends CI_Model {
             'id_pelaksana_tgs_jabatan'             => $id_pelaksana_tgs_jabatan,
             'uraian_kegiatan'                      => $uraian_kegiatan,
             'id_output_kerja'                      => $id_output_kerja,
-            'satuan_kuantitas'                     => $satuan_kuantitas,
+            'id_dp_kuantitas'                     => $satuan_kuantitas,
             'angka_kredit'                         => $angka_kredit,
         );
 
