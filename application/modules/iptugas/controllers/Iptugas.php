@@ -23,11 +23,7 @@ class Iptugas extends CI_Controller
     	$data['description']	= "Halaman Input Kegiatan / Tugas";
     	$data['breadcrumbs']	= $breadcrumbs->render();
     	$data['extra_css']		= "";
-<<<<<<< HEAD
     	$data['extra_js']		= $this->load->view('iptugas/extra_js');
-=======
-    	$data['extra_js']		= "";
->>>>>>> bfa13c6c50892f560f5e222c8324281f7b6d1162
     	$data['menu_active']	= "iptugas";
     	$data['sub_menu']		= "iptugas";
     	$id=$this->uri->segment(3);
@@ -58,7 +54,6 @@ class Iptugas extends CI_Controller
             
         }
     }
-<<<<<<< HEAD
 
     public function tes()
     {
@@ -66,8 +61,6 @@ class Iptugas extends CI_Controller
         $this->session->set_flashdata('notifikasi_line', notif_line("success", "Ada Kesalahan pada penginputan"));
         redirect('iptugas','refresh');
     }
-=======
->>>>>>> bfa13c6c50892f560f5e222c8324281f7b6d1162
     
     public function tp_cb_uraian_tugas() {
         $data = $this->M_iptugas->get_cb_uraian_tugas();
@@ -186,7 +179,6 @@ class Iptugas extends CI_Controller
         }
 	}
 
-<<<<<<< HEAD
 	public function get_skp_bulanan()
     {
         $tggl = $_POST['tggl'];
@@ -201,9 +193,6 @@ class Iptugas extends CI_Controller
         }
         
     }
-=======
-	
->>>>>>> bfa13c6c50892f560f5e222c8324281f7b6d1162
 
 
 }

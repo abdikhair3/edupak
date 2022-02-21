@@ -26,8 +26,6 @@ class M_ipskp_bulanan extends CI_Model {
             return $q;
         }    
 
-<<<<<<< HEAD
-=======
         public function get_detail_tp()
             {
                 $bln_now=date('m');
@@ -44,7 +42,6 @@ class M_ipskp_bulanan extends CI_Model {
                 return $q;
             }    
 
->>>>>>> bfa13c6c50892f560f5e222c8324281f7b6d1162
     public function get_cb_uraian_tugas()
     {
         $this->db->where('id_pegawai', detail_pegawai()->id_pegawai);
