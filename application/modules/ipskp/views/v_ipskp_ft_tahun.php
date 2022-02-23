@@ -1,6 +1,6 @@
 
 <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -28,42 +28,29 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-              <div class="row">
-                  <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#skpft">
-                  <i class="fas fa-file"></i> Tambah Periode Target Tahunan
-                  </button>
-                <div class="col-12">
-                  <div style="overflow-x:scroll">
-                    <table id="rev_penelitian" class="table table-bordered table-striped" style="width: 100%;">
-
-                    <thead>
-                        <tr>
-
-                            <th width=1>NO.</th>
-                            <th>Periode</th>
-                            <th width=100></th>
-                            <th width=100></th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php $no=1; foreach ($tp_periode as $rows) {
-                      ?>
-                                <tr align="center">
-                                  <td><?php echo $no;  ?></td>
-                                  <td><?php echo "$rows->dt_ml - $rows->dt_ak"; ?></td>
-                                  <td>
-                                    <a href="<?= base_url()?>Ipskp/ipskp_tahunan/<?= $rows->id_skp_tahunan_ft ?>" title="Tambah Target Tahunan" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                  </td>
-                                  <td>
-                                    <a href="<?= base_url()?>ipskp/<?= $rows->id_skp_tahunan_ft ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                  </td>
-                                </tr>
-                      <?php $no++;  } ?>
-                    </tbody>
-                    </table>
-                  </div>
-                </div>
+                <form class="form-horizontal" action="<?= base_url()?>ipskp/tp" method="get">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Tanggal Mulai</label>
+                                <div id="satuankuantitas"></div>
+                                <input type="date" class="form-control" name="dt_ml">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Tanggal Berakhir</label>
+                                <input type="date" class="form-control" name="dt_ak">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-block btn-primary">LIHAT DATA</button>
+                        </div>
+                    </div>
+                </form>
+                
+              </div>
+              </div>
               </div>
               </div>
             </div>
@@ -84,28 +71,14 @@
   <div class="modal-dialog  modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="skpmodalLabel">Tambah Periode Target Tahunan</h5>
+        <h5 class="modal-title" id="skpmodalLabel">FORM INPUT SKP</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" id="formUraian" action="<?php if($this->uri->segment(3)!=null) { echo base_url()."ipskp/edit_ipskp"; } else { echo base_url()."ipskp/tambah_ipskp"; } ?>" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="thn_input" value="<?php echo $this->input->get('thn_ft'); ?>">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label>Tanggal Mulai</label>
-                    <input type="date" class="form-control" name="dt_ml">
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label>Tanggal Berakhir</label>
-                    <input type="date" class="form-control" name="dt_ak">
-                </div>
-            </div>
-        </div>
+        <input type="hidden" class="form-control" name="id" value="<?php echo $this->uri->segment(3); ?>">
         <div class="form-group">
             <label for="sel1">Pilih Kategori :</label>
             <select class="form-control" name="id_kategori_kegiatan" id="kategori_kegiatan" required="required">
@@ -152,48 +125,6 @@
             <input type="text" class="form-control" name="totalangkakredit" placeholder="0" readonly id="ttlangkakredit">
             </div>
           </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-          <?php if($this->uri->segment(3)!=null) { ?>
-            <button type="submit" class="btn btn-warning">Perbarui Data</button>
-            <a href="../<?php base_url()?>tp" class="btn btn-secondary">Batal</a>
-          <?php } else { ?>
-            <button type="submit" class="btn btn-info">Simpan Data</button>
-            <a href="<?php base_url()?>" class="btn btn-secondary">Batal</a>
-          <?php } ?>
-      </div>
-        </form>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="skpft" tabindex="-1" role="dialog" aria-labelledby="skpmodalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="skpmodalLabel">FORM INPUT SKP</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" id="formUraian" action="<?php if($this->uri->segment(3)!=null) { echo base_url()."ipskp/edit_ipskp"; } else { echo base_url()."ipskp/tambah_ipskp_periode"; } ?>" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="thn_input" value="<?php echo $this->input->get('thn_ft'); ?>">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label>Tanggal Mulai</label>
-                    <input type="date" class="form-control" name="dt_ml">
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label>Tanggal Berakhir</label>
-                    <input type="date" class="form-control" name="dt_ak">
-                </div>
-            </div>
         </div>
       </div>
       <div class="modal-footer">

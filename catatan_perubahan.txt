@@ -4,3 +4,7 @@
 # script notif
 $this->session->set_flashdata('notifikasi', notif("success", "Ada Kesalahan pada penginputan"));
 $this->session->set_flashdata('notifikasi_line', notif_line("success", "Ada Kesalahan pada penginputan"));
+
+#database
+tambah tabel dp_skp_tahunan_dt
+ganti struktur tabel dp_skp_tahunan

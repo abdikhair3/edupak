@@ -10,18 +10,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_ipskp_tahunan extends CI_Model {
 
-    public function get_ip_tugas()
+    public function get_tp_periode()
         {
-            $bln_now=date('m');
-            $bln_now_con=(int)$bln_now;
-            if($bln_now_con<=6) { $semester=1; } else { $semester=2; }
-
-            $this->db->where('nip', detail_pegawai()->nip);
-            $this->db->order_by('id_skp', 'DESC');
-            $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_skp_tahunan.id_uraian_kegiatan');
-            $q = $this->db->get('dp_skp_tahunan')->result();
+            $this->db->where('id_pegawai', detail_pegawai()->id_pegawai);
+            $q = $this->db->get('dp_skp_tahunan_ft')->result();
             return $q;
         }    
+
+        public function get_tp_ip_target_Tahunan($id)
+            {
+                $this->db->where('id_pegawai', detail_pegawai()->id_pegawai);
+                $this->db->where('id_skp_tahunan_ft', $id);
+                $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_skp_tahunan.id_uraian_kegiatan');
+                $q = $this->db->get('dp_skp_tahunan')->result();
+                return $q;
+            }    
         
     public function get_cb_unsur()
     {
@@ -42,8 +45,9 @@ class M_ipskp_tahunan extends CI_Model {
     public function get_tp_detail()
     {
         $id_uraian_kegiatan = $this->input->get('id_uraian_kegiatan');
-        $this->db->where('id_uraian_kegiatan', $id_uraian_kegiatan);
+        $this->db->where('dp_uraian_kegiatan.id_uraian_kegiatan', $id_uraian_kegiatan);
         $this->db->order_by('uraian_kegiatan','ASC');
+        $this->db->join('dp_kuantitas', 'dp_kuantitas.id_dp_kuantitas = dp_uraian_kegiatan.id_dp_kuantitas');
         return $this->db->get('dp_uraian_kegiatan');
     }
     // public function get_cb_sub_sub_unsur($id_sub_unsur)
@@ -61,7 +65,24 @@ class M_ipskp_tahunan extends CI_Model {
             return $q;
         }  
 
-    public function simpan_ip_tugas($id_uraian_kegiatan, $nip, $tgl_input, $totalangkakredit, $kuantitas)
+    public function simpan_periode($id_pegawai, $dt_ml, $dt_ak)
+
+    {
+        $data = array(
+            'id_pegawai'                             => detail_pegawai()->id_pegawai,
+            'dt_ml'                       => $dt_ml,
+            'dt_ak'                       => $dt_ak
+        );
+
+
+
+        $this->db->insert('dp_skp_tahunan_ft', $data);
+
+        return;
+
+    }  
+
+    public function simpan_ip_tugas($id_uraian_kegiatan, $nip, $totalangkakredit, $kuantitas, $id_skp_tahunan_ft)
 
     {
         $tgl_now = date('Y-m-d');
@@ -73,19 +94,15 @@ class M_ipskp_tahunan extends CI_Model {
             'id_unit'                             => detail_pegawai()->id_unit,
             'id_pangkat'                             => detail_pegawai()->id_pangkat,
             'id_jabatan'                             => detail_pegawai()->id_jabatan,
+            'id_skp_tahunan_ft'                       => $id_skp_tahunan_ft,
             'kuantitas'                       => $kuantitas,
             'ttl_angkakredit'                 => $totalangkakredit,
             'tgl_input'                       => $tgl_now,
             'status_periksa'                  => "Diperiksa Atasan"
         );
 
-
-
         $this->db->insert('dp_skp_tahunan', $data);
 
         return;
-
-    }  
-
-
+    }
 }
