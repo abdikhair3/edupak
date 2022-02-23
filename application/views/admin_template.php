@@ -359,7 +359,7 @@
           </ul>
         </li>
       <?php }else if($this->session->userdata('level') == 'Pegawai') { ?>
-         <li class="nav-item" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
+         <li class="nav-item nav-treeview" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
             <a href="<?= base_url()?>iptugas/tp" class="nav-link <?php if($sub_menu=='iptugas'){echo 'active';} ?>">
               <i class="nav-icon fas fa-edit"></i>
               <p>

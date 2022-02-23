@@ -42,25 +42,15 @@
   
                           <label class="col-form-label" for="inputError">Tanggal Kegiatan / Tugas</label>
   
-                          <input type="date" class="form-control is-invalid" id="inputError" name="tanggal">
-                      
-                          <label for="sel1">Pilih Unsur Kegiatan / Tugas:</label>
-                          <select class="form-control" name="id_unsur" id="unsur">
-                            <option value="0"></option>
-                              <?php
-                              foreach ($cb_unsur as $value) {
-                                  echo "<option value='$value->id_unsur'>$value->unsur</option>";
-                              }
-                              ?>
-                          </select>
+                          <input type="date" class="form-control is-invalid" id="tggl_kegiatan"  onchange="kredit(this)" name="tanggal">
+
                           <label for="sel1">Pilih Uraian Kegiatan</label>
-                          <!-- <select class="form-control" name="id_uraian_kegiatan" id="uraiankegiatan">
-                              <option value="0"></option>
-                          </select> -->
-                          <select id="uraiankegiatan" class="form-control" name="id_uraian_kegiatan"></select>
-    
+                          <select id="form_kegiatan" class="form-control" name="id_uraian_kegiatan"></select>
+                        
                           <label for="sel1">Bukti Tugas / Kegiatan</label>
                           <input type="file" class="form-control" name="bukti" value="" style="font-size: 12px;">
+
+  
                       </div>
                     </div>
                     <div class="card-footer">
