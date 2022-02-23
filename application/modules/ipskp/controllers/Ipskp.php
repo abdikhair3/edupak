@@ -26,12 +26,31 @@ class Ipskp extends CI_Controller
     	$data['extra_js']		= "";
     	$data['menu_active']	= "ipskp";
     	$data['sub_menu']		= "ipskp_tahunan";
-    	$id=$this->uri->segment(3);
-    	$data['tp_ip_tugas']     		= $this->M_ipskp_tahunan->get_ip_tugas();
-    	$data['cb_unsur']     		= $this->M_ipskp_tahunan->get_cb_unsur();
-        if($this->uri->segment(3)!=null) {
-    	$data['uraian_kegiatan_edit']     	= $this->M_ipskp_tahunan->get_uraian_kegiatan_edit($id); }
+    	$data['tp_periode']     		= $this->M_ipskp_tahunan->get_tp_periode();
     	$data['container']		= $this->load->view('ipskp/v_ipskp_tahunan', $data, true);
+    	$this->load->view('admin_template', $data);
+
+	}
+
+	public function ipskp_tahunan()
+	{
+		$breadcrumbs 		= $this->breadcrumbs;
+
+		$breadcrumbs->add('Home', base_url().'home');
+		$breadcrumbs->add('Dashboard', base_url().'home');
+		$breadcrumbs->render();
+
+    	$data['title']			= 'Halaman Input SKP Tahunan';
+    	$data['description']	= "Halaman Input SKP Tahunan";
+    	$data['breadcrumbs']	= $breadcrumbs->render();
+    	$data['extra_css']		= "";
+    	$data['extra_js']		= "";
+    	$data['menu_active']	= "ipskp";
+    	$data['sub_menu']		= "ipskp_tahunan";
+    	$id=$this->uri->segment(3);
+    	$data['tp_ip_target_Tahunan']     		= $this->M_ipskp_tahunan->get_tp_ip_target_Tahunan($id);
+    	$data['cb_unsur']     		= $this->M_ipskp_tahunan->get_cb_unsur();
+    	$data['container']		= $this->load->view('ipskp/v_ipskp_tahunan_dt', $data, true);
     	$this->load->view('admin_template', $data);
 
 	}
@@ -46,7 +65,7 @@ class Ipskp extends CI_Controller
     
     public function tp_detail() {
         $data = $this->M_ipskp_tahunan->get_tp_detail();
-        foreach ($data->result() as $d) {
+        foreach ($data->result() as $d) {                   
             // echo "<option value=$d->satuan_kuantitas>$d->satuan_kuantitas </option>";
             echo "<input type=\"text\" class=\"form-control\" placeholder=\"Satuan\" readonly value='".$d->satuan_kuantitas."'>";
             
@@ -68,20 +87,18 @@ class Ipskp extends CI_Controller
  //        echo json_encode($data);
  //    }
 
-	public function tambah_ipskp()
+	public function tambah_ipskp_periode()
 	{
         $id_pegawai = detail_pegawai()->id_pegawai;
-        $this->form_validation->set_rules('id_uraian_kegiatan', 'id_uraian_kegiatan', 'required');
-        $this->form_validation->set_rules('totalangkakredit', 'totalangkakredit', 'required');
-        $this->form_validation->set_rules('kuantitas', 'kuantitas', 'required');
+        $this->form_validation->set_rules('dt_ml', 'dt_ml', 'required');
+        $this->form_validation->set_rules('dt_ak', 'dt_ak', 'required');
     
-        $thn_cek=date('Y');
-        $this->db->where('id_uraian_kegiatan', $this->input->post('id_uraian_kegiatan'));
+        $dt_pisah            = explode("-",$this->input->post('dt_ml'));
         $this->db->where('id_pegawai', $id_pegawai);
-        $this->db->where('YEAR(tgl_input)', $thn_cek);
-        $cek_kegiatan = $this->db->get('dp_skp_tahunan')->num_rows();
+        $this->db->where('YEAR(dt_ml)', $dt_pisah[0]);
+        $cek_kegiatan = $this->db->get('dp_skp_tahunan_ft')->num_rows();
         if($cek_kegiatan>=1) {
-            $this->session->set_flashdata('notifikasi', notif("error", "Kegiatan ini sudah pernah diinputkan"));
+            $this->session->set_flashdata('notifikasi', notif("error", "Periode ini sudah pernah diinputkan"));
 
                     redirect('ipskp/tp','refresh');
         } else {
@@ -89,14 +106,11 @@ class Ipskp extends CI_Controller
             if ($this->form_validation->run() == TRUE)
 
                 {
+                    $id_pegawai            = $this->input->post('id_pegawai');
+                    $dt_ml            = $this->input->post('dt_ml');
+                    $dt_ak            = $this->input->post('dt_ak');
 
-                    $id_uraian_kegiatan            = $this->input->post('id_uraian_kegiatan');
-                    $nip                           = $this->input->post('nip');
-                    $tgl_input            = $this->input->post('tgl_input');
-                    $totalangkakredit            = $this->input->post('totalangkakredit');
-                    $kuantitas            = $this->input->post('kuantitas');
-
-                                $this->M_ipskp_tahunan->simpan_ip_tugas($id_uraian_kegiatan, $nip, $tgl_input, $totalangkakredit, $kuantitas);
+                                $this->M_ipskp_tahunan->simpan_periode($id_pegawai, $dt_ml, $dt_ak);
 
                                 $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Menambah Target Tahunan"));
 
@@ -111,6 +125,54 @@ class Ipskp extends CI_Controller
                     $this->session->set_flashdata('notifikasi', notif("error", "Gagal Menambah Target Tahunan"));
 
                     redirect('ipskp/tp','refresh');
+                }
+            }
+	}
+
+	public function tambah_ipskp()
+	{
+        $id_pegawai = detail_pegawai()->id_pegawai;
+        $this->form_validation->set_rules('id_uraian_kegiatan', 'id_uraian_kegiatan', 'required');
+        $this->form_validation->set_rules('totalangkakredit', 'totalangkakredit', 'required');
+        $this->form_validation->set_rules('kuantitas', 'kuantitas', 'required');
+        $this->form_validation->set_rules('id_skp_tahunan_ft', 'id_skp_tahunan_ft', 'required');
+    
+        // $thn_cek=explode("-", $this->input->post('thn_input'));
+        $this->db->where('id_uraian_kegiatan', $this->input->post('id_uraian_kegiatan'));
+        $this->db->where('id_pegawai', $id_pegawai);
+        $this->db->where('id_skp_tahunan_ft', $this->input->post('id_skp_tahunan_ft'));
+        $cek_kegiatan = $this->db->get('dp_skp_tahunan')->num_rows();
+        if($cek_kegiatan>=1) {
+            $this->session->set_flashdata('notifikasi', notif("error", "Kegiatan ini sudah pernah diinputkan"));
+
+                    redirect('ipskp/ipskp_tahunan/'.$this->input->post('id_skp_tahunan_ft'),'refresh');
+        } else {
+                // periksa data kosong yang belum diisi pada form tambah
+            if ($this->form_validation->run() == TRUE)
+
+                {
+
+                    $id_uraian_kegiatan            = $this->input->post('id_uraian_kegiatan');
+                    $nip                           = $this->input->post('nip');
+                    $totalangkakredit            = $this->input->post('totalangkakredit');
+                    $kuantitas            = $this->input->post('kuantitas');
+                    $id_skp_tahunan_ft            = $this->input->post('id_skp_tahunan_ft');
+
+                                $this->M_ipskp_tahunan->simpan_ip_tugas($id_uraian_kegiatan, $nip, $totalangkakredit, $kuantitas, $id_skp_tahunan_ft);
+
+                                $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Menambah Target Tahunan"));
+
+                                redirect('ipskp/ipskp_tahunan/'.$this->input->post('id_skp_tahunan_ft'),'refresh');
+
+                }
+                
+                else
+
+                {
+
+                    $this->session->set_flashdata('notifikasi', notif("error", "Gagal Menambah Target Tahunan"));
+
+                    redirect('ipskp/ipskp_tahunan/'.$this->input->post('id_skp_tahunan_ft'),'refresh');
                 }
             }
 	}

@@ -66,11 +66,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                 <?php $no=1; foreach ($tp_ip_tugas as $rows) { ?>
+                 <?php $no=1; foreach ($tp_ip_tugas as $rows) {
+                  $this->db->where('id_dp_kuantitas', $rows->id_dp_kuantitas);
+                   $satuan = $this->db->get('dp_kuantitas')->first_row(); ?>
                             <tr align="center">
                               <td><?php echo $no;  ?></td>
                               <td><?php echo $rows->uraian_kegiatan; ?></td>
-                              <td><?php echo "$rows->kuantitas $rows->satuan_kuantitas"; ?></td>
+                              <td><?php echo "$rows->kuantitas "; echo $satuan->satuan_kuantitas; ?></td>
                               <td><?php echo $rows->ttl_angkakredit; ?></td>
                               <td>
                               <a href="<?= base_url()?>ipskp/<?= $rows->id_uraian_kegiatan ?>" title="Target Bulanan" type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>

@@ -1,6 +1,6 @@
 
 <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -30,7 +30,7 @@
               <div class="card-body">
               <div class="row">
                   <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#skpft">
-                  <i class="fas fa-file"></i> Tambah Periode Target Tahunan
+                  <i class="fas fa-file"></i> INPUT SKP TAHUNAN
                   </button>
                 <div class="col-12">
                   <div style="overflow-x:scroll">
@@ -40,23 +40,31 @@
                         <tr>
 
                             <th width=1>NO.</th>
-                            <th>Periode</th>
-                            <th width=100></th>
+                            <th>KEGIATAN / TUGAS</th>
+                            <th>TARGET KUANTITAS</th>
+                            <th>TARGET ANGKA KREDIT</th>
+                            <th>STATUS</th>
                             <th width=100></th>
 
                         </tr>
                     </thead>
                     <tbody>
-                    <?php $no=1; foreach ($tp_periode as $rows) {
+                    <?php $no=1; foreach ($tp_ip_tugas as $rows) {
+                      $this->db->where('id_dp_kuantitas', $rows->id_dp_kuantitas);
+                      $satuan = $this->db->get('dp_kuantitas')->first_row();
                       ?>
                                 <tr align="center">
                                   <td><?php echo $no;  ?></td>
-                                  <td><?php echo "$rows->dt_ml - $rows->dt_ak"; ?></td>
+                                  <td><?php echo $rows->uraian_kegiatan; ?></td>
+                                  <td><?php echo "$rows->kuantitas "; echo $satuan->satuan_kuantitas; ?></td>
+                                  <td><?php echo $rows->ttl_angkakredit; ?></td>
                                   <td>
-                                    <a href="<?= base_url()?>Ipskp/ipskp_tahunan/<?= $rows->id_skp_tahunan_ft ?>" title="Tambah Target Tahunan" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <label type="button" class="btn btn-block btn-outline-<?php if($rows->status_periksa=="Ditolak") { echo "danger"; } else if($rows->status_periksa=="Diverifikasi Atasan") { echo "success"; } else { echo "primary"; } ?> btn-xs" st><?php echo $rows->status_periksa; ?></label>
                                   </td>
                                   <td>
-                                    <a href="<?= base_url()?>ipskp/<?= $rows->id_skp_tahunan_ft ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                  <?php if($rows->status_periksa=="Diperiksa Atasan") { ?>
+                                    <a href="<?= base_url()?>ipskp/<?= $rows->id_uraian_kegiatan ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                <?php } else { echo "-"; } ?>
                                   </td>
                                 </tr>
                       <?php $no++;  } ?>
@@ -84,7 +92,7 @@
   <div class="modal-dialog  modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="skpmodalLabel">Tambah Periode Target Tahunan</h5>
+        <h5 class="modal-title" id="skpmodalLabel">FORM INPUT SKP</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -179,7 +187,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" id="formUraian" action="<?php if($this->uri->segment(3)!=null) { echo base_url()."ipskp/edit_ipskp"; } else { echo base_url()."ipskp/tambah_ipskp_periode"; } ?>" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" id="formUraian" action="<?php if($this->uri->segment(3)!=null) { echo base_url()."ipskp/edit_ipskp"; } else { echo base_url()."ipskp/tambah_ipskp"; } ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="thn_input" value="<?php echo $this->input->get('thn_ft'); ?>">
         <div class="row">
             <div class="col-sm-6">
