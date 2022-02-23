@@ -46,7 +46,7 @@
                             <select class="form-control select2" style="width: 100%;" name="atasan">
                                 <option value=''>------------Pilih Atasan Langsung-------------</option>
                                 <?php foreach($atasan as $rows){?>
-                                    <option value="<?= $rows->id_pegawai ?>" <?php if($profil->id_atasan==$rows->id_pegawai){echo"selected";} ?>>(<?= $rows->id_pegawai ?>) <?= $rows->nama ?> | <?= $rows->jabatan ?></option>
+                                    <option value="<?= $rows->nip ?>" <?php if($profil->nip_atasan==$rows->nip){echo"selected";} ?>>(<?= $rows->nip ?>) <?= $rows->nama ?> | <?= $rows->jabatan ?></option>
                                 <?php }?>
                             </select>
                             </div>

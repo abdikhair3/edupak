@@ -8,12 +8,28 @@ function kredit(selectObject) {
                     },
             cache:false,
             success: function(data){
-              console.log(data);
               $("#form_kegiatan").html(data);
               $("#form_kegiatan").show();
             }
 
         });
         return false;
+}
+
+function keg_get(selectObject)
+{
+  var kegiatan = selectObject.value;
+  $.ajax({
+      type : "POST",
+      url  : "<?php echo base_url('iptugas/get_satuan')?>",
+      data : {kegiatan: kegiatan,
+              },
+      cache:false,
+      success: function(data){
+          document.getElementById('satuan').value = data;
+      }
+
+  });
+  return false;
 }
 </script>

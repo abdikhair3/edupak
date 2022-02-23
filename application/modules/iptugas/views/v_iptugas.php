@@ -19,7 +19,7 @@
           <div class="col-12">
             
             <div class="card">
-            <?= $this->session->userdata('notifikasi_line'); ?>
+            <?= $this->session->userdata('notifikasi'); ?>
               <div class="card-body">
               
               <div class="row">
@@ -38,19 +38,26 @@
                     </div>
                     <div class="card-body">
                       <div class="row">
-  
-  
-                          <label class="col-form-label" for="inputError">Tanggal Kegiatan / Tugas</label>
-  
-                          <input type="date" class="form-control is-invalid" id="tggl_kegiatan"  onchange="kredit(this)" name="tanggal">
 
+                          <label class="col-form-label" for="inputError">Tanggal Kegiatan / Tugas</label>
+                          <input type="date" class="form-control <?php if(form_error('tanggal')){echo "is-invalid";}?>" id="tggl_kegiatan"  onchange="kredit(this)" name="tanggal">
+                          <div class="invalid-feedback"><?= form_error('name') ?></div>
                           <label for="sel1">Pilih Uraian Kegiatan</label>
-                          <select id="form_kegiatan" class="form-control" name="id_uraian_kegiatan"></select>
-                        
+                          <select id="form_kegiatan" class="form-control <?php if(form_error('id_uraian_kegiatan')){echo "is-invalid";}?>" name="id_uraian_kegiatan"  onchange="keg_get(this)" >
+                          </select>
+   
                           <label for="sel1">Bukti Tugas / Kegiatan</label>
                           <input type="file" class="form-control" name="bukti" value="" style="font-size: 12px;">
-
-  
+                          <div class="row">
+                            <div class="col-md-4">
+                              <label for="sel1">Kuantitas</label>
+                              <input type="text" class="form-control <?php if(form_error('kuantitas')){echo "is-invalid";}?>" name="kuantitas" value="" style="font-size: 12px;">
+                            </div>
+                            <div class="col-md-8">
+                              <label for="sel1">Satuan</label>
+                              <input id="satuan" type="text" class="form-control" name="satuan" value="" style="font-size: 12px;" disabled>
+                            </div>
+                          </div>
                       </div>
                     </div>
                     <div class="card-footer">

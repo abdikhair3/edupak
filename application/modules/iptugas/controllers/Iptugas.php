@@ -25,7 +25,7 @@ class Iptugas extends CI_Controller
     	$data['extra_css']		= "";
     	$data['extra_js']		= $this->load->view('iptugas/extra_js');
     	$data['menu_active']	= "iptugas";
-    	$data['sub_menu']		= "iptugas";
+    	$data['sub_menu']		= "laporan harian";
     	$id=$this->uri->segment(3);
     	$data['tp_ip_tugas']     		= $this->M_iptugas->get_ip_tugas();
     	$data['cb_unsur']     		= $this->M_iptugas->get_cb_unsur();
@@ -38,12 +38,13 @@ class Iptugas extends CI_Controller
 
     public function simpan_laporan()
     {
-        $tanggal = $this->input->post('tanggal');
-
+        if(detail_pegawai()->nip_atasan == NULL){
+            $this->session->set_flashdata('notifikasi', notif_line("danger", "Atasan Langasung Belum dipilih, Harap pilih atasan langsung anda terlebih dahulu ..!"));
+            redirect('iptugas','refresh');
+        }
         $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
-        $this->form_validation->set_rules('id_unsur', 'Unsur', 'required');
         $this->form_validation->set_rules('id_uraian_kegiatan', 'Uraian', 'required');
-
+        $this->form_validation->set_rules('kuantitas', 'kuantitas', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $this->session->set_flashdata('notifikasi', notif("error", "Ada Kesalahan pada penginputan"));
@@ -51,7 +52,42 @@ class Iptugas extends CI_Controller
         }
         else
         {
-            
+            $tanggal = $this->input->post('tanggal');
+            $id_uraian_kegiatan = $this->input->post('id_uraian_kegiatan');
+            $cek_sah_kegiatan = $this->db->get_where('dp_skp_tahunan',['id_pegawai'=>$this->session->userdata('id_member'),'id_uraian_kegiatan'=>$id_uraian_kegiatan])->num_rows();
+            if($cek_sah_kegiatan > 0){
+                 $id_uraian_kegiatan  = $this->input->post('id_uraian_kegiatan');
+                 $nip                 = detail_pegawai()->nip;
+                 $nip_atasan          = detail_pegawai()->nip_atasan;
+                 $tanggal            = $this->input->post('tanggal');
+
+                $config['upload_path'] = './assets/bukti/';
+                $config['allowed_types'] = 'jpg|png|jpeg';
+                $config['max_size']      = 300;
+                $config['encrypt_name'] = TRUE;
+                $config['file_size'] = TRUE; 
+                $this->load->library('upload',$config);
+                
+
+                if(!empty($_FILES['bukti']['name'])){
+                    if (!$this->upload->do_upload('bukti')) { 
+                        $this->session->set_flashdata('notifikasi', notif("error", "Ada Kesalahan pada File Bukti, pastikan file yang diupload sesuai dengan ketentuan !"));
+                        redirect('iptugas','refresh');
+                    }else{
+
+                        $this->M_iptugas->simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_atasan, $tanggal, $this->upload->data('file_name'));
+                        $this->session->set_flashdata('notifikasi', notif("success", "Berhasil menambahkan kegiatan harian"));
+                        redirect('iptugas','refresh');
+                    }              
+                } else {
+                    $this->M_iptugas->simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_atasan, $tanggal);
+                    $this->session->set_flashdata('notifikasi', notif("success", "Berhasil menambahkan kegiatan harian"));
+                    redirect('iptugas','refresh');
+                }
+            }else{
+                $this->session->set_flashdata('notifikasi', notif("error", "Ada Kesalahan pada penginputan"));
+                $this->index();
+            }
         }
     }
 
@@ -76,7 +112,6 @@ class Iptugas extends CI_Controller
         $this->form_validation->set_rules('id_uraian_kegiatan', 'id_uraian_kegiatan', 'required');
         $this->form_validation->set_rules('tgl_input', 'tgl_input', 'required');
   
-
         // periksa data kosong yang belum diisi pada form tambah
        if ($this->form_validation->run() == TRUE)
 
@@ -187,11 +222,21 @@ class Iptugas extends CI_Controller
         $this->db->join('dp_uraian_kegiatan','dp_uraian_kegiatan.id_uraian_kegiatan=dp_skp_tahunan.id_uraian_kegiatan','right');
         $this->db->group_by('dp_uraian_kegiatan.id_uraian_kegiatan');
         $this->db->where("DATE_FORMAT(tgl_input,'%Y-%m')", $t);
+        $this->db->where('id_pegawai', $this->session->userdata('id_member'));
         $get_keg = $this->db->get('dp_skp_tahunan')->result();
+            echo "<option value=''>-----------Pilih Uraian Kegiatan----------------</option>";
         foreach($get_keg as $rows){
             echo "<option value=".$rows->id_uraian_kegiatan.">".$rows->uraian_kegiatan."</option>";
         }
         
+    }
+
+    public function get_satuan()
+    {
+        $kegiatan = $_POST['kegiatan'];
+        $this->db->join('dp_kuantitas','dp_kuantitas.id_dp_kuantitas=dp_uraian_kegiatan.id_dp_kuantitas','left');
+        $satuan = $this->db->get_where('dp_uraian_kegiatan', ['id_uraian_kegiatan'=>$kegiatan])->first_row();
+        echo $satuan->satuan_kuantitas;
     }
 
 

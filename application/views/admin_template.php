@@ -359,16 +359,17 @@
           </ul>
         </li>
       <?php }else if($this->session->userdata('level') == 'Pegawai') { ?>
-         <li class="nav-item nav-treeview" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
+         <li class="nav-item <?php if($menu_active=='iptugas'){echo 'menu-open';} ?>" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
             <a href="<?= base_url()?>iptugas/tp" class="nav-link <?php if($sub_menu=='iptugas'){echo 'active';} ?>">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Input Kegiatan / Tugas
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
-                <li class="nav-item">
-                <a href="<?= base_url()?>iptugas" class="nav-link <?php if($sub_menu=='historytugasharian'){echo 'active';} ?>" style='color: #333;'>
+                <li class="nav-item <?php if($menu_active=='iptugas'){echo 'menu-open';} ?>">
+                <a href="<?= base_url()?>iptugas" class="nav-link <?php if($sub_menu=='laporan harian'){echo 'active';} ?>" style='color: #333;'>
                   <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
                   <p> Laporan Harian Pegawai
                   </p>
@@ -764,7 +765,6 @@
 
 
  <?= $extra_js ?>
- <?= $this->session->userdata('notifikasi'); ?>
 
 
  

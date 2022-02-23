@@ -39,9 +39,9 @@ class Set_profil extends CI_Controller
 		$password = $this->input->post('password');
 		$atasan = $this->input->post('atasan');
 		if($password == null){
-			$this->db->update('dp_pegawai', ['id_atasan'=>$atasan], ['id_pegawai'=>$id_user]);
+			$this->db->update('dp_pegawai', ['nip_atasan'=>$atasan], ['id_pegawai'=>$id_user]);
 		}else{
-			$this->db->update('dp_pegawai', ['id_atasan'=>$atasan], ['id_pegawai'=>$id_user]);
+			$this->db->update('dp_pegawai', ['nip_atasan'=>$atasan], ['id_pegawai'=>$id_user]);
 			$this->db->update('x_users', ['password'=> password_hash($password, PASSWORD_DEFAULT)], ['id_users'=>$id_user]);
 		}
 		$this->session->set_flashdata('notif', $this->Notif->global('success', 'Update Profil Berhasil!'));

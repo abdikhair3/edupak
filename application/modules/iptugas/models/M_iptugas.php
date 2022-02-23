@@ -58,31 +58,19 @@ class M_iptugas extends CI_Model {
             return $q;
         }  
 
-    public function simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_pemeriksa, $tgl_input, $semester, $bukti)
+    public function simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_atasan, $tanggal, $bukti='')
 
     {
-            $this->db->where('id_pegawai', $this->session->userdata('id_member'));
-            $nip_ses = $this->db->get('dp_pegawai')->first_row();
-
-            $this->db->where('nip_pegawai', $nip_ses->nip);
-            $penilai = $this->db->get('dp_pejabat_penilai')->first_row();
-            $nippenilai=isset ($penilai->nip_penilai) ? $penilai->nip_penilai:'';
-            if($nippenilai=="") { $nippen=0; } else { $nippen=$penilai->nip_penilai; }
         $data = array(
             'id_uraian_kegiatan'              => $id_uraian_kegiatan,
-            'nip'                             => $nip_ses->nip,
-            'nip_pemeriksa'                   => $nippen,
+            'nip'                             => $nip,
+            'nip_pemeriksa'                   => $nip_atasan,
             'file_bukti'                      => $bukti,
-            'tgl_input'                       => $tgl_input,
-            'semester'                        => $semester,
+            'tgl_input'                       => $tanggal,
             'status_periksa'                  => "Diperiksa Atasan",
             'status_tugas'                    => "Baru"
         );
-
-
-
         $this->db->insert('dp_tugas', $data);
-
         return;
 
     }  
