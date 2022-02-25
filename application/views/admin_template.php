@@ -379,8 +379,8 @@
 
           <?php 
 
-              $this->db->where('nip_penilai', $nip_ses->nip);
-              $cek_stat_penilai = $this->db->get('dp_pejabat_penilai')->num_rows();
+              $this->db->where('id_atasan', detail_pegawai()->id_pegawai);
+              $cek_stat_penilai = $this->db->get('dp_pegawai')->num_rows();
               if($cek_stat_penilai>=1) {
              ?>
           <li class="nav-item" style="margin-top: 5px; margin-bottom: 5px; border-bottom:dashed 1px #ccc;">
@@ -412,10 +412,10 @@
               </li>
 
               <li class="nav-item">
-                  <a href="<?= base_url()?>ipskp/ipskp_bulanan/tp" class="nav-link <?php if($sub_menu=='ipskp_bulanan'){echo 'active';} ?>" style='color: #333;'>
+                  <a href="<?= base_url()?>realisasi/periode" class="nav-link <?php if($sub_menu=='realisasi_skp'){echo 'active';} ?>" style='color: #333;'>
                     <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
                     <p>
-                      Input Target Bulanan
+                      Realisasi Target Tahunan
                     </p>
                   </a>
                 </li>

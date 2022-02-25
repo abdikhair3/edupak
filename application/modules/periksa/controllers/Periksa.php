@@ -47,8 +47,8 @@ class Periksa extends CI_Controller
         $data['extra_js']       = "";
         $data['menu_active']    = "";
         $data['sub_menu']       = "periksatugas";
-        $nip=$this->uri->segment(3);
-        $data['tp_ip_tugas']            = $this->M_periksa->get_kegiatan($nip);
+        $id=$this->uri->segment(3);
+        $data['tp_ip_tugas']            = $this->M_periksa->get_kegiatan($id);
         $data['container']      = $this->load->view('periksa/v_kegiatan', $data, true);
         $this->load->view('admin_template', $data);
 
@@ -57,14 +57,12 @@ class Periksa extends CI_Controller
     public function kegiatan_selesai()
     {
             $id            = $this->input->post('id');
-            $nip            = $this->input->post('nip');
+            $id_skp            = $this->input->post('id_skp');
             $status            = $this->input->post('status');
 
-		$this->M_periksa->get_kegiatan_selesai($id, $nip, $status);
-
-        $this->session->set_flashdata('notifinput', "sukses_input");
-
-        redirect('periksa/kegiatan/'.$nip,'refresh');
+		$this->M_periksa->get_kegiatan_selesai($id, $id_skp, $status);
+        $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Verifikasi Data"));
+        redirect('periksa/kegiatan/'.$id,'refresh');
 
     }
 	
