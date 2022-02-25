@@ -21,17 +21,17 @@ class M_periksa extends CI_Model {
 
             $thn_now=date('Y');
 
-            $this->db->where('YEAR(tgl_input)',$thn_now);
+            $this->db->where('id_atasan', detail_pegawai()->id_pegawai);
             $this->db->where('status_periksa', "Diperiksa Atasan");
-            $this->db->where('semester', $semester);
-            $this->db->where('nip_pemeriksa', $nip_ses->nip);
+            $this->db->where('YEAR(dt_ml)',$thn_now);
             $this->db->group_by("dp_pegawai.nip");
-            $this->db->join('dp_pegawai', 'dp_pegawai.nip = dp_tugas.nip');
-            $q = $this->db->get('dp_tugas')->result();
+            $this->db->join('dp_pegawai', 'dp_pegawai.id_pegawai = dp_skp_tahunan_ft.id_pegawai');
+            $this->db->join('dp_skp_tahunan', 'dp_skp_tahunan.id_skp_tahunan_ft = dp_skp_tahunan_ft.id_skp_tahunan_ft');
+            $q = $this->db->get('dp_skp_tahunan_ft')->result();
             return $q;
         }    
 
-    public function get_kegiatan($nip)
+    public function get_kegiatan($id)
         {
             $bln_now=date('m');
             $bln_now_con=(int)$bln_now;
@@ -40,15 +40,15 @@ class M_periksa extends CI_Model {
             $thn_now=date('Y');
             
             $this->db->where('YEAR(tgl_input)',$thn_now);
-            $this->db->where('nip', $nip);
-            $this->db->where('semester', $semester);
+            $this->db->where('dp_skp_tahunan_ft.id_skp_tahunan_ft', $id);
             $this->db->where('status_periksa', "Diperiksa Atasan");
-            $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_tugas.id_uraian_kegiatan');
-            $q = $this->db->get('dp_tugas')->result();
+            $this->db->join('dp_skp_tahunan_ft', 'dp_skp_tahunan_ft.id_skp_tahunan_ft = dp_skp_tahunan.id_skp_tahunan_ft');
+            $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_skp_tahunan.id_uraian_kegiatan');
+            $q = $this->db->get('dp_skp_tahunan')->result();
             return $q;
         }
 
-    public function get_kegiatan_selesai($id, $nip, $status)
+    public function get_kegiatan_selesai($id, $id_skp, $status)
 
     {
 
@@ -59,9 +59,9 @@ class M_periksa extends CI_Model {
         );
         
 
-        $this->db->where('id_tugas', $id);
+        $this->db->where('id_skp', $id_skp);
 
-        $this->db->update('dp_tugas', $data);
+        $this->db->update('dp_skp_tahunan', $data);
 
         return;
 

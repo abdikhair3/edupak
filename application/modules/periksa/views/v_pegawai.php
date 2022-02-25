@@ -36,30 +36,26 @@
 
                 <thead>
                     <tr>
-
                         <th width=1>NO.</th>
                         <th>NIP</th>
                         <th>NAMA</th>
                         <th>JUMLAH KEGIATAN</th>
                         <th width=100></th>
-
                     </tr>
                 </thead>
                 <tbody>
-                 <?php $no=1; foreach ($pegawai as $rows) { ?>
+                 <?php $no=1; foreach ($pegawai as $rows) {
+                              $this->db->where('id_skp_tahunan_ft', $rows->id_skp_tahunan_ft);
+                        $q =  $this->db->get('dp_skp_tahunan')->num_rows(); ?>
                             <tr align="center">
                               <td><?php echo $no;  ?></td>
                               <td><?php echo $rows->nip; ?></td>
                               <td><?php echo $rows->nama; ?></td>
                               <td>
-                                <?php
-                                $this->db->where('nip', $rows->nip);
-                                $this->db->where('status_periksa', 'Diperiksa Atasan');
-                                $jmltgs = $this->db->get('dp_tugas')->num_rows();
-                                 echo $jmltgs; ?>
+                                <?php echo $q; ?>
                               </td>
                               <td>
-                                <a href="<?= base_url()?>periksa/kegiatan/<?= $rows->nip; ?>" title="Hapus Data" type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
+                                <a href="<?= base_url()?>periksa/kegiatan/<?= $rows->id_skp_tahunan_ft; ?>" title="Detail" type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a>
                               </td>
                             </tr>
                   <?php $no++;  } ?>

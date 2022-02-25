@@ -51,7 +51,7 @@
                       ?>
                                 <tr align="center">
                                   <td><?php echo $no;  ?></td>
-                                  <td><?php echo "$rows->dt_ml - $rows->dt_ak"; ?></td>
+                                  <td><?php echo "(".date('d F Y', strtotime($rows->dt_ml)).") - (".date('d F Y', strtotime($rows->dt_ak)).")";  ?></td>
                                   <td>
                                     <a href="<?= base_url()?>Ipskp/ipskp_tahunan/<?= $rows->id_skp_tahunan_ft ?>" title="Tambah Target Tahunan" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                   </td>

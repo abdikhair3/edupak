@@ -31,9 +31,9 @@
               <div class="card-body">
               <div class="row">
                   <?php 
-                      $nip=$this->uri->segment(3);
-                      $this->db->where('nip', $nip);
-                      $dt_pegawai = $this->db->get('dp_pegawai')->first_row(); ?>
+                      $this->db->where('id_skp_tahunan_ft', $this->uri->segment(3));
+                      $this->db->join('dp_pegawai', 'dp_pegawai.id_pegawai = dp_skp_tahunan_ft.id_pegawai');
+                      $dt_pegawai = $this->db->get('dp_skp_tahunan_ft')->first_row(); ?>
               <div class="col-6">
                 <button type="button" class="btn btn-block btn-outline-info btn-sm text-left">NIP PEGAWAI : <?php echo $dt_pegawai->nip; ?></button>
               </div>    
@@ -49,8 +49,9 @@
 
                         <th width=1>NO.</th>
                         <th>KEGIATAN / TUGAS</th>
-                        <th>TANGGAL</th>
-                        <th>BUKTI</th>
+                        <th>PERIODE</th>
+                        <th>TARGET KUANTITAS</th>
+                        <th>TARGET ANGKA KREDIT</th>
                         <th width=50></th>
 
                     </tr>
@@ -60,20 +61,19 @@
                             <tr align="center">
                               <td><?php echo $no;  ?></td>
                               <td><?php echo $rows->uraian_kegiatan; ?></td>
-                              <td><?php echo $rows->tgl_input; ?></td>
-                              <td>
-                                  <a href="<?= base_url()?>assets/bukti/<?php echo $rows->file_bukti; ?>" target="_blank" class="btn btn-default btn-sm"><i class="nav-icon fas fa-file"></i></a>
-                              </td>
+                              <td><?php echo "$rows->dt_ml - $rows->dt_ak"; ?></td>
+                              <td><?php echo $rows->kuantitas; ?></td>
+                              <td><?php echo $rows->angka_kredit; ?></td>
                               <td>
                                 <form style="float:left" action="<?php echo base_url()."periksa/kegiatan_selesai"; ?>" method="post">
-                                  <input type="hidden" name="id" value="<?= $rows->id_tugas ?>">
-                                  <input type="hidden" name="nip" value="<?= $rows->nip ?>">
+                                  <input type="hidden" name="id_skp" value="<?= $rows->id_skp ?>">
+                                  <input type="hidden" name="id" value="<?= $rows->id_skp_tahunan_ft ?>">
                                   <input type="hidden" name="status" value="Diverifikasi Atasan">
                                   <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check"></i></button>
                                 </form>
                                 <form style="float:right;" action="<?php echo base_url()."periksa/kegiatan_selesai"; ?>" method="post">
-                                  <input type="hidden" name="id" value="<?= $rows->id_tugas ?>">
-                                  <input type="hidden" name="nip" value="<?= $rows->nip ?>">
+                                  <input type="hidden" name="id_skp" value="<?= $rows->id_skp ?>">
+                                  <input type="hidden" name="id" value="<?= $rows->id_skp_tahunan_ft ?>">
                                   <input type="hidden" name="status" value="Ditolak">
                                   <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                 </form>
@@ -97,3 +97,4 @@
     </section>
     <!-- /.content -->
   </div>
+
