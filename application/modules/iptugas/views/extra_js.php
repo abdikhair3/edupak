@@ -26,10 +26,13 @@ function keg_get(selectObject)
               },
       cache:false,
       success: function(data){
-          document.getElementById('satuan').value = data;
+        var returnedData = JSON.parse(data);
+        document.getElementById('satuan').value = returnedData.kuantitas;
+        document.getElementById('outputkerja').value = returnedData.output;
       }
 
   });
   return false;
 }
+
 </script>

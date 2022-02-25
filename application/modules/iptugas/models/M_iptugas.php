@@ -12,17 +12,10 @@ class M_iptugas extends CI_Model {
 
     public function get_ip_tugas()
         {
-            $bln_now=date('m');
-            $bln_now_con=(int)$bln_now;
-            if($bln_now_con<=6) { $semester=1; } else { $semester=2; }
-
-            $this->db->where('id_pegawai', $this->session->userdata('id_member'));
-            $nip_ses = $this->db->get('dp_pegawai')->first_row();
-
-            $this->db->where('nip', $nip_ses->nip);
-            $this->db->where('semester', $semester);
+            $this->db->where('nip', detail_pegawai()->nip);
             $this->db->order_by('id_tugas', 'DESC');
             $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_tugas.id_uraian_kegiatan');
+            $this->db->join('dp_kuantitas', 'dp_kuantitas.id_dp_kuantitas = dp_uraian_kegiatan.id_dp_kuantitas');
             $q = $this->db->get('dp_tugas')->result();
             return $q;
         }    
@@ -58,7 +51,7 @@ class M_iptugas extends CI_Model {
             return $q;
         }  
 
-    public function simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_atasan, $tanggal, $bukti='')
+    public function simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_atasan, $tanggal, $bukti='', $kuantitas)
 
     {
         $data = array(
@@ -67,6 +60,7 @@ class M_iptugas extends CI_Model {
             'nip_pemeriksa'                   => $nip_atasan,
             'file_bukti'                      => $bukti,
             'tgl_input'                       => $tanggal,
+            'kuantitas'                       => $kuantitas,
             'status_periksa'                  => "Diperiksa Atasan",
             'status_tugas'                    => "Baru"
         );

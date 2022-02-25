@@ -765,6 +765,7 @@
 
 
  <?= $extra_js ?>
+ <?= $this->session->userdata('notifikasi') ?>
 
 
  

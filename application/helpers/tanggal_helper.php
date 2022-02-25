@@ -39,7 +39,7 @@ function is_time_convert($tanggal)
 				'Desember'
 			);
 	$split = explode('-', $tanggal);
-	return $split[0] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[2];
+	return $split[2] . ' ' . $bulan[ (int)$split[1] ] . ' ' . $split[0];
 
 }
 

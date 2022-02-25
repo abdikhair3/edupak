@@ -19,7 +19,7 @@
           <div class="col-12">
             
             <div class="card">
-            <?= $this->session->userdata('notifikasi'); ?>
+            <?= $this->session->userdata('notifikasi_line'); ?>
               <div class="card-body">
               
               <div class="row">
@@ -45,13 +45,15 @@
                           <label for="sel1">Pilih Uraian Kegiatan</label>
                           <select id="form_kegiatan" class="form-control <?php if(form_error('id_uraian_kegiatan')){echo "is-invalid";}?>" name="id_uraian_kegiatan"  onchange="keg_get(this)" >
                           </select>
-   
+                          <label for="sel1">Output Kerja</label>
+                          <input id="outputkerja" type="text" class="form-control" value="" style="font-size: 12px;" disabled>
+                          </select>
                           <label for="sel1">Bukti Tugas / Kegiatan</label>
                           <input type="file" class="form-control" name="bukti" value="" style="font-size: 12px;">
                           <div class="row">
                             <div class="col-md-4">
                               <label for="sel1">Kuantitas</label>
-                              <input type="text" class="form-control <?php if(form_error('kuantitas')){echo "is-invalid";}?>" name="kuantitas" value="" style="font-size: 12px;">
+                              <input type="text" class="form-control <?php if(form_error('kuantitas')){echo "is-invalid";}?>" name="kuantitas" style="font-size: 12px;">
                             </div>
                             <div class="col-md-8">
                               <label for="sel1">Satuan</label>
@@ -77,32 +79,36 @@
                 <div class="row">
                   <div class="col-12">
                     <div style="overflow-x:scroll">
-                      <table id="rev_penelitian" class="table table-bordered table-striped" style="width: 100%;">
+                      <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th width=1>NO.</th>
-                                <th>KEGIATAN / TUGAS</th>
                                 <th>TANGGAL</th>
+                                <th>KEGIATAN / TUGAS</th>
+                                <th>Kuantitas</th>   
                                 <th>BUKTI</th>
                                 <th>STATUS</th>
-                                <th width=100></th>
+                                <th width=100>Aksi</th>
                             </tr>
                         </thead>
                           <tbody>
                           <?php $no=1; foreach ($tp_ip_tugas as $rows) { ?>
                             <tr align="center">
                               <td><?php echo $no;  ?></td>
+                              <td><?php echo is_time_convert($rows->tgl_input); ?></td>
                               <td><?php echo $rows->uraian_kegiatan; ?></td>
-                              <td><?php echo $rows->tgl_input; ?></td>
+                              <td><?= $rows->kuantitas ?> <?= $rows->satuan_kuantitas ?></td> 
                               <td>
+                                <?php if($rows->file_bukti != null){?>
                                   <a href="<?= base_url()?>assets/bukti/<?php echo $rows->file_bukti; ?>" target="_blank" class="btn btn-default btn-sm"><i class="nav-icon fas fa-file"></i></a>
+                                <?php }else{ echo "-";}?>
                               </td>
                               <td>
                                 <label type="button" class="btn btn-block btn-outline-<?php if($rows->status_periksa=="Ditolak") { echo "danger"; } else if($rows->status_periksa=="Diverifikasi Atasan") { echo "success"; } else { echo "primary"; } ?> btn-xs" st><?php echo $rows->status_periksa; ?></label>
                               </td>
                               <td>
                               <?php if($rows->status_periksa=="Diperiksa Atasan") { ?>
-                                <a href="<?= base_url()?>iptugas/<?= $rows->id_uraian_kegiatan ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                <a onclick="return confirm('Are You Sure ?')" href="<?= base_url()?>iptugas/hapus_tugas/<?= $rows->id_tugas ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                               <?php } else { echo "-"; } ?>
                               </td>
                             </tr>

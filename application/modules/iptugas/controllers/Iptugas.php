@@ -27,10 +27,7 @@ class Iptugas extends CI_Controller
     	$data['menu_active']	= "iptugas";
     	$data['sub_menu']		= "laporan harian";
     	$id=$this->uri->segment(3);
-    	$data['tp_ip_tugas']     		= $this->M_iptugas->get_ip_tugas();
-    	$data['cb_unsur']     		= $this->M_iptugas->get_cb_unsur();
-        if($this->uri->segment(3)!=null) {
-    	$data['uraian_kegiatan_edit']     	= $this->M_iptugas->get_uraian_kegiatan_edit($id); }
+    	$data['tp_ip_tugas']     = $this->M_iptugas->get_ip_tugas();
     	$data['container']		= $this->load->view('iptugas/v_iptugas', $data, true);
     	$this->load->view('admin_template', $data);
 
@@ -39,8 +36,15 @@ class Iptugas extends CI_Controller
     public function simpan_laporan()
     {
         if(detail_pegawai()->nip_atasan == NULL){
-            $this->session->set_flashdata('notifikasi', notif_line("danger", "Atasan Langasung Belum dipilih, Harap pilih atasan langsung anda terlebih dahulu ..!"));
+            $this->session->set_flashdata('notifikasi_line', notif_line("danger", "Atasan Langasung Belum dipilih, Harap pilih atasan langsung anda terlebih dahulu ..!"));
             redirect('iptugas','refresh');
+        }
+
+        $cek_tggl = $this->db->get_where('dp_tugas',['tgl_input'=>$this->input->post('tanggal'), 'nip'=>detail_pegawai()->nip])->first_row();
+        if($cek_tggl){
+            $this->session->set_flashdata('notifikasi_line', notif_line("danger", "Tanggal yang sama sudah di inputkan !"));
+            redirect('iptugas','refresh');
+            die();
         }
         $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
         $this->form_validation->set_rules('id_uraian_kegiatan', 'Uraian', 'required');
@@ -57,9 +61,10 @@ class Iptugas extends CI_Controller
             $cek_sah_kegiatan = $this->db->get_where('dp_skp_tahunan',['id_pegawai'=>$this->session->userdata('id_member'),'id_uraian_kegiatan'=>$id_uraian_kegiatan])->num_rows();
             if($cek_sah_kegiatan > 0){
                  $id_uraian_kegiatan  = $this->input->post('id_uraian_kegiatan');
+                 $kuantitas           = $this->input->post('kuantitas');
                  $nip                 = detail_pegawai()->nip;
                  $nip_atasan          = detail_pegawai()->nip_atasan;
-                 $tanggal            = $this->input->post('tanggal');
+                 $tanggal             = $this->input->post('tanggal');
 
                 $config['upload_path'] = './assets/bukti/';
                 $config['allowed_types'] = 'jpg|png|jpeg';
@@ -75,12 +80,12 @@ class Iptugas extends CI_Controller
                         redirect('iptugas','refresh');
                     }else{
 
-                        $this->M_iptugas->simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_atasan, $tanggal, $this->upload->data('file_name'));
+                        $this->M_iptugas->simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_atasan, $tanggal, $this->upload->data('file_name'), $kuantitas);
                         $this->session->set_flashdata('notifikasi', notif("success", "Berhasil menambahkan kegiatan harian"));
                         redirect('iptugas','refresh');
                     }              
                 } else {
-                    $this->M_iptugas->simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_atasan, $tanggal);
+                    $this->M_iptugas->simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_atasan, $tanggal,'', $kuantitas);
                     $this->session->set_flashdata('notifikasi', notif("success", "Berhasil menambahkan kegiatan harian"));
                     redirect('iptugas','refresh');
                 }
@@ -91,129 +96,19 @@ class Iptugas extends CI_Controller
         }
     }
 
-    public function tes()
+    public function hapus_tugas()
     {
-        $this->session->set_flashdata('notifikasi', notif("danger", "Ada Kesalahan pada penginputan"));
-        $this->session->set_flashdata('notifikasi_line', notif_line("success", "Ada Kesalahan pada penginputan"));
-        redirect('iptugas','refresh');
-    }
-    
-    public function tp_cb_uraian_tugas() {
-        $data = $this->M_iptugas->get_cb_uraian_tugas();
-        echo "<option value=''>Pilih Uraian Kegiatan</option>";
-        foreach ($data->result() as $d) {
-            echo "<option value=$d->id_uraian_kegiatan>$d->uraian_kegiatan ($d->pelaksana_tgs_jabatan)</option>";
+        $id = $this->uri->segment(3);
+        $cek = $this->db->get_where('dp_tugas',['id_tugas'=>$id])->first_row();
+        if($cek){
+            $this->db->delete('dp_tugas',['id_tugas'=>$id]);
+            $this->session->set_flashdata('notifikasi', notif("success", "Data Berhasil Dihapus"));
+            redirect('iptugas','refresh');
+        }else{
+            $this->session->set_flashdata('notifikasi', notif("error", "Data Tidak Ditemukan"));
+            redirect('iptugas','refresh');
         }
     }
-
-
-	public function tambah_iptugas()
-	{
-        $this->form_validation->set_rules('id_uraian_kegiatan', 'id_uraian_kegiatan', 'required');
-        $this->form_validation->set_rules('tgl_input', 'tgl_input', 'required');
-  
-        // periksa data kosong yang belum diisi pada form tambah
-       if ($this->form_validation->run() == TRUE)
-
-        {
-            
-            $id_uraian_kegiatan            = $this->input->post('id_uraian_kegiatan');
-            $nip                           = $this->input->post('nip');
-            $nip_pemeriksa            = $this->input->post('nip_pemeriksa');
-            $tgl_input            = $this->input->post('tgl_input');
-
-            $bln_now=date('m');
-            $bln_now_con=(int)$bln_now;
-            $bln_input=explode("-", $tgl_input);
-            $bln_input_con=(int)$bln_input[1];
-              if($bln_input_con<=6) { $batas_ml=1; $batas_sl=6; $semester=1; } else { $batas_ml=7; $batas_sl=12; $semester=2;}
-                    if($bln_now_con >= $batas_ml && $bln_now_con <= $batas_sl) {
-                        $random        = time().'_'.rand();
-
-                        $config['upload_path'] = './assets/bukti/'; //path folder
-
-                        $config['allowed_types'] = 'jpg|png|jpeg'; //type yang dapat diakses bisa anda sesuaikan
-
-                        $config['encrypt_name'] = FALSE; //nama yang terupload nantinya
-
-                        $config['file_size'] = TRUE; 
-
-                        $config['file_name'] = $random;
-
-                        $this->load->library('upload',$config);
-                        
-                            if(!empty($_FILES['bukti']['name'])){
-
-                                    if (!$this->upload->do_upload('bukti')) {
-                                        
-                                        $this->session->set_flashdata('notiformas', "gagal_upload");
-
-                                        redirect('penelitian/penelitian','refresh');
-
-                                    }else{
-
-                                        $this->M_iptugas->simpan_ip_tugas($id_uraian_kegiatan, $nip, $nip_pemeriksa, $tgl_input,$semester, $this->upload->data('file_name'));
-
-                                        $this->session->set_flashdata('notifinput', "sukses_input");
-
-                                        redirect('iptugas/tp','refresh');
-                                    }   
-                            
-                        } else {
-
-                              $this->session->set_flashdata('notifinput', "gagal_upload");
-
-                                      redirect('iptugas/tp','refresh');
-                        }
-                    } else {
-                         $this->session->set_flashdata('notifinput', "tanggal_salah");
-
-                                      redirect('iptugas/tp','refresh');
-                    }
-
-        }
-        
-        else
-
-        {
-
-            $this->session->set_flashdata('notifinput', "gagal");
-
-            redirect('iptugas/tp','refresh');
-        }
-	}
-
-	public function edit_uraian_kegiatan()
-	{
-		$this->form_validation->set_rules('id', 'id', 'required');
-		$this->form_validation->set_rules('uraian_kegiatan', 'uraian_kegiatan', 'required');
-  
-
-        // periksa data kosong yang belum diisi pada form tambah
-       if ($this->form_validation->run() == TRUE)
-
-        {
-            
-            $id            = $this->input->post('id');
-            $uraian_kegiatan            = $this->input->post('uraian_kegiatan');
-
-            $this->M_iptugas->edit_uraian_kegiatan($id, $uraian_kegiatan);
-
-            $this->session->set_flashdata('notifinput', "sukses_input");
-
-    		redirect('uraian_kegiatan/tp/'.$id,'refresh');
-        }
-        
-        else
-
-        {
-
-            $this->session->set_flashdata('notifinput', "gagal");
-
-            redirect('uraian_kegiatan/tp/'.$id,'refresh');
-        }
-	}
-
 	public function get_skp_bulanan()
     {
         $tggl = $_POST['tggl'];
@@ -235,8 +130,11 @@ class Iptugas extends CI_Controller
     {
         $kegiatan = $_POST['kegiatan'];
         $this->db->join('dp_kuantitas','dp_kuantitas.id_dp_kuantitas=dp_uraian_kegiatan.id_dp_kuantitas','left');
+        $this->db->join('dp_output_kerja','dp_output_kerja.id_output_kerja=dp_uraian_kegiatan.id_output_kerja','left');
         $satuan = $this->db->get_where('dp_uraian_kegiatan', ['id_uraian_kegiatan'=>$kegiatan])->first_row();
-        echo $satuan->satuan_kuantitas;
+        $data['kuantitas'] = $satuan->satuan_kuantitas;
+        $data['output'] = $satuan->output_kerja;
+        echo json_encode($data);
     }
 
 
