@@ -380,7 +380,7 @@
 
           <?php 
 
-              $this->db->where('nip_atasan', detail_pegawai()->id_pegawai);
+              $this->db->where('nip_atasan', detail_pegawai()->nip);
               $cek_stat_penilai = $this->db->get('dp_pegawai')->num_rows();
               if($cek_stat_penilai>=1) {
              ?>
