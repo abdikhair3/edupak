@@ -21,7 +21,7 @@ class M_periksa extends CI_Model {
 
             $thn_now=date('Y');
 
-            $this->db->where('id_atasan', detail_pegawai()->id_pegawai);
+            $this->db->where('nip_atasan', detail_pegawai()->nip);
             $this->db->where('status_periksa', "Diperiksa Atasan");
             $this->db->where('YEAR(dt_ml)',$thn_now);
             $this->db->group_by("dp_pegawai.nip");
