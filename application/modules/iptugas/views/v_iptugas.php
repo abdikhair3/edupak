@@ -78,8 +78,9 @@
 
                 <div class="row">
                   <div class="col-12">
+                    
                     <div style="overflow-x:scroll">
-                      <table class="table table-bordered table-striped">
+                      <table class="font-standart table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th width=1>NO.</th>
@@ -88,7 +89,7 @@
                                 <th>Kuantitas</th>   
                                 <th>BUKTI</th>
                                 <th>STATUS</th>
-                                <th width=100>Aksi</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                           <tbody>
@@ -104,11 +105,15 @@
                                 <?php }else{ echo "-";}?>
                               </td>
                               <td>
-                                <label type="button" class="btn btn-block btn-outline-<?php if($rows->status_periksa=="Ditolak") { echo "danger"; } else if($rows->status_periksa=="Diverifikasi Atasan") { echo "success"; } else { echo "primary"; } ?> btn-xs" st><?php echo $rows->status_periksa; ?></label>
+                                <label type="button" class="btn btn-block btn-outline-<?php if($rows->status_periksa=="Ditolak") { echo "danger"; } else if($rows->status_periksa=="Verifikasi Atasan") { echo "success"; } else { echo "primary"; } ?> btn-xs" st><?php echo $rows->status_periksa; ?></label>
                               </td>
                               <td>
                               <?php if($rows->status_periksa=="Diperiksa Atasan") { ?>
+                                <div class="row">
+                                <a href="<?= base_url()?>iptugas/form_edit_tugas/<?= $rows->id_tugas ?>" title="Edit Data" type="button" class="btn btn-primary btn-sm"><i class="fa fa-pen"></i></a>
+                                <a href="<?= base_url()?>iptugas/view_tugas/<?= $rows->id_tugas ?>" title="View Data" type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
                                 <a onclick="return confirm('Are You Sure ?')" href="<?= base_url()?>iptugas/hapus_tugas/<?= $rows->id_tugas ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                              </div>
                               <?php } else { echo "-"; } ?>
                               </td>
                             </tr>

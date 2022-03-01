@@ -28,7 +28,8 @@
     <!-- Select2 -->
   <link rel="stylesheet" href="<?= base_url()?>assets/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= base_url()?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-
+  <!-- custum -->
+  <link rel="stylesheet" href="<?= base_url()?>assets/costum.css">
 <script src="<?php echo base_url()?>assets/dist/js/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="<?= base_url()?>assets/dist/css/adminlte.min.css">
 <style type="text/css">
@@ -369,12 +370,19 @@
             </a>
             <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
                 <li class="nav-item <?php if($menu_active=='iptugas'){echo 'menu-open';} ?>">
-                <a href="<?= base_url()?>iptugas" class="nav-link <?php if($sub_menu=='laporan harian'){echo 'active';} ?>" style='color: #333;'>
-                  <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
-                  <p> Laporan Harian Pegawai
-                  </p>
-                </a>
-              </li>
+                  <a href="<?= base_url()?>iptugas" class="nav-link <?php if($sub_menu=='laporan harian'){echo 'active';} ?>" style='color: #333;'>
+                    <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
+                    <p> Laporan Harian Pegawai
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item <?php if($menu_active=='iptugas'){echo 'menu-open';} ?>">
+                  <a href="<?= base_url()?>iptugas/bawahan" class="nav-link <?php if($sub_menu=='bawahan'){echo 'active';} ?>" style='color: #333;'>
+                    <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
+                    <p> Laporan Harian Bawahan
+                    </p>
+                  </a>
+                </li>
             </ul>
           </li>
 
