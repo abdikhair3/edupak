@@ -12,14 +12,14 @@ class M_realisasi extends CI_Model {
 
     public function get_tp_periode()
         {
-            $this->db->where('id_pegawai', detail_pegawai()->id_pegawai);
+            $this->db->where('nip', detail_pegawai()->nip);
             $q = $this->db->get('dp_skp_tahunan_ft')->result();
             return $q;
         }    
 
         public function get_realisasi($id)
             {
-                $this->db->where('id_pegawai', detail_pegawai()->id_pegawai);
+                $this->db->where('nip', detail_pegawai()->nip);
                 $this->db->where('status_periksa', "Diverifikasi Atasan");
                 $this->db->where('id_skp_tahunan_ft', $id);
                 $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_skp_tahunan.id_uraian_kegiatan');

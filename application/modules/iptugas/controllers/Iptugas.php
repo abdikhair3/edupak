@@ -149,11 +149,12 @@ class Iptugas extends CI_Controller
     {
         $tggl = $_POST['tggl'];
         $pecah = explode('-', $tggl);
+        $nip = detail_pegawai()->nip;
         $t = $pecah[0];
         $this->db->join('dp_uraian_kegiatan','dp_uraian_kegiatan.id_uraian_kegiatan=dp_skp_tahunan.id_uraian_kegiatan','right');
         $this->db->group_by('dp_uraian_kegiatan.id_uraian_kegiatan');
         $this->db->where("DATE_FORMAT(tgl_input,'%Y')", $t);
-        $this->db->where('id_pegawai', $this->session->userdata('id_member'));
+        $this->db->where('nip', $nip);
         $this->db->where('status_periksa', 'Diverifikasi Atasan');
         $get_keg = $this->db->get('dp_skp_tahunan')->result();
             echo "<option value=''>-----------Pilih Uraian Kegiatan----------------</option>";
