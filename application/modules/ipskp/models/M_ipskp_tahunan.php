@@ -12,14 +12,14 @@ class M_ipskp_tahunan extends CI_Model {
 
     public function get_tp_periode()
         {
-            $this->db->where('id_pegawai', detail_pegawai()->id_pegawai);
+            $this->db->where('nip', detail_pegawai()->nip);
             $q = $this->db->get('dp_skp_tahunan_ft')->result();
             return $q;
         }    
 
         public function get_tp_ip_target_Tahunan($id)
             {
-                $this->db->where('id_pegawai', detail_pegawai()->id_pegawai);
+                $this->db->where('nip', detail_pegawai()->nip);
                 $this->db->where('id_skp_tahunan_ft', $id);
                 $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_skp_tahunan.id_uraian_kegiatan');
                 $q = $this->db->get('dp_skp_tahunan')->result();
@@ -65,11 +65,11 @@ class M_ipskp_tahunan extends CI_Model {
             return $q;
         }  
 
-    public function simpan_periode($id_pegawai, $dt_ml, $dt_ak)
+    public function simpan_periode($dt_ml, $dt_ak)
 
     {
         $data = array(
-            'id_pegawai'                             => detail_pegawai()->id_pegawai,
+            'nip'                             => detail_pegawai()->nip,
             'dt_ml'                       => $dt_ml,
             'dt_ak'                       => $dt_ak
         );
@@ -82,19 +82,19 @@ class M_ipskp_tahunan extends CI_Model {
 
     }  
 
-    public function simpan_ip_tugas($id_uraian_kegiatan, $nip, $totalangkakredit, $kuantitas, $id_skp_tahunan_ft)
+    public function simpan_ip_tugas($id_uraian_kegiatan, $totalangkakredit, $kuantitas, $id_skp_tahunan_ft)
 
     {
         $tgl_now = date('Y-m-d');
         $data = array(
             'id_uraian_kegiatan'              => $id_uraian_kegiatan,
-            'nip'                             => detail_pegawai()->nip,
-            'id_pegawai'                             => detail_pegawai()->id_pegawai,
+            'nip_pemeriksa'                             => detail_pegawai()->nip_atasan,
             'id_satuan'                             => detail_pegawai()->id_satuan,
             'id_unit'                             => detail_pegawai()->id_unit,
             'id_pangkat'                             => detail_pegawai()->id_pangkat,
             'id_jabatan'                             => detail_pegawai()->id_jabatan,
             'id_skp_tahunan_ft'                       => $id_skp_tahunan_ft,
+            'nip'                       => detail_pegawai()->nip,
             'kuantitas'                       => $kuantitas,
             'ttl_angkakredit'                 => $totalangkakredit,
             'tgl_input'                       => $tgl_now,

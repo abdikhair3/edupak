@@ -32,7 +32,7 @@
               <div class="row">
                   <?php 
                       $this->db->where('id_skp_tahunan_ft', $this->uri->segment(3));
-                      $this->db->join('dp_pegawai', 'dp_pegawai.id_pegawai = dp_skp_tahunan_ft.id_pegawai');
+                      $this->db->join('dp_pegawai', 'dp_pegawai.nip = dp_skp_tahunan_ft.nip');
                       $dt_pegawai = $this->db->get('dp_skp_tahunan_ft')->first_row(); ?>
               <div class="col-6">
                 <button type="button" class="btn btn-block btn-outline-info btn-sm text-left">NIP PEGAWAI : <?php echo $dt_pegawai->nip; ?></button>
