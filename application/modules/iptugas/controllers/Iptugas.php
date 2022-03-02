@@ -116,6 +116,14 @@ class Iptugas extends CI_Controller
         $tahun = $this->input->post('tahun');
         $tggl  = $this->input->post('tanggal');
         $nama  = $this->input->post('nama');
+
+        if(!$bulan){
+            $bulan = date('m');
+        }
+        if(!$tahun){
+            $tahun = date('Y');
+        }
+
         $data['nama']           = $nama;
         $data['tanggal']        = $tggl;
         $data['bulan']          = $bulan;
