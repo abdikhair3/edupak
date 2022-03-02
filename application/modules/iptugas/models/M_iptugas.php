@@ -36,12 +36,37 @@ class M_iptugas extends CI_Model {
         $this->db->order_by('uraian_kegiatan','ASC');
         return $this->db->get('dp_uraian_kegiatan');
     }
-    // public function get_cb_sub_sub_unsur($id_sub_unsur)
-    // {
-    //     $this->db->order_by('sub_sub_unsur', 'ASC');
-    //     $q = $this->db->get('dp_sub_sub_unsur')->result();
-    //     return $q;
-    // }
+    
+    
+    public function get_bawahan($bulan, $tahun, $tggl, $nama)
+    {
+        $this->db->where('dp_pegawai.nip_atasan', detail_pegawai()->nip);
+        if($bulan != ''){
+            $this->db->where('MONTH(tgl_input)', $bulan);
+        }else{
+            $this->db->where('MONTH(tgl_input)', date('m'));
+        }
+
+        if($tahun != ''){
+            $this->db->where('YEAR(tgl_input)', $tahun);
+        }else{
+            $this->db->where('YEAR(tgl_input)', date('Y'));
+        }
+
+        if($tggl != ''){
+            $this->db->where('DAY(tgl_input)', $tggl);
+        }
+        
+        if($nama != ''){
+            $this->db->like('dp_pegawai.nama', $nama, 'both');
+        }
+        $this->db->join('dp_pegawai','dp_pegawai.nip=dp_tugas.nip','left');
+        $this->db->join('dp_uraian_kegiatan','dp_uraian_kegiatan.id_uraian_kegiatan=dp_tugas.id_uraian_kegiatan','left');
+        $this->db->join('dp_kuantitas','dp_kuantitas.id_dp_kuantitas=dp_uraian_kegiatan.id_dp_kuantitas','left');
+        $q = $this->db->get('dp_tugas')->result();
+        return $q;
+    } 
+
 
     public function get_pelaksana_tgs_jabatan_edit($id)
         {
@@ -69,5 +94,12 @@ class M_iptugas extends CI_Model {
 
     }  
 
-
+    public function get_tahun()
+    {
+        $this->db->select('YEAR(dt_ml) as a');
+        $this->db->group_by('YEAR(dt_ml)');
+        $this->db->order_by('YEAR(dt_ml)');
+        $q = $this->db->get('dp_skp_tahunan_ft')->result();
+        return $q;
+    }
 }

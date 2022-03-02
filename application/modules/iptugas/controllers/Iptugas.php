@@ -96,6 +96,34 @@ class Iptugas extends CI_Controller
         }
     }
 
+    public function bawahan()
+    {
+        $breadcrumbs 		= $this->breadcrumbs;
+
+		$breadcrumbs->add('Home', base_url().'home');
+		$breadcrumbs->add('Dashboard', base_url().'home');
+		$breadcrumbs->render();
+
+    	$data['title']			= 'Halaman Input Kegiatan / Tugas';
+    	$data['description']	= "Halaman Input Kegiatan / Tugas";
+    	$data['breadcrumbs']	= $breadcrumbs->render();
+    	$data['extra_css']		= "";
+    	$data['extra_js']		= $this->load->view('iptugas/extra_js');
+    	$data['menu_active']	= "iptugas";
+    	$data['sub_menu']		= "bawahan";
+        $data['tahun']          = $this->M_iptugas->get_tahun();
+        $bulan = $this->input->post('bulan');
+        $tahun = $this->input->post('tahun');
+        $tggl  = $this->input->post('tanggal');
+        $nama  = $this->input->post('nama');
+        $data['nama']           = $nama;
+        $data['tanggal']        = $tggl;
+        $data['bulan']          = $bulan;
+        $data['tahun_n']        = $tahun;
+    	$data['bawahan']        = $this->M_iptugas->get_bawahan($bulan, $tahun, $tggl, $nama);
+    	$data['container']		= $this->load->view('iptugas/v_iptugas_bawahan', $data, true);
+    	$this->load->view('admin_template', $data);
+    }
     public function hapus_tugas()
     {
         $id = $this->uri->segment(3);
@@ -138,5 +166,26 @@ class Iptugas extends CI_Controller
         echo json_encode($data);
     }
 
+    public function verifikasi()
+    {
+        $id_tugas = $_POST['id_tugas'];
+        $check = $_POST['check'];
+        if($check == 0){
+            $data=['status_periksa'=>'Diperiksa Atasan'];
+        }else{
+            $data=['status_periksa'=>'Verifikasi Atasan'];
+        }
+        $this->db->update('dp_tugas', $data, ['id_tugas'=>$id_tugas]);
 
+    }
+
+    public function form_edit_tugas()
+    {
+
+    }
+
+    public function view_tugas()
+    {
+        
+    }
 }
