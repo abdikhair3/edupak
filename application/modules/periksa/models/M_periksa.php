@@ -16,16 +16,13 @@ class M_periksa extends CI_Model {
             $bln_now_con=(int)$bln_now;
             if($bln_now_con<=6) { $semester=1; } else { $semester=2; }
 
-            $this->db->where('id_pegawai', $this->session->userdata('id_member'));
-            $nip_ses = $this->db->get('dp_pegawai')->first_row();
 
             $thn_now=date('Y');
 
-            $this->db->where('nip_atasan', detail_pegawai()->nip);
             $this->db->where('status_periksa', "Diperiksa Atasan");
             $this->db->where('YEAR(dt_ml)',$thn_now);
             $this->db->group_by("dp_pegawai.nip");
-            $this->db->join('dp_pegawai', 'dp_pegawai.id_pegawai = dp_skp_tahunan_ft.id_pegawai');
+            $this->db->join('dp_pegawai', 'dp_pegawai.nip = dp_skp_tahunan_ft.nip');
             $this->db->join('dp_skp_tahunan', 'dp_skp_tahunan.id_skp_tahunan_ft = dp_skp_tahunan_ft.id_skp_tahunan_ft');
             $q = $this->db->get('dp_skp_tahunan_ft')->result();
             return $q;

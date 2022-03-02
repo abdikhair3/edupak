@@ -89,12 +89,12 @@ class Ipskp extends CI_Controller
 
 	public function tambah_ipskp_periode()
 	{
-        $id_pegawai = detail_pegawai()->id_pegawai;
+        $nip = detail_pegawai()->nip;
         $this->form_validation->set_rules('dt_ml', 'dt_ml', 'required');
         $this->form_validation->set_rules('dt_ak', 'dt_ak', 'required');
     
         $dt_pisah            = explode("-",$this->input->post('dt_ml'));
-        $this->db->where('id_pegawai', $id_pegawai);
+        $this->db->where('nip', $nip);
         $this->db->where('YEAR(dt_ml)', $dt_pisah[0]);
         $cek_kegiatan = $this->db->get('dp_skp_tahunan_ft')->num_rows();
         if($cek_kegiatan>=1) {
@@ -106,11 +106,10 @@ class Ipskp extends CI_Controller
             if ($this->form_validation->run() == TRUE)
 
                 {
-                    $id_pegawai            = $this->input->post('id_pegawai');
                     $dt_ml            = $this->input->post('dt_ml');
                     $dt_ak            = $this->input->post('dt_ak');
 
-                                $this->M_ipskp_tahunan->simpan_periode($id_pegawai, $dt_ml, $dt_ak);
+                                $this->M_ipskp_tahunan->simpan_periode($dt_ml, $dt_ak);
 
                                 $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Menambah Target Tahunan"));
 
@@ -131,7 +130,7 @@ class Ipskp extends CI_Controller
 
 	public function tambah_ipskp()
 	{
-        $id_pegawai = detail_pegawai()->id_pegawai;
+        $nip = detail_pegawai()->nip;
         $this->form_validation->set_rules('id_uraian_kegiatan', 'id_uraian_kegiatan', 'required');
         $this->form_validation->set_rules('totalangkakredit', 'totalangkakredit', 'required');
         $this->form_validation->set_rules('kuantitas', 'kuantitas', 'required');
@@ -139,7 +138,7 @@ class Ipskp extends CI_Controller
     
         // $thn_cek=explode("-", $this->input->post('thn_input'));
         $this->db->where('id_uraian_kegiatan', $this->input->post('id_uraian_kegiatan'));
-        $this->db->where('id_pegawai', $id_pegawai);
+        $this->db->where('nip', $nip);
         $this->db->where('id_skp_tahunan_ft', $this->input->post('id_skp_tahunan_ft'));
         $cek_kegiatan = $this->db->get('dp_skp_tahunan')->num_rows();
         if($cek_kegiatan>=1) {
@@ -153,12 +152,11 @@ class Ipskp extends CI_Controller
                 {
 
                     $id_uraian_kegiatan            = $this->input->post('id_uraian_kegiatan');
-                    $nip                           = $this->input->post('nip');
                     $totalangkakredit            = $this->input->post('totalangkakredit');
                     $kuantitas            = $this->input->post('kuantitas');
                     $id_skp_tahunan_ft            = $this->input->post('id_skp_tahunan_ft');
 
-                                $this->M_ipskp_tahunan->simpan_ip_tugas($id_uraian_kegiatan, $nip, $totalangkakredit, $kuantitas, $id_skp_tahunan_ft);
+                                $this->M_ipskp_tahunan->simpan_ip_tugas($id_uraian_kegiatan, $totalangkakredit, $kuantitas, $id_skp_tahunan_ft);
 
                                 $this->session->set_flashdata('notifikasi', notif("success", "Berhasil Menambah Target Tahunan"));
 

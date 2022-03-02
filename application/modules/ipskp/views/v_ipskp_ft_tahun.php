@@ -77,7 +77,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" id="formUraian" action="<?php if($this->uri->segment(3)!=null) { echo base_url()."ipskp/edit_ipskp"; } else { echo base_url()."ipskp/tambah_ipskp"; } ?>" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" id="formUraian" action="<?php  echo base_url()."ipskp/tambah_ipskp"; ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" class="form-control" name="id" value="<?php echo $this->uri->segment(3); ?>">
         <div class="form-group">
             <label for="sel1">Pilih Kategori :</label>
