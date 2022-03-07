@@ -28,11 +28,11 @@ class Uraian_kegiatan extends CI_Controller
     	$data['sub_menu']		= "uraiankeg";
     	$id=$this->uri->segment(4);
     	$id_kategori_kegiatan=$this->uri->segment(5);
-    	$data['uraian_kegiatan']     		= $this->M_uraian_kegiatan->get_uraian_kegiatan();
-    	$data['cb_output_kerja']     		= $this->M_uraian_kegiatan->get_cb_output_kerja();
-        $data['cb_pel_tgs_jabatan']            = $this->M_uraian_kegiatan->cb_pel_tgs_jabatan();
+    	$data['uraian_kegiatan']     	 = $this->M_uraian_kegiatan->get_uraian_kegiatan();
+    	$data['cb_output_kerja']     	 = $this->M_uraian_kegiatan->get_cb_output_kerja();
+        $data['cb_pel_tgs_jabatan']      = $this->M_uraian_kegiatan->cb_pel_tgs_jabatan();
         $data['cb_kuantitas']            = $this->M_uraian_kegiatan->cb_kuantitas();
-    	$data['unsurroot']     	= $this->M_uraian_kegiatan->get_unsur_root($id, $id_kategori_kegiatan);
+    	$data['unsurroot']     	         = $this->M_uraian_kegiatan->get_unsur_root($id, $id_kategori_kegiatan);
     	if($this->uri->segment(5)!=null) {
     	$data['uraian_kegiatan_edit']     	= $this->M_uraian_kegiatan->get_uraian_kegiatan_edit($id, $id_kategori_kegiatan); }
     	$data['container']		= $this->load->view('kegiatan/v_uraian_kegiatan', $data, true);

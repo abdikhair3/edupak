@@ -49,12 +49,10 @@ function notif($jenis, $pesan)
 function notif_line($warna, $pesan)
 {
 	$notif = '
-              <div class="card-body">
                 <div class="alert alert-'.$warna.' alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   '.$pesan.'
                 </div>
-              </div>
 		';
 		return $notif;
 }
