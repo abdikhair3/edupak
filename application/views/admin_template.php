@@ -159,6 +159,10 @@
 
 </head>
 <?php 
+
+          $tgl_skrg=date('d');
+          $bln_skrg=date('m');
+
               $this->db->where('id_pegawai', $this->session->userdata('id_member'));
               $nip_ses = $this->db->get('dp_pegawai')->first_row();
 
@@ -412,7 +416,11 @@
           <ul class="nav nav-treeview" style="background-color: rgba(36, 88, 178, 0.3);">
 
               <li class="nav-item">
-                <a href="<?= base_url()?>ipskp/tp" class="nav-link <?php if($sub_menu=='ipskp_tahunan'){echo 'active';} ?>" style='color: #333;'>
+                <a class="nav-link <?php if($sub_menu=='ipskp_tahunan'){echo 'active';} ?>" style='color: #333;'
+                <?php 
+                      if($tgl_skrg<=5 and $bln_skrg==1) { echo "href='".base_url()."ipskp/tp'"; }
+                      else { echo "data-toggle='modal' data-target='#mdfiltertahun'"; } ?>
+                >
                   <i class="nav-icon fas fa-arrow-alt-circle-right"></i>
                   <p>
                     Input Target Tahunan
@@ -639,7 +647,25 @@
   </footer>
 </div>
 <!-- ./wrapper -->
-
+<div class="modal fade" id="mdfiltertahun" tabindex="-1" role="dialog" aria-labelledby="mdfiltertahun" aria-hidden="true">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content"> 
+      <div class="modal-header bg-warning">
+        <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <h4 style="text-align:justify"><b>Penginputan Target Kinerja Tahunan hanya pada tanggal 1 Januari sampai 5 Januari ...</b></h4>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between bg-warning">
+      </div>
+    </div>
+  </div>
+</div>
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <!-- <script src="<?= base_url()?>assets/plugins/jquery/jquery.min.js"></script> -->

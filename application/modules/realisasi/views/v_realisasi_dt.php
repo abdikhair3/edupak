@@ -47,12 +47,15 @@
                     <?php $no=1; foreach ($realisasi as $rows) {
                       $this->db->where('id_dp_kuantitas', $rows->id_dp_kuantitas);
                       $satuan = $this->db->get('dp_kuantitas')->first_row();
+                      $this->db->where('status_periksa', "Diverifikasi Atasan");
+                      $this->db->where('id_dp_kuantitas', $rows->id_dp_kuantitas);
+                      $real = $this->db->get('dp_kuantitas')->num_rows();
                       ?>
                                 <tr align="center">
                                   <td><?php echo $no;  ?></td>
                                   <td><?php echo $rows->uraian_kegiatan; ?></td>
                                   <td><?php echo "$rows->kuantitas "; echo $satuan->satuan_kuantitas; ?></td>
-                                  <td><?php echo $rows->ttl_angkakredit; ?></td>
+                                  <td><?php echo $real; echo $satuan->satuan_kuantitas;?></td>
                                 </tr>
                       <?php $no++;  } ?>
                     </tbody>

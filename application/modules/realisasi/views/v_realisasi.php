@@ -28,24 +28,18 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-              <div class="input-group mb-3 col-6">
+              <div class="input-group mb-3 col-8">
                   <input type="text" class="form-control rounded-0" disabled value="Silahkan Pilih Periode ">
                   <span class="input-group-append">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
                           Periode
-                          ( <?php if($this->uri->segment(3)=="01") { echo "Januari"; } 
-                                  else if($this->uri->segment(3)=="02") { echo "Februari"; }
-                                  else if($this->uri->segment(3)=="03") { echo "Maret"; }
-                                  else if($this->uri->segment(3)=="04") { echo "April"; }
-                                  else if($this->uri->segment(3)=="05") { echo "Mei"; }
-                                  else if($this->uri->segment(3)=="06") { echo "Juni"; }
-                                  else if($this->uri->segment(3)=="07") { echo "Juli"; }
-                                  else if($this->uri->segment(3)=="08") { echo "Agustus"; }
-                                  else if($this->uri->segment(3)=="09") { echo "September"; }
-                                  else if($this->uri->segment(3)=="10") { echo "Oktober"; }
-                                  else if($this->uri->segment(3)=="11") { echo "November"; }
-                                  else if($this->uri->segment(3)=="12") { echo "Desember"; } ?> )
+                          ( <?php  
+                    $this->db->where('id_skp_tahunan_ft', $this->uri->segment(3));
+                     $dt_tanggal = $this->db->get('dp_skp_tahunan_ft')->first_row();
+                     if($this->uri->segment(3)!="")
+                    { echo date('d F Y', strtotime($dt_tanggal->dt_ml)); echo " - "; echo date('d F Y', strtotime($dt_tanggal->dt_ak));
+                     }?> )
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <?php $no=1; foreach ($tp_periode as $rows) { ?>
@@ -65,8 +59,8 @@
 
                           <th width=1>NO.</th>
                           <th>KEGIATAN / TUGAS</th>
-                          <th>TARGET KUANTITAS</th>
-                          <th>REALISASI</th>
+                          <th>TARGET</th>
+                          <th>REALISASI TARGET</th>
 
                       </tr>
                   </thead>
@@ -74,12 +68,15 @@
                   <?php $no=1; foreach ($realisasi as $rows) {
                     $this->db->where('id_dp_kuantitas', $rows->id_dp_kuantitas);
                     $satuan = $this->db->get('dp_kuantitas')->first_row();
+                    $this->db->where('status_periksa', "Diverifikasi Atasan");
+                    $this->db->where('id_skp', $rows->id_skp);
+                    $real = $this->db->get('dp_skp_tahunan')->num_rows();
                     ?>
                               <tr align="center">
                                 <td><?php echo $no;  ?></td>
                                 <td><?php echo $rows->uraian_kegiatan; ?></td>
                                 <td><?php echo "$rows->kuantitas "; echo $satuan->satuan_kuantitas; ?></td>
-                                <td><?php echo $rows->ttl_angkakredit; ?></td>
+                                  <td><?php echo "$real "; echo $satuan->satuan_kuantitas;?></td>
                               </tr>
                     <?php $no++;  } ?>
                   </tbody>
