@@ -19,9 +19,9 @@
           <div class="col-12">
             
             <div class="card">
-            <?= $this->session->userdata('notifikasi_line'); ?>
+            
               <div class="card-body">
-              
+              <?= $this->session->userdata('notifikasi_line'); ?>
               <div class="row">
               
                 <div class="col-md-12">
@@ -77,8 +77,39 @@
               </form>
 
                 <div class="row">
-                  <div class="col-12">
                     
+                  <div class="col-12">
+                    <form method="post" action="<?= base_url()?>iptugas">
+                      <div class="row">
+                        <div class="col-2">
+                          <div class="form-group">
+                            <select name="bulan" class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Pilih Bulan</option>
+                            <option value="01" <?php if($bulan=="01"){echo "selected";} ?> >Januari</option>
+                            <option value="02" <?php if($bulan=="02"){echo "selected";} ?> >Februari</option>
+                            <option value="03" <?php if($bulan=="03"){echo "selected";} ?> >Maret</option>
+                            <option value="04" <?php if($bulan=="04"){echo "selected";} ?> >April</option>
+                            <option value="05" <?php if($bulan=="05"){echo "selected";} ?> >Mei</option>
+                            <option value="06" <?php if($bulan=="06"){echo "selected";} ?> >Juni</option>
+                            <option value="07" <?php if($bulan=="07"){echo "selected";} ?> >Juli</option>
+                            <option value="08" <?php if($bulan=="08"){echo "selected";} ?> >Agustus</option>
+                            <option value="09" <?php if($bulan=="09"){echo "selected";} ?> >September</option>
+                            <option value="10" <?php if($bulan=="10"){echo "selected";} ?> >Oktober</option>
+                            <option value="11" <?php if($bulan=="11"){echo "selected";} ?> >November</option>
+                            <option value="12" <?php if($bulan=="12"){echo "selected";} ?> >Desember</option>
+                            </select>
+                          </div>
+                        </div>
+ 
+                        <div class="col-2">
+                          <button type="submit" class="btn btn-block btn-info">Cari</button>
+                        </div>
+                      
+                    </form>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-block bg-gradient-secondary" name="cetak" value="cet"><i class="fa fa-print"></i> Cetak</button>
+                    </div>
+                    </div>
                     <div style="overflow-x:scroll">
                       <table class="font-standart table table-bordered table-striped">
                         <thead>
@@ -111,7 +142,6 @@
                               <?php if($rows->status_periksa=="Diperiksa Atasan") { ?>
                                 <div class="row">
                                 <a href="<?= base_url()?>iptugas/form_edit_tugas/<?= $rows->id_tugas ?>" title="Edit Data" type="button" class="btn btn-primary btn-sm"><i class="fa fa-pen"></i></a>
-                                <a href="<?= base_url()?>iptugas/view_tugas/<?= $rows->id_tugas ?>" title="View Data" type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
                                 <a onclick="return confirm('Are You Sure ?')" href="<?= base_url()?>iptugas/hapus_tugas/<?= $rows->id_tugas ?>" title="Hapus Data" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                               </div>
                               <?php } else { echo "-"; } ?>

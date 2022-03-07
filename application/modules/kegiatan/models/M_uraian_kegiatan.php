@@ -64,7 +64,7 @@ class M_uraian_kegiatan extends CI_Model {
     public function get_unsur_root($id, $id_sub_sub)
         {
             $this->db->where('id_sub_sub_unsur', $id);
-            $this->db->join('dp_sub_unsur', 'dp_sub_unsur.id_sub_unsur = dp_sub_sub_unsur.id_sub_sub_unsur');
+            $this->db->join('dp_sub_unsur', 'dp_sub_unsur.id_sub_unsur = dp_sub_sub_unsur.id_sub_unsur');
             $this->db->join('dp_unsur', 'dp_unsur.id_unsur = dp_sub_unsur.id_unsur');
             $this->db->join('dp_kategori_kegiatan', 'dp_kategori_kegiatan.id_kategori_kegiatan = dp_unsur.id_kategori_kegiatan');
             $q = $this->db->get('dp_sub_sub_unsur')->result();
