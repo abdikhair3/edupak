@@ -32,50 +32,36 @@
               <div class="row">
               <div class="col-12">
                 <div >
+                <form method="get" action="<?= base_url()?>history_kegiatan/semester">
+                  <div class="row">
+                    <div class="col-2">
+                        <div class="form-group">
+                            <select name="tahun" class="form-control select2" style="width: 100%;">
+                            <option value="" selected="selected">Pilih Tahun </option>
+                            <?php foreach($tahun as $rows){
+                              $ps_tahun=explode("-", $rows->tgl_input); ?>
+                            <option value="<?= $ps_tahun[0]; ?>" <?php if($this->input->get('tahun')==$ps_tahun[0]){echo "selected";} ?> ><?= $ps_tahun[0]; ?></option>
+                            <?php }?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                          <?php 
+                          $semester=$this->input->get('semester');
+                          //$bulan = isset ($bln_cari) ? $bln_cari:''; ?>
+                            <select name="semester" class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Pilih Semester</option>
+                            <option value="01" <?php if($semester=="1"){echo "selected";} ?> >Ganjil</option>
+                            <option value="02" <?php if($semester=="2"){echo "selected";} ?> >Genap</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                      <button type="submit" class="btn btn-block btn-info">Cari</button>
+                    </div>
+                    </form>
                 <table border="1" width="100%">
-<!-- 
-                    <tr>
-                        <td width=1></td>
-                        <td>Nama</td>
-                        <td align="center" width=1>:</td>
-                        <td colspan="31"></td>
-                    </tr>
-                    <tr>
-                        <td width=1></td>
-                        <td>NIP</td>
-                        <td align="center" width=1>:</td>
-                        <td colspan="31"></td>
-                    </tr>
-                    <tr>
-                        <td width=1></td>
-                        <td>Pangkat / Golongan</td>
-                        <td align="center" width=1>:</td>
-                        <td colspan="31"></td>
-                    </tr>
-                    <tr>
-                        <td width=1></td>
-                        <td>Jabatan</td>
-                        <td align="center" width=1>:</td>
-                        <td colspan="31"></td>
-                    </tr> -->
-                    <tr>
-                        <td width=1></td>
-                        <td>Semester</td>
-                        <td align="center" width=1>:</td>
-                        <td colspan="31">
-                          <div class="dropdown">
-                              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                Pilih Semester 
-                                ( <?php if($this->uri->segment(3)=="1") { echo "Ganjil"; } 
-                                        else if($this->uri->segment(3)=="2") { echo "Genap"; } ?> )
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/semester/1">Ganjil</a>
-                                <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/semester/2">Genap</a>
-                              </div>
-                          </div> 
-                        </td>
-                    </tr>
                     <tr align="center">
                         <td width=1 rowspan="2">NO.</td>
                         <td rowspan="2">URAIAN KREDIT</td>
@@ -87,14 +73,14 @@
                         <td rowspan="2">KETERANGAN / BUKTI FISIK</td>
                     </tr>
                     <tr align="center">
-                      <?php if($this->uri->segment(3)=="1") {  ?>
+                      <?php if($semester=="1") {  ?>
                         <td>JAN</td>
                         <td>FEB</td>
                         <td>MAR</td>
                         <td>APR</td>
                         <td>MEI</td>
                         <td>JUN</td>
-                      <?php } else if($this->uri->segment(3)=="2") { ?>
+                      <?php } else if($semester=="2") { ?>
                         <td>JUL</td>
                         <td>AGU</td>
                         <td>SEP</td>
@@ -104,35 +90,30 @@
                       <?php } ?>
                     </tr>
                     <?php $no=1; 
-                          $thn_now=date('Y');
+                          $thn_ft=$this->input->get('tahun');
                           foreach ($history_semester as $rows) {
-                          $periode_ft=explode("-",$rows->tgl_input);
                        ?>
                     <tr>
                         <td align="center"><?php echo $no;  ?></td>
                         <td><?php echo $rows->uraian_kegiatan; ?></td>
-                        <td align="center">?</td>
-                        <?php if($this->uri->segment(3)=="1") {                                  
+                        <td align="center"><?php echo $rows->satuan_kuantitas; ?></td>
+                        <?php if($semester=="1") {                                  
                           for ($x = 1; $x <= 6; $x++) { ?>
                         <td align="center">
                                 <?php 
-                                $this->db->where('id_pegawai', $this->session->userdata('id_member'));
-                                $nip_ses = $this->db->get('dp_pegawai')->first_row();
                                 $this->db->where('MONTH(tgl_input)',$x);
-                                $this->db->where('YEAR(tgl_input)',$periode_ft[0]);
+                                $this->db->where('YEAR(tgl_input)',$thn_ft);
                                 $this->db->where('nip', $rows->nip);
                                 $this->db->where('id_uraian_kegiatan', $rows->id_uraian_kegiatan);
                                 echo $jml_kegiatan = $this->db->get('dp_tugas')->num_rows(); ?>
                         </td>
                           <?php } ?>
-                        <?php } else if($this->uri->segment(3)=="2") { ?>
+                        <?php } else if($semester=="2") { ?>
                           <?php for ($x = 6; $x <= 6; $x++) { ?>
                         <td align="center">
                                 <?php 
-                                $this->db->where('id_pegawai', $this->session->userdata('id_member'));
-                                $nip_ses = $this->db->get('dp_pegawai')->first_row();
                                 $this->db->where('MONTH(tgl_input)',$x);
-                                $this->db->where('YEAR(tgl_input)',$periode_ft[0]);
+                                $this->db->where('YEAR(tgl_input)',$thn_ft);
                                 $this->db->where('nip', $rows->nip);
                                 $this->db->where('id_uraian_kegiatan', $rows->id_uraian_kegiatan);
                                 echo $jml_kegiatan = $this->db->get('dp_tugas')->num_rows(); ?>
@@ -141,11 +122,11 @@
                         <?php } ?>
                         <td align="center">
                               <?php
+                                $this->db->where('nip', detail_pegawai()->nip);
                               $this->db->where('dp_tugas.id_uraian_kegiatan', $rows->id_uraian_kegiatan);
                               $this->db->where('status_periksa', 'Diverifikasi Atasan');
                               $this->db->where('semester', $rows->semester);            
-                              $this->db->where('YEAR(tgl_input)', $thn_now);  
-                              $this->db->where('nip', $nip_ses->nip);
+                              $this->db->where('YEAR(tgl_input)', $thn_ft);  
                               echo $jmltgs = $this->db->get('dp_tugas')->num_rows();
                               ?>
                         </td>
@@ -154,7 +135,7 @@
                           <?php
                           $this->db->select_sum('angka_kredit');
                           $this->db->where('semester', $rows->semester);            
-                          $this->db->where('YEAR(tgl_input)', $thn_now);  
+                          $this->db->where('YEAR(tgl_input)', $thn_ft);  
                           $this->db->where('dp_uraian_kegiatan.id_uraian_kegiatan', $rows->id_uraian_kegiatan);
                           $this->db->join('dp_uraian_kegiatan', 'dp_uraian_kegiatan.id_uraian_kegiatan = dp_tugas.id_uraian_kegiatan');
                           $sum_angka_kredit = $this->db->get('dp_tugas')->first_row();

@@ -26,8 +26,9 @@ class History_kegiatan extends CI_Controller
     	$data['extra_js']		= "";
     	$data['menu_active']	= "historytugas";
     	$data['sub_menu']		= "historytugasharian";
-    	$bln_cari=$this->uri->segment(3);
-    	$data['history_harian']   = $this->M_history_kegiatan->get_history_harian($bln_cari);
+    	// $bln_cari=$this->uri->segment(3);
+    	$data['history_harian']   = $this->M_history_kegiatan->get_history_harian();
+    	$data['tahun']   = $this->M_history_kegiatan->get_tahun();
     	$data['container']		= $this->load->view('history_kegiatan/v_harian', $data, true);
     	$this->load->view('admin_template', $data);
 
@@ -35,6 +36,7 @@ class History_kegiatan extends CI_Controller
 
 	public function bulanan()
 	{
+		
 		$breadcrumbs 		= $this->breadcrumbs;
 
 		$breadcrumbs->add('Home', base_url().'home');
@@ -48,8 +50,8 @@ class History_kegiatan extends CI_Controller
     	$data['extra_js']		= "";
     	$data['menu_active']	= "historytugas";
     	$data['sub_menu']		= "historytugasbulanan";
-    	$bln_cari=$this->uri->segment(3);
-    	$data['history_bulanan']   = $this->M_history_kegiatan->get_history_bulanan($bln_cari);
+    	$data['tahun']   = $this->M_history_kegiatan->get_tahun();
+    	$data['history_bulanan']   = $this->M_history_kegiatan->get_history_bulanan();
     	$data['container']		= $this->load->view('history_kegiatan/v_bulanan', $data, true);
     	$this->load->view('admin_template', $data);
 
@@ -70,8 +72,8 @@ class History_kegiatan extends CI_Controller
     	$data['extra_js']		= "";
     	$data['menu_active']	= "historytugas";
     	$data['sub_menu']		= "historytugassemester";
-    	$semester_cari=$this->uri->segment(3);
-    	$data['history_semester']     		= $this->M_history_kegiatan->get_history_semester($semester_cari);
+    	$data['tahun']   = $this->M_history_kegiatan->get_tahun();
+    	$data['history_semester']     		= $this->M_history_kegiatan->get_history_semester();
     	$data['container']		= $this->load->view('history_kegiatan/v_semester', $data, true);
     	$this->load->view('admin_template', $data);
 

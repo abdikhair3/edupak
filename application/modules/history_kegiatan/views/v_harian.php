@@ -31,42 +31,46 @@
               <div class="card-body">
               <div class="row">
               <div class="col-12">
-                <div class="input-group mb-3 col-6">
-                  <input type="text" class="form-control rounded-0" disabled value="Silahkan Pilih Bulan ">
-                  <span class="input-group-append">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                          Pilih Bulan 
-                          ( <?php if($this->uri->segment(3)=="01") { echo "Januari"; } 
-                                  else if($this->uri->segment(3)=="02") { echo "Februari"; }
-                                  else if($this->uri->segment(3)=="03") { echo "Maret"; }
-                                  else if($this->uri->segment(3)=="04") { echo "April"; }
-                                  else if($this->uri->segment(3)=="05") { echo "Mei"; }
-                                  else if($this->uri->segment(3)=="06") { echo "Juni"; }
-                                  else if($this->uri->segment(3)=="07") { echo "Juli"; }
-                                  else if($this->uri->segment(3)=="08") { echo "Agustus"; }
-                                  else if($this->uri->segment(3)=="09") { echo "September"; }
-                                  else if($this->uri->segment(3)=="10") { echo "Oktober"; }
-                                  else if($this->uri->segment(3)=="11") { echo "November"; }
-                                  else if($this->uri->segment(3)=="12") { echo "Desember"; } ?> )
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/01">Januari</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/02">Februari</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/03">Maret</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/04">April</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/05">Mei</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/06">Juni</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/07">Juli</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/08">Agustus</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/09">September</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/10">Oktober</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/11">November</a>
-                          <a class="dropdown-item" href="<?= base_url()?>history_kegiatan/harian/12">Desember</a>
+                <form method="get" action="<?= base_url()?>history_kegiatan/harian">
+                  <div class="row">
+                    <div class="col-2">
+                        <div class="form-group">
+                            <select name="tahun" class="form-control select2" style="width: 100%;">
+                            <option value="" selected="selected">Pilih Tahun </option>
+                            <?php foreach($tahun as $rows){
+                              $ps_tahun=explode("-", $rows->tgl_input); ?>
+                            <option value="<?= $ps_tahun[0]; ?>" <?php if($this->input->get('tahun')==$ps_tahun[0]){echo "selected";} ?> ><?= $ps_tahun[0]; ?></option>
+                            <?php }?>
+                            </select>
                         </div>
                     </div>
-                  </span>
-                </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                          <?php 
+                          $bulan=$this->input->get('bulan');
+                          //$bulan = isset ($bln_cari) ? $bln_cari:''; ?>
+                            <select name="bulan" class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Pilih Bulan</option>
+                            <option value="01" <?php if($bulan=="01"){echo "selected";} ?> >Januari</option>
+                            <option value="02" <?php if($bulan=="02"){echo "selected";} ?> >Februari</option>
+                            <option value="03" <?php if($bulan=="03"){echo "selected";} ?> >Maret</option>
+                            <option value="04" <?php if($bulan=="04"){echo "selected";} ?> >April</option>
+                            <option value="05" <?php if($bulan=="05"){echo "selected";} ?> >Mei</option>
+                            <option value="06" <?php if($bulan=="06"){echo "selected";} ?> >Juni</option>
+                            <option value="07" <?php if($bulan=="07"){echo "selected";} ?> >Juli</option>
+                            <option value="08" <?php if($bulan=="08"){echo "selected";} ?> >Agustus</option>
+                            <option value="09" <?php if($bulan=="09"){echo "selected";} ?> >September</option>
+                            <option value="10" <?php if($bulan=="10"){echo "selected";} ?> >Oktober</option>
+                            <option value="11" <?php if($bulan=="11"){echo "selected";} ?> >November</option>
+                            <option value="12" <?php if($bulan=="12"){echo "selected";} ?> >Desember</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                      <button type="submit" class="btn btn-block btn-info">Cari</button>
+                    </div>
+                    </form>
+
                 <table border="1" width="100%">
                    <!--  <tr>
                         <td width=1></td>
