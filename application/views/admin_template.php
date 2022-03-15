@@ -648,10 +648,10 @@
 </div>
 <!-- ./wrapper -->
 <div class="modal fade" id="mdfiltertahun" tabindex="-1" role="dialog" aria-labelledby="mdfiltertahun" aria-hidden="true">
-  <div class="modal-dialog  modal-lg" role="document">
+  <div class="modal-dialog  modal-xs" role="document">
     <div class="modal-content"> 
       <div class="modal-header bg-warning">
-        <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+        <h5><i class="icon fas fa-exclamation-triangle"></i> <b>WARNING!</b></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
       </button>
@@ -661,7 +661,7 @@
           <h4 style="text-align:justify"><b>Penginputan Target Kinerja Tahunan hanya pada tanggal 1 Januari sampai 5 Januari ...</b></h4>
         </div>
       </div>
-      <div class="modal-footer justify-content-between bg-warning">
+      <div class="modal-footer justify-content-between">
       </div>
     </div>
   </div>
