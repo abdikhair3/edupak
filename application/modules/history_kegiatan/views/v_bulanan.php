@@ -95,7 +95,7 @@
                         <td align="center" width=1>:</td>
                         <td colspan="31"></td>
                     </tr> -->
-                    <tr align="center">
+                    <tr align="center" style="text-transform: uppercase; font-weight:bold;">
                         <td width=1>NO.</td>
                         <td>URAIAN KREDIT</td>
                         <td>SATUAN HASIL</td>
@@ -115,19 +115,16 @@
                           $sum_angka_kredit = $this->db->get('dp_tugas')->first_row();
                           
 
-                          $this->db->where('id_pegawai', $this->session->userdata('id_member'));
-                          $nip_ses = $this->db->get('dp_pegawai')->first_row();
-
                           $bln_now=date('m');
                           $bln_now_con=(int)$bln_now;
                           if($bln_now_con<=6) { $semester=1; } else { $semester=2; }
                           $thn_now=date('Y');
 
+                          $this->db->where('nip', detail_pegawai()->nip);
                           $this->db->where('dp_tugas.id_uraian_kegiatan', $rows->id_uraian_kegiatan);
                           $this->db->where('status_periksa', 'Diverifikasi Atasan');  
                           $this->db->where('YEAR(tgl_input)', $thn_now);     
-                          $this->db->where('MONTH(tgl_input)', $this->uri->segment(3));
-                          $this->db->where('nip', $nip_ses->nip);
+                          $this->db->where('MONTH(tgl_input)', $this->input->get('bulan'));
                           $jmltgs = $this->db->get('dp_tugas')->num_rows();
 
                           // $sum_angka_kredit=$jmltgs*$rows->angka_kredit;

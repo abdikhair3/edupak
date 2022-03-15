@@ -96,12 +96,12 @@
                         <td align="center" width=1>:</td>
                         <td colspan="31"></td>
                     </tr> -->
-                    <tr align="center">
+                    <tr align="center"  style="text-transform: uppercase; font-weight:bold;">
                         <td width=1 rowspan="2">No.</td>
                         <td rowspan="2">Uraian Kegiatan</td>
                         <td colspan="33">Tanggal</td>
                     </tr>
-                    <tr align="center">
+                    <tr align="center" style="text-transform: uppercase; font-weight:bold;">
                       <?php
                       $bln=date('m');
                       $thn=date('y');

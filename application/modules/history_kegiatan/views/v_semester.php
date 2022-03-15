@@ -62,7 +62,7 @@
                     </div>
                     </form>
                 <table border="1" width="100%">
-                    <tr align="center">
+                    <tr align="center" style="text-transform: uppercase; font-weight:bold;">
                         <td width=1 rowspan="2">NO.</td>
                         <td rowspan="2">URAIAN KREDIT</td>
                         <td rowspan="2">SATUAN HASIL</td>
@@ -72,7 +72,7 @@
                         <td rowspan="2">JUMLAH ANGKA KREDIT</td>
                         <td rowspan="2">KETERANGAN / BUKTI FISIK</td>
                     </tr>
-                    <tr align="center">
+                    <tr align="center" style="text-transform: uppercase; font-weight:bold;">
                       <?php if($semester=="1") {  ?>
                         <td>JAN</td>
                         <td>FEB</td>
